@@ -1,12 +1,15 @@
 import gmbh.kdb.hsw.gdp.Game;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MainMenue {
+    Game gameInstanz;
     public void run() {
-        var gameInstanz = Game.create(IGameHandler -> (true));
-        menuStructure();
+        gameInstanz = Game.create(IGameHandler -> (false));
         gameInstanz.start();
+        System.out.println(gameInstanz);
+        menuStructure();
     }
 
     public void menuStructure() {
@@ -21,9 +24,11 @@ public class MainMenue {
                     System.out.println("Ende");
                     break;
                 case "Weiter":
-                    //Macht, dass es weiter geht!
                     System.out.println("Geht weiter");
-                    break;
+                    while (true){
+                        gameInstanz.start();
+                        System.out.println(gameInstanz);
+                    }
                 default:
                     throw new WrongChoiceException("Falsche Eingabe");
             }
