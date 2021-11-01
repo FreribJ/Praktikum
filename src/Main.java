@@ -3,6 +3,6 @@ import gmbh.kdb.hsw.gdp.IGameHandler;
 
 public class Main {
     public static void main(String[] args) {
-        Game.create(IGameHandler -> (true));
+        var gameInstanz = Game.create(IGameHandler -> (false));
     }
 }
