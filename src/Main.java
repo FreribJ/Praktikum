@@ -6,7 +6,7 @@ public class Main {
         var gameInstanz = Game.create(IGameHandler -> (true));
         gameInstanz.start();
 
-        var menu = new MainMenu();
+        var menu = new MainMenue();
         menu.run();
     }
 }
