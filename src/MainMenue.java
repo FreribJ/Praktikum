@@ -1,8 +1,7 @@
 import gmbh.kdb.hsw.gdp.Game;
-import gmbh.kdb.hsw.gdp.IGameHandler;
 
-public class Main {
-    public static void main(String[] args) {
+public class MainMenue {
+    public void run(){
         var gameInstanz = Game.create(IGameHandler -> (true));
         gameInstanz.start();
     }
