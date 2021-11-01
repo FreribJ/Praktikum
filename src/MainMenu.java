@@ -1,33 +1,33 @@
 import gmbh.kdb.hsw.gdp.Game;
 
 import java.sql.SQLOutput;
+import java.util.Locale;
 import java.util.Scanner;
 
-public class MainMenue {
-    Game gameInstanz;
+public class MainMenu {
+    Game gameInstance;
     public void run() {
-        gameInstanz = Game.create(IGameHandler -> (false));
-        gameInstanz.start();
-        System.out.println(gameInstanz);
+        gameInstance = Game.create(IGameHandler -> (false));
+        gameInstance.start();
+        System.out.println(gameInstance);
         menuStructure();
     }
 
     public void menuStructure() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Was ist ihre nächste Wahl?");
+        System.out.println("Was ist Ihre nächste Wahl?");
         try {
-            String eingabe = sc.next();
-
-            switch (eingabe) {
-                case "Beenden":
+            String input = sc.next().toLowerCase();
+            switch (input) {
+                case "beenden":
                     //Mach das es Endet!
                     System.out.println("Ende");
                     break;
-                case "Weiter":
+                case "weiter":
                     System.out.println("Geht weiter");
                     while (true){
-                        gameInstanz.start();
-                        System.out.println(gameInstanz);
+                        gameInstance.start();
+                        System.out.println(gameInstance);
                     }
                 default:
                     throw new WrongChoiceException("Falsche Eingabe");
