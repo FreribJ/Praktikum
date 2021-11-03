@@ -8,29 +8,30 @@ public class MainMenu {
 
     Game gameInstance;
     public void run() {
-        gameInstance = Game.create(IGameHandler -> (false));
+        gameInstance = Game.create(gameDevStudio -> {
+            System.out.println(gameInstance);
+            return false;
+        });
         gameInstance.start();
-        System.out.println(gameInstance);
         menuStructure();
     }
     public void menuStructure() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Was ist Ihre nächste Wahl?");
+        System.out.println("Whats your next choice?");
         try {
             String input = sc.next().toLowerCase();
             switch (input) {
-                case "beenden":
-                    //Mach das es Endet!
-                    System.out.println("Ende");
+                case "end":
+                    //Terminate programm
+                    System.out.println("end");
                     break;
-                case "weiter":
-                    System.out.println("Geht weiter");
+                case "continue":
+                    System.out.println("continues");
                     while (true){
                         gameInstance.start();
-                        System.out.println(gameInstance);
                     }
                 default:
-                    throw new WrongChoiceException("Falsche Eingabe");
+                    throw new WrongChoiceException("Wrong input");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
