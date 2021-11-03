@@ -16,13 +16,10 @@ public class MainMenu {
         menuStructure();
     }
     public void menuStructure() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Whats your next choice?");
         try {
-            String input = sc.next().toLowerCase();
-            switch (input) {
+            switch (TextHandler.getText("Whats your next choice?: ")) {
                 case "end":
-                    //Terminate programm
+                    //Terminate program
                     System.out.println("end");
                     break;
                 case "continue":
