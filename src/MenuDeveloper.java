@@ -17,7 +17,7 @@ public class MenuDeveloper {
         }
         System.out.println("Number of Developer: " + allDeveloper.size());
         for (int i = 0; i < allDeveloper.size(); i++) {
-            System.out.println(i + ". " + allDeveloper.get(i));
+            System.out.println((i + 1) + ". " + allDeveloper.get(i));
         }
     }
 }
