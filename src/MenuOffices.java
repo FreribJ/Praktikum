@@ -1,7 +1,7 @@
 import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
 import gmbh.kdb.hsw.gdp.domain.Office;
 
-public class menuOffices {
+public class MenuOffices {
     public static String showOffices(GameDevStudio studio){
         String offices = "";
         for (Office office : studio.getOffices()) {
