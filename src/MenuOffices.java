@@ -3,16 +3,14 @@ import gmbh.kdb.hsw.gdp.domain.Office;
 
 public class MenuOffices {
     public static void showOffices(GameDevStudio studio){
-        String offices = "";
+        System.out.println("Numbers of offices: " + studio.getOffices().size());
         for (Office office : studio.getOffices()) {
-            offices.concat(printOffice(office));
+            printOffice(office);
         }
-        System.out.println(offices);
     }
-    private static String printOffice(Office office){
-        return
-        office.getName() +
-        office.getLease().toString() +
-        office.getDevelopers().size();
+    private static void printOffice(Office office){
+        System.out.println("Name: " + office.getName().getName());
+        System.out.println("Lease: " + office.getLease().toString());
+        System.out.println("Number of Developer: " + office.getDevelopers().size());
     }
 }
