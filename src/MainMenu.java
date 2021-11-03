@@ -1,4 +1,5 @@
 import gmbh.kdb.hsw.gdp.Game;
+import org.w3c.dom.Text;
 
 import java.sql.SQLOutput;
 import java.util.Locale;
@@ -8,6 +9,7 @@ public class MainMenu {
 
     Game gameInstance;
     boolean letGameContinue = false;
+
     public void run() {
         gameInstance = Game.create(iGameHandler -> {
             printRelevantInformation();
@@ -20,7 +22,7 @@ public class MainMenu {
 
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice?: ")) {
+            switch (TextHandler.getText("Whats your next choice? [end, continue; evaluation]: ")) {
                 case "end":
                     //Terminate program
                     System.out.println("end");
@@ -29,6 +31,10 @@ public class MainMenu {
                     System.out.println("continues");
                     letGameContinue = true;
                     gameInstance.start();
+                    break;
+                case "evaluation":
+                    this.menuEvaluationStructure();
+                    break;
                 default:
                     throw new WrongChoiceException("Wrong input");
             }
@@ -36,6 +42,27 @@ public class MainMenu {
             System.out.println(e.getMessage());
         }
     }
+
+    public void menuEvaluationStructure() {
+        try {
+            switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
+                case "log":
+                    System.out.println("Eventlog: ");
+                    break;
+                case "offices":
+                    System.out.println("Offices: ");
+                    break;
+                case "developer":
+                    System.out.println("Developer: ");
+                    break;
+                default:
+                    throw new WrongChoiceException("Wrong input");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     public void printRelevantInformation() {
         System.out.println("Relevant information: ");
