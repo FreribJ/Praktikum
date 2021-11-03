@@ -47,12 +47,12 @@ public class MainMenu {
         try {
             switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
                 case "log":
-                    MenuEventLog.showEventLog(gameInstance.getStudio());
+                    MenuEventLog.showEventLog(gameInstance);
                     break;
                 case "offices":
                     MenuOffices.showOffices(gameInstance.getStudio());
                     break;
-                case "developer":
+               case "developer":
                     MenuDeveloper.showDeveloper(gameInstance.getStudio());
                     break;
                 default:
