@@ -5,10 +5,11 @@ import java.util.List;
 
 public class MenuEventLog {
 
-    public static void showEventLog(GameDevStudio eventLog){
-        List<Project> liste = eventLog.getProjectBoard().get();
-        for(int i=0; i<liste.size(); i++)
-           System.out.println(liste.get(i).getName());
+    public static void showEventLog(GameDevStudio studio){
+        List<Project> list = studio.getProjectBoard().get();
+        System.out.println("Number of projects: " + list.size());
+        for(Project project : list)
+           System.out.println("Project : " + project.toString());
     }
 }
 
