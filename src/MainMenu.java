@@ -7,15 +7,17 @@ import java.util.Scanner;
 public class MainMenu {
 
     Game gameInstance;
+    boolean letGameContinue = false;
     public void run() {
         gameInstance = Game.create(iGameHandler -> {
             printRelevantInformation();
-            return false;
+            return letGameContinue;
         });
 
         gameInstance.start();
         menuStructure();
     }
+
     public void menuStructure() {
         try {
             switch (TextHandler.getText("Whats your next choice?: ")) {
@@ -25,9 +27,8 @@ public class MainMenu {
                     break;
                 case "continue":
                     System.out.println("continues");
-                    while (true){
-                        gameInstance.start();
-                    }
+                    letGameContinue = true;
+                    gameInstance.start();
                 default:
                     throw new WrongChoiceException("Wrong input");
             }
@@ -37,9 +38,11 @@ public class MainMenu {
     }
 
     public void printRelevantInformation() {
+        System.out.println("Relevant information: ");
         System.out.println("Companyname: " + gameInstance.getStudio().getName().getName());
         System.out.println("Cash: " + gameInstance.getStudio().getCash().toString());
         System.out.println("Number of Offices: " + gameInstance.getStudio().getOffices().size());
+        System.out.println();
     }
 }
 
