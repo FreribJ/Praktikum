@@ -8,10 +8,11 @@ public class MainMenu {
 
     Game gameInstance;
     public void run() {
-        gameInstance = Game.create(gameDevStudio -> {
-            System.out.println(gameInstance);
+        gameInstance = Game.create(iGameHandler -> {
+            printRelevantInformation();
             return false;
         });
+
         gameInstance.start();
         menuStructure();
     }
@@ -33,6 +34,12 @@ public class MainMenu {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void printRelevantInformation() {
+        System.out.println("Companyname: " + gameInstance.getStudio().getName().getName());
+        System.out.println("Cash: " + gameInstance.getStudio().getCash().toString());
+        System.out.println("Number of Offices: " + gameInstance.getStudio().getOffices().size());
     }
 }
 
