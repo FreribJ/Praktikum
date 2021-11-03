@@ -47,13 +47,13 @@ public class MainMenu {
         try {
             switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
                 case "log":
-                    System.out.println("Eventlog: ");
+                    MenuEventLog.showEventLog(gameInstance.getStudio());
                     break;
                 case "offices":
-                    System.out.println("Offices: ");
+                    MenuOffices.showOffices(gameInstance.getStudio());
                     break;
                 case "developer":
-                    System.out.println("Developer: ");
+                    MenuDeveloper.showDeveloper(gameInstance.getStudio());
                     break;
                 default:
                     throw new WrongChoiceException("Wrong input");
