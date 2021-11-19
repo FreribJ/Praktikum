@@ -24,24 +24,36 @@ public class MenuProject {
             }
         }
 
-        System.out.println("Anzahl verfügbare Entwickler: " + allDeveloperWithoutProject.size());
-
-
         for (int i = 0; i < allProjects.size(); i++) {
             System.out.println(allProjects.get(i));
             for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
-                System.out.println("Days to Finish: " + getDaysForFinish(allDeveloperWithoutProject.get(j), allProjects.get(i)));
-                System.out.println(allProjects.get(i));
+                var dev = allDeveloperWithoutProject.get(j);
+                try {
+                    System.out.print("Days to Finish: " + getDaysForFinish(dev, allProjects.get(i)) + " -> ");
+                }
+                catch (RuntimeException e) {
+                    System.out.print(e.getMessage() + " -> ");
+                }
+                System.out.println(dev);
             }
+            System.out.println();
         }
     }
 
     public static int getDaysForFinish(Developer dev, Project pro) {
         Skillset effort = pro.getEffort();
         int days = 0;
-        while (effort.getCoding() != 0 && effort.getDesign() != 0 && effort.getResearch() != 0 && effort.getTesting() != 0) {
+        if(
+                (dev.getSkills().getCoding() == 0 && effort.getCoding() != 0) ||
+                (dev.getSkills().getResearch() == 0 && effort.getResearch() != 0) ||
+                (dev.getSkills().getTesting() == 0 && effort.getTesting() != 0) ||
+                (dev.getSkills().getDesign() == 0 && effort.getDesign() != 0)
+        ) {
+            throw new RuntimeException("Developer is unable to perform this project!");
+        }
+        while (effort.getCoding() != 0 || effort.getDesign() != 0 || effort.getResearch() != 0 || effort.getTesting() != 0) {
             days++;
-            effort.subtract(dev.getSkills());
+            effort = effort.subtract(dev.getSkills());
         }
         return days;
     }
