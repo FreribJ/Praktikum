@@ -22,7 +22,7 @@ public class MainMenu {
 
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [end; continue; evaluation]: ")) {
+            switch (TextHandler.getText("Whats your next choice? [end; continue; evaluation; applications]: ")) {
                 case "end":
                     //Terminate program
                     System.out.println("end");
@@ -34,6 +34,7 @@ public class MainMenu {
                     break;
                 case "evaluation":
                     this.menuEvaluationStructure();
+                    System.out.println();
                     menuStructure();
                     break;
                 case "applications":
@@ -74,7 +75,7 @@ public class MainMenu {
                 MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
                 break;
             case "apply":
-                MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
+               MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
                 break;
             default:
                 break;
