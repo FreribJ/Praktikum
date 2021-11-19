@@ -65,5 +65,14 @@ public class MenuApplication {
         yearlyExpenditure = yearlyExpenditure.add(applications.get(j).getHireAgentFee());
         return yearlyExpenditure;
     }
+
+    public static void hireApplicationDeveloper(GameDevStudio studio){
+        int developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?"));
+        for (int j = 0; j< studio.getOffices().size(); j++) {
+            System.out.println(j + ": " + studio.getOffices().get(j).toString());
+        }
+        int officeIndex = Integer.parseInt(TextHandler.getText("In which office?"));
+        studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
+    }
 }
 
