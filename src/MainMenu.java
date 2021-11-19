@@ -22,7 +22,7 @@ public class MainMenu {
 
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [end, continue; evaluation]: ")) {
+            switch (TextHandler.getText("Whats your next choice? [end; continue; evaluation]: ")) {
                 case "end":
                     //Terminate program
                     System.out.println("end");
@@ -34,6 +34,9 @@ public class MainMenu {
                     break;
                 case "evaluation":
                     this.menuEvaluationStructure();
+                    break;
+                case "applications":
+                    this.menuApplicationStructure();
                     break;
                 default:
                     throw new WrongChoiceException("Wrong input");
@@ -63,6 +66,19 @@ public class MainMenu {
         }
     }
 
+    public void menuApplicationStructure() {
+        switch (TextHandler.getText("What do you want to do with the Application? [list; hire]: "))
+        {
+            case "list":
+                MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
+                break;
+            case "apply":
+                MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
+                break;
+            default:
+                break;
+        }
+    }
 
     public void printRelevantInformation() {
         System.out.println("Relevant information: ");
