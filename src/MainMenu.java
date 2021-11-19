@@ -76,7 +76,7 @@ public class MainMenu {
         switch (TextHandler.getText("Do you want to hire one? [yes; no]: "))
         {
             case "yes":
-                MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
+                //MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
                 break;
             case "no":
                 break;
