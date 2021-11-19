@@ -34,13 +34,19 @@ public class MainMenu {
                     break;
                 case "evaluation":
                     this.menuEvaluationStructure();
+                    System.out.println();
                     menuStructure();
                     break;
                 case "applications":
                     this.menuApplicationStructure();
+                    System.out.println();
+                    menuStructure();
                     break;
                 case "projects":
                     MenuProject.showProjects(gameInstance.getStudio());
+                    System.out.println();
+                    menuStructure();
+                    break;
                 default:
                     throw new WrongChoiceException("Wrong input");
             }
