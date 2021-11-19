@@ -1,40 +1,40 @@
-import gmbh.kdb.hsw.gdp.domain.Developer;
-import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
-import gmbh.kdb.hsw.gdp.domain.Money;
-import gmbh.kdb.hsw.gdp.domain.Office;
+import gmbh.kdb.hsw.gdp.domain.*;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class MenuApplication {
-    public static void showApplicationDevelopers(GameDevStudio studio){
+    public static void showApplicationDevelopers(GameDevStudio studio) {
 
+        //neue Liste für alle verfügbaren Entwickler
         var allApplicationDeveloper = new ArrayList<Developer>();
 
-        var applications = studio.getApplications();
+        //alle Applications werden durchgegangen und der jeweilige Entwickler zur Liste aller verfügbaren Entwickler hinzugefügt
+        var applications = new ArrayList<Application>();
+        for(int a = 0; a < studio.getApplications().size(); a++){
+            applications.add(studio.getApplications().get(a));
+        }
+
         for (int i = 0; i < applications.size(); i++) {
             var developer = applications.get(i).getDeveloper();
             allApplicationDeveloper.add(developer);
         }
 
-        //System.out.println("Number of Developer: " + allApplicationDeveloper.size());
+        //Liste aller verfügbaren Entwickler wird durchgegangen
         for (int j = 0; j < allApplicationDeveloper.size(); j++) {
-            System.out.println(j+ ": " + allApplicationDeveloper.get(j).toString());
-            Money capital = new Money(new BigDecimal(0));
-            capital = capital.add(studio.getCash());
+            // jeder Entwickler wird ausgegeben
+            System.out.println(j + ": " + allApplicationDeveloper.get(j).toString());
 
-            capital = capital.subtract(applications.get(j).getHireBonus());
-            System.out.println("Remaining capital: " + capital.toString());
-            Money yearlyExpenditure = new Money(new BigDecimal(0));
-            for (Office office : studio.getOffices()) {
-                yearlyExpenditure = yearlyExpenditure.add(office.getLease());
-                for (Developer developer : office.getDevelopers()) {
-                    yearlyExpenditure = yearlyExpenditure.add(developer.getSalary());
-                }
-            }
-            yearlyExpenditure = yearlyExpenditure.add(applications.get(j).getHireAgentFee());
+            // remaining capital wird berechnet und ausgegeben
+            Money capital = calculateRemainingCapital(studio, j, applications);
+
+            // jährlicher Betrag den wir durch alle bisherigen Ausgaben und den neuen Entwickler verlieren wird berechnet
+            Money yearlyExpenditure = calculateyearlyExpenditure(studio, j, applications);
+
+            // Berechnung und Ausgabe wie viele Jahre bis tot
             int yearsUntilDeath = 0;
-            while (capital.isGreaterThan(yearlyExpenditure)){
+            while (capital.isGreaterThan(yearlyExpenditure)) {
                 capital = capital.subtract(yearlyExpenditure);
                 yearsUntilDeath++;
 
@@ -42,5 +42,28 @@ public class MenuApplication {
             System.out.println("Years until we die: " + yearsUntilDeath);
         }
     }
+
+    public static Money calculateRemainingCapital(GameDevStudio studio, int j, ArrayList<Application> applications) {
+        Money capital = new Money(new BigDecimal(0));
+        capital = capital.add(studio.getCash());
+        capital = capital.subtract(applications.get(j).getHireBonus());
+        System.out.println("Remaining capital: " + capital.toString());
+        return capital;
     }
+
+    public static Money calculateyearlyExpenditure(GameDevStudio studio, int j, ArrayList<Application> applications) {
+        // jährlicher Betrag den wir durch alle Ausgaben verlieren
+        Money yearlyExpenditure = new Money(new BigDecimal(0));
+        for (Office office : studio.getOffices()) {
+            yearlyExpenditure = yearlyExpenditure.add(office.getLease());
+            for (Developer developer : office.getDevelopers()) {
+                yearlyExpenditure = yearlyExpenditure.add(developer.getSalary());
+            }
+        }
+
+        //jährlicher Betrag den wir zusätzlich durch das Gehalt des jeweiligen Entwicklers ausgeben
+        yearlyExpenditure = yearlyExpenditure.add(applications.get(j).getHireAgentFee());
+        return yearlyExpenditure;
+    }
+}
 
