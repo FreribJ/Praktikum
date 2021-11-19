@@ -12,15 +12,10 @@ public class MenuProject {
     public static void showProjects(GameDevStudio studio) {
         var allProjects = studio.getProjectBoard().get();
 
-        var offices = studio.getOffices();
         var allDeveloperWithoutProject = new ArrayList<Developer>();
-        for (int i = 0; i < offices.size(); i++) {
-            var developer = offices.get(i).getDevelopers();
-            for (int k = 0; k < developer.size(); k++) {
-                var dev = developer.get(k);
-                if (dev.getWorkingOn() == null) {
-                    allDeveloperWithoutProject.add(dev);
-                }
+        for (var dev : Employees.getEmployees(studio)) {
+            if (dev.getWorkingOn() == null) {
+                allDeveloperWithoutProject.add(dev);
             }
         }
 
