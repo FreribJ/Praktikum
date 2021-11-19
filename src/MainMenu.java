@@ -34,6 +34,7 @@ public class MainMenu {
                     break;
                 case "evaluation":
                     this.menuEvaluationStructure();
+                    menuStructure();
                     break;
                 case "applications":
                     this.menuApplicationStructure();
