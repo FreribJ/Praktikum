@@ -1,4 +1,5 @@
 import gmbh.kdb.hsw.gdp.Game;
+import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
 import org.w3c.dom.Text;
 
 import java.sql.SQLOutput;
@@ -76,7 +77,6 @@ public class MainMenu {
     }
 
     public void menuApplicationStructure() {
-        System.out.println("List of all Developers: ");
         MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
         System.out.println();
         switch (TextHandler.getText("Do you want to hire one? [yes; no]: "))
