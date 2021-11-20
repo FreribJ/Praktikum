@@ -83,14 +83,20 @@ public class MainMenu {
     public void menuApplicationStructure() {
         MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
         System.out.println();
+        try {
         switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
             case "yes":
                 MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
                 break;
             case "no":
+                System.out.println("No Developer hired");
                 break;
             default:
-                break;
+                throw new WrongChoiceException();
+            }
+        } catch (WrongChoiceException e){
+            System.out.println(e.getMessage());
+            menuApplicationStructure();
         }
     }
 

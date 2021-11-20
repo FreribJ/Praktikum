@@ -3,6 +3,7 @@ import gmbh.kdb.hsw.gdp.domain.*;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuApplication {
     public static void showApplicationDevelopers(GameDevStudio studio) {
@@ -10,27 +11,16 @@ public class MenuApplication {
         //neue Liste für alle verfügbaren Entwickler
         var allApplicationDeveloper = new ArrayList<Developer>();
 
-        //alle Applications werden durchgegangen und der jeweilige Entwickler zur Liste aller verfügbaren Entwickler hinzugefügt
-        var applications = new ArrayList<Application>();
-        for(int a = 0; a < studio.getApplications().size(); a++){
-            applications.add(studio.getApplications().get(a));
-        }
-
-        for (int i = 0; i < applications.size(); i++) {
-            var developer = applications.get(i).getDeveloper();
+        for (int i = 0; i < studio.getApplications().size(); i++) {
+            var developer = studio.getApplications().get(i).getDeveloper();
             allApplicationDeveloper.add(developer);
-        }
-
-        //Liste aller verfügbaren Entwickler wird durchgegangen
-        for (int j = 0; j < allApplicationDeveloper.size(); j++) {
-            // jeder Entwickler wird ausgegeben
-            System.out.println(j + ": " + allApplicationDeveloper.get(j).toString());
+            System.out.println(i + ": " + allApplicationDeveloper.get(i).toString());
 
             // remaining capital wird berechnet und ausgegeben
-            Money capital = calculateRemainingCapital(studio, j, applications);
+            Money capital = calculateRemainingCapital(studio, studio.getApplications().get(i));
 
             // jährlicher Betrag den wir durch alle bisherigen Ausgaben und den neuen Entwickler verlieren wird berechnet
-            Money yearlyExpenditure = calculateyearlyExpenditure(studio, j, applications);
+            Money yearlyExpenditure = calculateYearlyExpenditure(studio, studio.getApplications().get(i));
 
             // Berechnung und Ausgabe wie viele Jahre bis tot
             int yearsUntilDeath = 0;
@@ -43,15 +33,15 @@ public class MenuApplication {
         }
     }
 
-    public static Money calculateRemainingCapital(GameDevStudio studio, int j, ArrayList<Application> applications) {
+    public static Money calculateRemainingCapital(GameDevStudio studio, Application application) {
         Money capital = new Money(new BigDecimal(0));
         capital = capital.add(studio.getCash());
-        capital = capital.subtract(applications.get(j).getHireBonus());
+        capital = capital.subtract(application.getHireBonus());
         System.out.println("Remaining capital: " + capital.toString());
         return capital;
     }
 
-    public static Money calculateyearlyExpenditure(GameDevStudio studio, int j, ArrayList<Application> applications) {
+    public static Money calculateYearlyExpenditure(GameDevStudio studio, Application application) {
         // jährlicher Betrag den wir durch alle Ausgaben verlieren
         Money yearlyExpenditure = new Money(new BigDecimal(0));
         for (Office office : studio.getOffices()) {
@@ -62,7 +52,7 @@ public class MenuApplication {
         }
 
         //jährlicher Betrag den wir zusätzlich durch das Gehalt des jeweiligen Entwicklers ausgeben
-        yearlyExpenditure = yearlyExpenditure.add(applications.get(j).getHireAgentFee());
+        yearlyExpenditure = yearlyExpenditure.add(application.getHireAgentFee());
         return yearlyExpenditure;
     }
 
