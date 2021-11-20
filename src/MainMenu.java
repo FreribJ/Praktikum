@@ -21,6 +21,7 @@ public class MainMenu {
         menuStructure();
     }
 
+    //Main-Menu
     public void menuStructure() {
         try {
             switch (TextHandler.getText("Whats your next choice? [end; continue; evaluation; applications; projects]: ")) {
@@ -44,18 +45,20 @@ public class MainMenu {
                     menuStructure();
                     break;
                 case "projects":
-                    MenuProject.showProjects(gameInstance.getStudio());
+                    this.menuProjectsStructure(null);
                     System.out.println();
                     menuStructure();
                     break;
                 default:
-                    throw new WrongChoiceException("Wrong input");
+                    throw new WrongChoiceException();
             }
-        } catch (Exception e) {
+        } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
+            menuStructure();
         }
     }
 
+    //Sub-Menus
     public void menuEvaluationStructure() {
         try {
             switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
@@ -65,22 +68,22 @@ public class MainMenu {
                 case "offices":
                     MenuOffices.showOffices(gameInstance.getStudio());
                     break;
-               case "developer":
+                case "developer":
                     MenuDeveloper.showDeveloper(gameInstance.getStudio());
                     break;
                 default:
-                    throw new WrongChoiceException("Wrong input");
+                    throw new WrongChoiceException();
             }
-        } catch (Exception e) {
+        } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
+            menuApplicationStructure();
         }
     }
 
     public void menuApplicationStructure() {
         MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
         System.out.println();
-        switch (TextHandler.getText("Do you want to hire one? [yes; no]: "))
-        {
+        switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
             case "yes":
                 MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
                 break;
@@ -91,6 +94,42 @@ public class MainMenu {
         }
     }
 
+    public void menuProjectsStructure(MenuProject menuProject) {
+        try {
+            switch (TextHandler.getText("What do you want to do? [list; accept; back]")) {
+                case "list":
+                    menuProject = new MenuProject(gameInstance.getStudio());
+                    menuProject.showProjects();
+                    menuProjectsStructure(menuProject);
+                    break;
+                case "accept":
+                    if (menuProject == null) {
+                        throw new RuntimeException("You need to use List first");
+                    }
+                    menuProject.accept(Integer.parseInt(TextHandler.getText("Which number?")));
+                    menuProjectsStructure(menuProject);
+                    break;
+                case "back":
+                    break;
+                default:
+                    throw new WrongChoiceException();
+            }
+        } catch (WrongChoiceException e) {
+            System.out.println(e.getMessage());
+            menuProjectsStructure(menuProject);
+        }
+        catch (NumberFormatException e) {
+            System.out.println("You have to give a number!");
+            menuProjectsStructure(menuProject);
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            menuProjectsStructure(menuProject);
+        }
+
+    }
+
+    //Helping Methods
     public void printRelevantInformation() {
         System.out.println("Relevant information: ");
         System.out.println("Companyname: " + gameInstance.getStudio().getName().getName());

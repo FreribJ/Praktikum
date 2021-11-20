@@ -1,7 +1,5 @@
-import java.rmi.server.ExportException;
-
-public class WrongChoiceException extends ExportException {
-    public WrongChoiceException(String s) {
-        super(s);
+public class WrongChoiceException extends Exception{
+    public WrongChoiceException() {
+        super("Wrong input. Please try again");
     }
 }
