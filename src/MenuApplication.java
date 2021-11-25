@@ -23,7 +23,7 @@ public class MenuApplication {
             Money yearlyExpenditure = calculateYearlyExpenditure(studio, studio.getApplications().get(i));
 
             // Berechnung und Ausgabe wie viele Jahre bis tot
-            int yearsUntilDeath = 0;
+            int yearsUntilDeath = 1;
             while (capital.isGreaterThan(yearlyExpenditure)) {
                 capital = capital.subtract(yearlyExpenditure);
                 yearsUntilDeath++;
