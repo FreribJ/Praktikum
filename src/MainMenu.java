@@ -3,6 +3,7 @@ import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
 import org.w3c.dom.Text;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -27,26 +28,23 @@ public class MainMenu {
             switch (TextHandler.getText("Whats your next choice? [continue; evaluation; applications; projects; continueAll; end]: ")) {
                 case "end":
                     //Terminate program
-                    System.out.println("end");
+                    TextHandler.print("end");
                     break;
                 case "continueall":
-                    System.out.println("continues");
+                    TextHandler.print("continues");
                     letGameContinue = true;
                     gameInstance.start();
                     break;
                 case "evaluation":
                     this.menuEvaluationStructure();
-                    System.out.println();
                     menuStructure();
                     break;
                 case "applications":
                     this.menuApplicationStructure();
-                    System.out.println();
                     menuStructure();
                     break;
                 case "projects":
                     this.menuProjectsStructure(null);
-                    System.out.println();
                     menuStructure();
                     break;
                 case "continue":
@@ -86,14 +84,13 @@ public class MainMenu {
 
     public void menuApplicationStructure() {
         MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
-        System.out.println();
         try {
         switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
             case "yes":
                 MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
                 break;
             case "no":
-                System.out.println("No Developer hired");
+                TextHandler.print("No Developer hired");
                 break;
             default:
                 throw new WrongChoiceException();
@@ -141,11 +138,12 @@ public class MainMenu {
 
     //Helping Methods
     public void printRelevantInformation() {
-        System.out.println("Relevant information: ");
-        System.out.println("Companyname: " + gameInstance.getStudio().getName().getName());
-        System.out.println("Cash: " + gameInstance.getStudio().getCash().toString());
-        System.out.println("Number of Offices: " + gameInstance.getStudio().getOffices().size());
-        System.out.println();
+        var relevantInformation = new ArrayList<String>();
+        relevantInformation.add("Company Name: " + gameInstance.getStudio().getName().getName());
+        relevantInformation.add("Cash: " + gameInstance.getStudio().getCash().toString());
+        relevantInformation.add("Number of Offices: " + gameInstance.getStudio().getOffices().size());
+
+        TextHandler.print(relevantInformation, "Relevant information");
     }
 }
 

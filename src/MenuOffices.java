@@ -1,16 +1,17 @@
 import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
 import gmbh.kdb.hsw.gdp.domain.Office;
 
+import java.util.ArrayList;
+
 public class MenuOffices {
     public static void showOffices(GameDevStudio studio){
-        System.out.println("Numbers of offices: " + studio.getOffices().size());
+        var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
-            printOffice(office);
+            outputText.add("");
+            outputText.add("Name: " + office.getName().getName());
+            outputText.add("Lease: " + office.getLease().toString());
+            outputText.add("Number of developer: " + office.getDevelopers().size());
         }
-    }
-    private static void printOffice(Office office){
-        System.out.println("Name: " + office.getName().getName());
-        System.out.println("Lease: " + office.getLease().toString());
-        System.out.println("Number of Developer: " + office.getDevelopers().size());
+        TextHandler.print(outputText, "Number of offices: " + studio.getOffices().size());
     }
 }

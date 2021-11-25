@@ -4,6 +4,7 @@ import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
 import gmbh.kdb.hsw.gdp.domain.Project;
 import gmbh.kdb.hsw.gdp.domain.Skillset;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,23 +20,25 @@ public class MenuProject {
 
     public void showProjects() {
         ArrayList<Developer> allDeveloperWithoutProject = getAllDeveloperWithoutProject();
+        var projectText = new ArrayList<String>();
+        var extraInformation = new ArrayList<ArrayList<String>>();
         if (allProjects.size() == 0) {
-            System.out.println("There are no Projects");
+            TextHandler.print("There are no projects");
         } else {
             for (int i = 0; i < allProjects.size(); i++) {
                 Project project = allProjects.get(i);
-                System.out.println("Nr." + (i + 1) + " " + project); //Print Project
+                projectText.add(project.toString());
+                var extraInformation2D = new ArrayList<String>();
                 if (allDeveloperWithoutProject.size() == 0) {
-                    System.out.println("There are no available Developer");
+                    extraInformation2D.add("There are no available Developer");
                     allProjectsFastestDevelopers.add(new ArrayList<Developer>());
                 } else {
-                    printPossibleDevelopers(allDeveloperWithoutProject, project);
-
-                    findFastestDevelopers(allDeveloperWithoutProject, project);
-
-                    System.out.println();
+                    extraInformation2D.addAll(possibleDevelopers(allDeveloperWithoutProject, project));
+                    extraInformation2D.add(findFastestDevelopers(allDeveloperWithoutProject, project));
                 }
+                extraInformation.add(extraInformation2D);
             }
+            TextHandler.print(projectText, null, "", true, extraInformation);
         }
     }
 
@@ -57,19 +60,23 @@ public class MenuProject {
         }
     }
 
-    private void printPossibleDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
+    private ArrayList<String> possibleDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
+        var extraInformation2D = new ArrayList<String>();
         for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
             Developer dev = allDeveloperWithoutProject.get(j);
+            String extraInformation2DText = "";
             try {
-                System.out.print("Days to Finish: " + getDaysToFinishProject(dev, project) + " -> ");
+                extraInformation2DText = extraInformation2DText.concat("Days to Finish: " + getDaysToFinishProject(dev, project) + " -> ");
             } catch (RuntimeException e) {
-                System.out.print(e.getMessage() + " -> ");
+                extraInformation2DText = extraInformation2DText.concat(e.getMessage() + " -> ");
             }
-            System.out.println(dev);
+            extraInformation2DText = extraInformation2DText.concat(dev.toString());
+            extraInformation2D.add(extraInformation2DText);
         }
+        return extraInformation2D;
     }
 
-    private void findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
+    private String findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
         //while (true) {
         int lowestDays = 100;
@@ -90,9 +97,9 @@ public class MenuProject {
         allProjectsFastestDevelopers.add(fastestForCurrentProject);
 
         if (fastestForCurrentProject.size() == 0) {
-            System.out.println("There is no Developer, who can do this project");
+             return "There is no Developer, who can do this project";
         } else {
-            System.out.println("Best Developers: " + fastestForCurrentProject);
+            return "Best Developer: " + fastestForCurrentProject.toString();
         }
     }
 
