@@ -9,12 +9,12 @@ public class MenuApplication {
     public static void showApplicationDevelopers(GameDevStudio studio) {
 
         //neue Liste für alle verfügbaren Entwickler
-        var allApplicationDeveloper = new ArrayList<Developer>();
+        var allApplicationDeveloper = new ArrayList<String>();
+        var extraInformation = new ArrayList<ArrayList<String>>();
 
         for (int i = 0; i < studio.getApplications().size(); i++) {
             var developer = studio.getApplications().get(i).getDeveloper();
-            allApplicationDeveloper.add(developer);
-            System.out.println(i + ": " + allApplicationDeveloper.get(i).toString());
+            allApplicationDeveloper.add(developer.toString());
 
             // remaining capital wird berechnet und ausgegeben
             Money capital = calculateRemainingCapital(studio, studio.getApplications().get(i));
@@ -29,15 +29,18 @@ public class MenuApplication {
                 yearsUntilDeath++;
 
             }
-            System.out.println("Years until we die: " + yearsUntilDeath);
+            var extraInformation2D = new ArrayList<String>();
+            extraInformation2D.add("Remaining capital: " + calculateRemainingCapital(studio, studio.getApplications().get(i)));
+            extraInformation2D.add("Years until we die: " + yearsUntilDeath);
+            extraInformation.add(extraInformation2D);
         }
+        TextHandler.print(allApplicationDeveloper, "These are all the applicants", "", true, extraInformation);
     }
 
     public static Money calculateRemainingCapital(GameDevStudio studio, Application application) {
         Money capital = new Money(studio.getCash().getValue());
         capital = capital.subtract(application.getHireBonus());
         capital = capital.subtract(application.getHireAgentFee());
-        System.out.println("Remaining capital: " + capital.toString());
         return capital;
     }
 
@@ -57,12 +60,15 @@ public class MenuApplication {
     }
 
     public static void hireApplicationDeveloper(GameDevStudio studio){
-        int developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?"));
-        for (int j = 0; j< studio.getOffices().size(); j++) {
-            System.out.println(j + ": " + studio.getOffices().get(j).toString());
+        int developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?")) - 1;
+        var outputText = new ArrayList<String>();
+        for (Office office : studio.getOffices()) {
+            outputText.add(office.toString());
         }
-        int officeIndex = Integer.parseInt(TextHandler.getText("In which office?"));
+        TextHandler.print(outputText, true);
+        int officeIndex = Integer.parseInt(TextHandler.getText("In which office?")) - 1;
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
+        TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
     }
 }
 
