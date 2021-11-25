@@ -34,9 +34,9 @@ public class MenuApplication {
     }
 
     public static Money calculateRemainingCapital(GameDevStudio studio, Application application) {
-        Money capital = new Money(new BigDecimal(0));
-        capital = capital.add(studio.getCash());
+        Money capital = new Money(studio.getCash().getValue());
         capital = capital.subtract(application.getHireBonus());
+        capital = capital.subtract(application.getHireAgentFee());
         System.out.println("Remaining capital: " + capital.toString());
         return capital;
     }
@@ -52,7 +52,7 @@ public class MenuApplication {
         }
 
         //jährlicher Betrag den wir zusätzlich durch das Gehalt des jeweiligen Entwicklers ausgeben
-        yearlyExpenditure = yearlyExpenditure.add(application.getHireAgentFee());
+        yearlyExpenditure = yearlyExpenditure.add(application.getDeveloper().getSalary());
         return yearlyExpenditure;
     }
 

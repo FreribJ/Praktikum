@@ -24,12 +24,12 @@ public class MainMenu {
     //Main-Menu
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [end; continue; evaluation; applications; projects]: ")) {
+            switch (TextHandler.getText("Whats your next choice? [continue; evaluation; applications; projects; continueAll; end]: ")) {
                 case "end":
                     //Terminate program
                     System.out.println("end");
                     break;
-                case "continue":
+                case "continueall":
                     System.out.println("continues");
                     letGameContinue = true;
                     gameInstance.start();
@@ -47,6 +47,10 @@ public class MainMenu {
                 case "projects":
                     this.menuProjectsStructure(null);
                     System.out.println();
+                    menuStructure();
+                    break;
+                case "continue":
+                    gameInstance.start();
                     menuStructure();
                     break;
                 default:
