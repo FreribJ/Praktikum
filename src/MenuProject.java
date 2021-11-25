@@ -35,6 +35,7 @@ public class MenuProject {
                 } else {
                     extraInformation2D.addAll(possibleDevelopers(allDeveloperWithoutProject, project));
                     extraInformation2D.add(findFastestDevelopers(allDeveloperWithoutProject, project));
+                    extraInformation2D.add("");
                 }
                 extraInformation.add(extraInformation2D);
             }

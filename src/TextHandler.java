@@ -26,23 +26,19 @@ public class TextHandler {
     }
 
     public static void print(ArrayList<String> textList, String headline){
-        print(textList, headline, "", false);
+        print(textList, headline, false);
     }
 
-    public static void print(ArrayList<String> textList, String headline, String prefix){
-        print(textList, headline, prefix, false);
+    public static void print(ArrayList<String> textList, String headline,  boolean enumeration){
+        print(textList, headline, "", enumeration, null);
     }
 
-    public static void print(ArrayList<String> textList, String headline, boolean enumeration){
-        print(textList, headline, "", enumeration);
+    public static void print(ArrayList<String> textList, String headline,  String prefix){
+        print(textList, headline, prefix, false, null);
     }
 
     public static void print(ArrayList<String> textList, boolean enumeration){
-        print(textList, null, "", enumeration);
-    }
-
-    public static void print(ArrayList<String> textList, String headline, String prefix, boolean enumeration){
-        print(textList, headline, prefix, enumeration, null);
+        print(textList, null, enumeration);
     }
 
     public static void print(ArrayList<String> textList, String headline, String prefix, boolean enumeration, ArrayList<ArrayList<String>> extraInformation) throws RuntimeException{
