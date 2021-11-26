@@ -30,7 +30,7 @@ public class TextHandler {
     }
 
     public static void print(ArrayList<String> textList, String headline,  boolean enumeration){
-        print(textList, headline, "", enumeration, null);
+        print(textList, headline, null, enumeration, null);
     }
 
     public static void print(ArrayList<String> textList, String headline,  String prefix){
@@ -42,6 +42,10 @@ public class TextHandler {
     }
 
     public static void print(ArrayList<String> textList, String headline, String prefix, boolean enumeration, ArrayList<ArrayList<String>> extraInformation) throws RuntimeException{
+        if(prefix == null)
+                prefix = "";
+        if(headline == "")
+                headline = null;
         System.out.println();
         if(headline != null){
             System.out.println(headline + ":");

@@ -39,7 +39,7 @@ public class MenuProject {
                 }
                 extraInformation.add(extraInformation2D);
             }
-            TextHandler.print(projectText, null, "", true, extraInformation);
+            TextHandler.print(projectText, null, null, true, extraInformation);
         }
     }
 

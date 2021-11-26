@@ -34,7 +34,7 @@ public class MenuApplication {
             extraInformation2D.add("Years until we die: " + yearsUntilDeath);
             extraInformation.add(extraInformation2D);
         }
-        TextHandler.print(allApplicationDeveloper, "These are all the applicants", "", true, extraInformation);
+        TextHandler.print(allApplicationDeveloper, "These are all the applicants", null, true, extraInformation);
     }
 
     public static Money calculateRemainingCapital(GameDevStudio studio, Application application) {
