@@ -60,7 +60,7 @@ public class MainMenu {
     //Sub-Menus
     public void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
+            switch (TextHandler.getText("Which Evaluation? [log; offices; developer; costs; yearsUntilBankrupt]: ")) {
                 case "log":
                     MenuEventLogEvaluation.showEventLog(gameInstance);
                     break;
@@ -71,13 +71,20 @@ public class MainMenu {
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
                 case "projects":
-
+                    MenuProjectsEvaluation.showProjects(gameInstance.getStudio());
+                    break;
+                case "costs":
+                    MenuCostsEvaluation.showCosts(gameInstance.getStudio());
+                    break;
+                case "yearsuntilbankrupt":
+                    MenuBankruptEvaluation.showDaysUntilBankrupt(gameInstance.getStudio());
+                    break;
                 default:
                     throw new WrongChoiceException();
             }
         } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
-            menuApplicationStructure();
+            menuEvaluationStructure();
         }
     }
 
