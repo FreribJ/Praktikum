@@ -19,7 +19,7 @@ public class MenuProjectsEvaluation {
             }
 
         }
-        TextHandler.print();
+        TextHandler.print(projects, "current projects: ");
     }
 
     public static int calculateDaysLeft(Project project, Game game){
