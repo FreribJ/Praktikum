@@ -71,7 +71,7 @@ public class MainMenu {
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
                 case "projects":
-                    MenuProjectsEvaluation.showProjects(gameInstance.getStudio());
+                    MenuProjectsEvaluation.showProjects(gameInstance);
                     break;
                 case "costs":
                     MenuCostsEvaluation.showCosts(gameInstance.getStudio());

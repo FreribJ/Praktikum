@@ -1,2 +1,28 @@
+import gmbh.kdb.hsw.gdp.Game;
+import gmbh.kdb.hsw.gdp.domain.Developer;
+import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
+import gmbh.kdb.hsw.gdp.domain.Office;
+import gmbh.kdb.hsw.gdp.domain.Project;
+
+import java.util.ArrayList;
+
 public class MenuProjectsEvaluation {
+    public static void showProjects(Game game) {
+        var projects = new ArrayList<String>();
+
+        for (Office office : game.getStudio().getOffices()) {
+            for (Developer developer : office.getDevelopers()) {
+                //projects.add(developer.getWorkingOn().toString());
+                projects.add("");
+                projects.add("Name: " + developer.getWorkingOn().getName().toString());
+                projects.add("Days left: " + calculateDaysLeft(developer.getWorkingOn(), game));
+            }
+
+        }
+        TextHandler.print();
+    }
+
+    public static int calculateDaysLeft(Project project, Game game){
+        return project.getDeadline().differenceTo(game.getDay());
+    }
 }
