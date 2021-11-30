@@ -22,10 +22,10 @@ public class MenuProject {
         ArrayList<Developer> allDeveloperWithoutProject = getAllDeveloperWithoutProject();
         var projectText = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
-        if (allProjects.size() == 0) {
+        if (allProjects.size() == 0) { //Überprüft ob
             TextHandler.print("There are no projects");
         } else {
-            for (int i = 0; i < allProjects.size(); i++) {
+            for (int i = 0; i < allProjects.size(); i++) { //Iterate throw all Projects
                 Project project = allProjects.get(i);
                 projectText.add(project.toString());
                 var extraInformation2D = new ArrayList<String>();
@@ -71,7 +71,7 @@ public class MenuProject {
             } catch (RuntimeException e) {
                 extraInformation2DText = extraInformation2DText.concat(e.getMessage() + " -> ");
             }
-            extraInformation2DText = extraInformation2DText.concat(dev.toString());
+            extraInformation2DText = extraInformation2DText.concat(dev.getName().getName());
             extraInformation2D.add(extraInformation2DText);
         }
         return extraInformation2D;
@@ -100,7 +100,11 @@ public class MenuProject {
         if (fastestForCurrentProject.size() == 0) {
              return "There is no Developer, who can do this project";
         } else {
-            return "Best Developer: " + fastestForCurrentProject.toString();
+            StringBuilder sb = new StringBuilder();
+            for (Developer dev: fastestForCurrentProject) {
+                sb.append(dev.getName().getName() + "     ");
+            }
+            return "Best Developer(s): " + sb;
         }
     }
 
@@ -128,6 +132,26 @@ public class MenuProject {
         while (effort.getCoding() != 0 || effort.getDesign() != 0 || effort.getResearch() != 0 || effort.getTesting() != 0) {
             days++;
             effort = effort.subtract(dev.getSkills());
+        }
+        return days;
+    }
+
+    private int getDaysToFinishProject(List<Developer> devs, Project pro) {
+        Skillset effort = pro.getEffort();
+        int days = 0;
+        for(Developer dev: devs) {
+            if (
+                    (dev.getSkills().getCoding() == 0 && effort.getCoding() != 0) ||
+                            (dev.getSkills().getResearch() == 0 && effort.getResearch() != 0) ||
+                            (dev.getSkills().getTesting() == 0 && effort.getTesting() != 0) ||
+                            (dev.getSkills().getDesign() == 0 && effort.getDesign() != 0)
+            ) {
+                throw new RuntimeException("Developer is unable to perform this project!");
+            }
+            while (effort.getCoding() != 0 || effort.getDesign() != 0 || effort.getResearch() != 0 || effort.getTesting() != 0) {
+                days++;
+                effort = effort.subtract(dev.getSkills());
+            }
         }
         return days;
     }
