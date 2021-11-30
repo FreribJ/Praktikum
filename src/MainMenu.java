@@ -58,7 +58,7 @@ public class MainMenu {
     //Sub-Menus
     public void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
+            switch (TextHandler.getText("Which Evaluation? [log; offices; developer; projects; costs; daysUntilBankrupt]: ")) {
                 case "log":
                     MenuEventLogEvaluation.showEventLog(gameInstance);
                     break;
@@ -69,7 +69,14 @@ public class MainMenu {
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
                 case "projects":
-
+                    MenuProjectsEvaluation.showProjects(gameInstance.getStudio());
+                    break;
+                case "costs":
+                    MenuCostsEvaluation.showCosts(gameInstance.getStudio());
+                    break;
+                case "daysUntilBankrupt":
+                    MenuBankruptEvaluation.showDaysUntilBankrupt(gameInstance.getStudio());
+                    break;
                 default:
                     throw new WrongChoiceException();
             }
@@ -82,17 +89,17 @@ public class MainMenu {
     public void menuApplicationStructure() {
         MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
         try {
-        switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
-            case "yes":
-                MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
-                break;
-            case "no":
-                TextHandler.print("No Developer hired");
-                break;
-            default:
-                throw new WrongChoiceException();
+            switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
+                case "yes":
+                    MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
+                    break;
+                case "no":
+                    TextHandler.print("No Developer hired");
+                    break;
+                default:
+                    throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException e){
+        } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
             menuApplicationStructure();
         }
@@ -121,12 +128,10 @@ public class MainMenu {
         } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
             menuProjectsStructure(menuProject);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println("You have to give a number!");
             menuProjectsStructure(menuProject);
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             menuProjectsStructure(menuProject);
         }
