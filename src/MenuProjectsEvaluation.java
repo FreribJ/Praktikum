@@ -13,13 +13,17 @@ public class MenuProjectsEvaluation {
         for (Office office : game.getStudio().getOffices()) {
             for (Developer developer : office.getDevelopers()) {
                 //projects.add(developer.getWorkingOn().toString());
-                projects.add("");
-                projects.add("Name: " + developer.getWorkingOn().getName().toString());
-                projects.add("Days left: " + calculateDaysLeft(developer.getWorkingOn(), game));
+                if (developer.getWorkingOn() != null) {
+                    projects.add("");
+                    projects.add("Name: " + developer.getWorkingOn().getName().toString());
+                    projects.add("Days left: " + calculateDaysLeft(developer.getWorkingOn(), game));
+                }
             }
 
         }
+        if(!projects.isEmpty()){
         TextHandler.print(projects, "current projects: ");
+    }
     }
 
     public static int calculateDaysLeft(Project project, Game game){
