@@ -1,11 +1,6 @@
 import gmbh.kdb.hsw.gdp.Game;
-import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
-import org.w3c.dom.Text;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class MainMenu {
 
@@ -65,13 +60,13 @@ public class MainMenu {
         try {
             switch (TextHandler.getText("Which Evaluation? [log; offices; developer]: ")) {
                 case "log":
-                    MenuEventLog.showEventLog(gameInstance);
+                    MenuEventLogEvaluation.showEventLog(gameInstance);
                     break;
                 case "offices":
-                    MenuOffices.showOffices(gameInstance.getStudio());
+                    MenuOfficesEvaluation.showOffices(gameInstance.getStudio());
                     break;
                 case "developer":
-                    MenuDeveloper.showDeveloper(gameInstance.getStudio());
+                    MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
                 default:
                     throw new WrongChoiceException();

@@ -5,7 +5,7 @@ import gmbh.kdb.hsw.gdp.domain.Project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuEventLog {
+public class MenuEventLogEvaluation {
     public static void showEventLog(Game game) {
         var eventLog = new ArrayList<String>();
         for(String string: game.getEventLog()){

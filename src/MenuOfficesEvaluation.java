@@ -3,7 +3,7 @@ import gmbh.kdb.hsw.gdp.domain.Office;
 
 import java.util.ArrayList;
 
-public class MenuOffices {
+public class MenuOfficesEvaluation {
     public static void showOffices(GameDevStudio studio){
         var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
