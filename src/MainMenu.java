@@ -60,7 +60,7 @@ public class MainMenu {
     //Sub-Menus
     public void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log; offices; developer; costs; yearsUntilBankrupt]: ")) {
+            switch (TextHandler.getText("Which Evaluation? [log; offices; developer; projects; costs; yearsUntilBankrupt]: ")) {
                 case "log":
                     MenuEventLogEvaluation.showEventLog(gameInstance);
                     break;
@@ -71,7 +71,7 @@ public class MainMenu {
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
                 case "projects":
-                    MenuProjectsEvaluation.showProjects(gameInstance.getStudio());
+                    MenuProjectsEvaluation.showProjects(gameInstance);
                     break;
                 case "costs":
                     MenuCostsEvaluation.showCosts(gameInstance.getStudio());
