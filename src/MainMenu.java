@@ -73,6 +73,8 @@ public class MainMenu {
                 case "developer":
                     MenuDeveloper.showDeveloper(gameInstance.getStudio());
                     break;
+                case "projects":
+
                 default:
                     throw new WrongChoiceException();
             }
