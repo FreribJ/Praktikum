@@ -59,7 +59,7 @@ public class MenuApplication {
         return yearlyExpenditure;
     }
 
-    public static void hireApplicationDeveloper(GameDevStudio studio){
+    public static void hireApplicationDeveloper(GameDevStudio studio) throws Exception{
         int developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?")) - 1;
         var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
@@ -67,6 +67,9 @@ public class MenuApplication {
         }
         TextHandler.print(outputText, true);
         int officeIndex = Integer.parseInt(TextHandler.getText("In which office?")) - 1;
+        if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
+            throw new WrongChoiceException();
+        }
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
         TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
     }

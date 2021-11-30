@@ -97,8 +97,13 @@ public class MainMenu {
                     System.out.println("You can only perform three actions in a round");
                     throw new WrongChoiceException();
                 }
-                MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
-                i++;
+                try {
+                    MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
+                    i++;
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
+                    menuApplicationStructure();
+                }
                 break;
             case "no":
                 TextHandler.print("No Developer hired");
