@@ -6,6 +6,7 @@ public class MainMenu {
 
     Game gameInstance;
     boolean letGameContinue = false;
+    int i;
 
     public void run() {
         gameInstance = Game.create(iGameHandler -> {
@@ -44,6 +45,7 @@ public class MainMenu {
                     break;
                 case "continue":
                     gameInstance.start();
+                    i= 0;
                     menuStructure();
                     break;
                 default:
@@ -68,6 +70,8 @@ public class MainMenu {
                 case "developer":
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
+                case "projects":
+
                 default:
                     throw new WrongChoiceException();
             }
@@ -82,7 +86,12 @@ public class MainMenu {
         try {
         switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
             case "yes":
+                if (i>2){
+                    System.out.println("You can only perform three actions in a round");
+                    throw new WrongChoiceException();
+                }
                 MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
+                i++;
                 break;
             case "no":
                 TextHandler.print("No Developer hired");
@@ -105,11 +114,16 @@ public class MainMenu {
                     menuProjectsStructure(menuProject);
                     break;
                 case "accept":
+                    if (i>2){
+                        System.out.println("You can only perform three actions in a round");
+                        throw new WrongChoiceException();
+                    }
                     if (menuProject == null) {
                         throw new RuntimeException("You need to use List first");
                     }
                     menuProject.accept(Integer.parseInt(TextHandler.getText("Which number?")));
                     menuProjectsStructure(menuProject);
+                    i++;
                     break;
                 case "back":
                     break;
