@@ -30,7 +30,7 @@ public class MenuProject {
                 projectText.add(project.getName().getName());
                 var extraInformation2D = new ArrayList<String>();
                 if (allDeveloperWithoutProject.size() == 0) {
-                    extraInformation2D.add("There are no available Developer");
+                    extraInformation2D.add("There are no available Developers");
                     allProjectsFastestDevelopers.add(new ArrayList<Developer>());
                 } else {
                     extraInformation2D.addAll(possibleDevelopers(allDeveloperWithoutProject, project));
@@ -47,7 +47,7 @@ public class MenuProject {
         try {
             i--;
             if (allProjectsFastestDevelopers.get(i).size() == 0) {
-                throw new Exception("Can´t accept project, because there is no capable Developer!");
+                throw new IllegalArgumentException("Can´t accept project, because there is no capable Developer!");
             }
             studio.acceptProject(allProjects.get(i), allProjectsFastestDevelopers.get(i));
             System.out.println("Project was accepted!");
@@ -56,9 +56,9 @@ public class MenuProject {
             System.out.println("Wrong Number!!! (You may try 'List' first)");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        } //catch (Exception e) {
+        //    System.out.println(e.getMessage());
+        //}
     }
 
     private ArrayList<String> possibleDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
