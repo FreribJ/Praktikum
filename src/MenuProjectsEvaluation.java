@@ -23,7 +23,9 @@ public class MenuProjectsEvaluation {
         }
         if(!projects.isEmpty()){
         TextHandler.print(projects, "current projects: ");
-    }
+    } else{
+        TextHandler.print("no current projects");
+        }
     }
 
     public static int calculateDaysLeft(Project project, Game game){
