@@ -6,8 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuApplication {
-    public static void showApplicationDevelopers(GameDevStudio studio) {
+    GameDevStudio studio;
 
+    public MenuApplication(GameDevStudio studio) {
+        this.studio = studio;
+    }
+
+    public void showApplicationDevelopers() {
         //neue Liste für alle verfügbaren Entwickler
         var allApplicationDeveloper = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
@@ -17,34 +22,33 @@ public class MenuApplication {
             allApplicationDeveloper.add(developer.toString());
 
             // remaining capital wird berechnet und ausgegeben
-            Money capital = calculateRemainingCapital(studio, studio.getApplications().get(i));
+            Money capital = this.calculateRemainingCapital(studio.getApplications().get(i));
 
             // jährlicher Betrag den wir durch alle bisherigen Ausgaben und den neuen Entwickler verlieren wird berechnet
-            Money yearlyExpenditure = calculateYearlyExpenditure(studio, studio.getApplications().get(i));
+            Money yearlyExpenditure = this.calculateYearlyExpenditure(studio.getApplications().get(i));
 
             // Berechnung und Ausgabe wie viele Jahre bis tot
             int yearsUntilDeath = 0;
             while (capital.isGreaterThan(yearlyExpenditure)) {
                 capital = capital.subtract(yearlyExpenditure);
                 yearsUntilDeath++;
-
             }
             var extraInformation2D = new ArrayList<String>();
-            extraInformation2D.add("Remaining capital: " + calculateRemainingCapital(studio, studio.getApplications().get(i)));
+            extraInformation2D.add("Remaining capital: " + this.calculateRemainingCapital(studio.getApplications().get(i)));
             extraInformation2D.add("Years until we die: " + yearsUntilDeath);
             extraInformation.add(extraInformation2D);
         }
         TextHandler.print(allApplicationDeveloper, "These are all the applicants", null, true, extraInformation);
     }
 
-    public static Money calculateRemainingCapital(GameDevStudio studio, Application application) {
+    public Money calculateRemainingCapital(Application application) {
         Money capital = new Money(studio.getCash().getValue());
         capital = capital.subtract(application.getHireBonus());
         capital = capital.subtract(application.getHireAgentFee());
         return capital;
     }
 
-    public static Money calculateYearlyExpenditure(GameDevStudio studio, Application application) {
+    public Money calculateYearlyExpenditure(Application application) {
         // jährlicher Betrag den wir durch alle Ausgaben verlieren
         Money yearlyExpenditure = new Money(new BigDecimal(0));
         for (Office office : studio.getOffices()) {
@@ -59,7 +63,7 @@ public class MenuApplication {
         return yearlyExpenditure;
     }
 
-    public static void hireApplicationDeveloper(GameDevStudio studio) throws Exception{
+    public void hireApplicationDeveloper() throws Exception{
         int developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?")) - 1;
         var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
