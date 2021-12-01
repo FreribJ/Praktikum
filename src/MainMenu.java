@@ -112,8 +112,9 @@ public class MainMenu {
                 case "back":
                     break;
                 case "create":
-                    MenuApplication menuApplicationC = new MenuApplication(gameInstance.getStudio());
-                    menuApplicationC.create();
+                    menuApplication = new MenuApplication(gameInstance.getStudio());
+                    menuApplication.create();
+                    menuApplicationStructure(null);
                     break;
                 default:
                     throw new WrongChoiceException();
@@ -157,8 +158,9 @@ public class MainMenu {
                 case "back":
                     break;
                 case "create":
-                    MenuProject menuProjectC = new MenuProject(gameInstance.getStudio());
-                   menuProjectC.create();
+                    menuProject = new MenuProject(gameInstance.getStudio());
+                    menuProject.create();
+                    menuProjectsStructure(null);
                     break;
                 default:
                     throw new WrongChoiceException();
