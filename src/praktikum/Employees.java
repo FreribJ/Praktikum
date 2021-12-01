@@ -1,3 +1,5 @@
+package praktikum;
+
 import gmbh.kdb.hsw.gdp.domain.Developer;
 import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
 import gmbh.kdb.hsw.gdp.domain.Office;

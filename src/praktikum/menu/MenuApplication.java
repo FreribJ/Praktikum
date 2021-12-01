@@ -1,9 +1,12 @@
-import gmbh.kdb.hsw.gdp.domain.*;
+package praktikum.menu;
 
-import java.lang.reflect.Array;
+import gmbh.kdb.hsw.gdp.domain.*;
+import praktikum.SpecialApplication;
+import praktikum.TextHandler;
+import praktikum.exceptions.WrongChoiceException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuApplication {
     GameDevStudio studio;
@@ -63,7 +66,7 @@ public class MenuApplication {
         return yearlyExpenditure;
     }
 
-    public void hireApplicationDeveloper() throws WrongChoiceException{
+    public void hireApplicationDeveloper() throws WrongChoiceException {
         int developerIndex = 0;
         int officeIndex = 0;
         try {

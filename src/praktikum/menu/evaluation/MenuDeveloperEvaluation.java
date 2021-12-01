@@ -1,8 +1,8 @@
-import gmbh.kdb.hsw.gdp.domain.Developer;
-import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
+package praktikum.menu.evaluation;
 
-import java.util.ArrayList;
-import java.util.List;
+import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
+import praktikum.Employees;
+import praktikum.TextHandler;
 
 public class MenuDeveloperEvaluation {
     public static void showDeveloper(GameDevStudio studio) {

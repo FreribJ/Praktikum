@@ -1,5 +1,9 @@
+package praktikum.menu;
+
 import gmbh.kdb.hsw.gdp.Game;
-import gmbh.kdb.hsw.gdp.domain.Application;
+import praktikum.TextHandler;
+import praktikum.exceptions.WrongChoiceException;
+import praktikum.menu.evaluation.*;
 
 import java.util.ArrayList;
 
@@ -18,7 +22,7 @@ public class MainMenu {
         menuStructure();
     }
 
-    //Main-Menu
+    //praktikum.Main-Menu
     public void menuStructure() {
         try {
             switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); continueAll(ca); end]: ").toLowerCase()) {
@@ -146,7 +150,7 @@ public class MainMenu {
 
     public void menuProjectsStructure(MenuProject menuProject) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back]").toLowerCase()) {
+            switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
                     menuProject = new MenuProject(gameInstance.getStudio());
@@ -161,6 +165,7 @@ public class MainMenu {
                     menuProject.accept(Integer.parseInt(TextHandler.getText("Which number?")));
                     menuProjectsStructure(menuProject);
                     break;
+                case "b":
                 case "back":
                     break;
                 case "c":

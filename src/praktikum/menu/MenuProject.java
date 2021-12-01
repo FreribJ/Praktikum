@@ -1,8 +1,10 @@
+package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.domain.*;
+import praktikum.Employees;
+import praktikum.SpecialProject;
+import praktikum.TextHandler;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

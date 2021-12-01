@@ -1,9 +1,9 @@
+package praktikum.menu.evaluation;
+
 import gmbh.kdb.hsw.gdp.Game;
-import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
-import gmbh.kdb.hsw.gdp.domain.Project;
+import praktikum.TextHandler;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuEventLogEvaluation {
     public static void showEventLog(Game game) {

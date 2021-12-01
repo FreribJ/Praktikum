@@ -1,3 +1,5 @@
+package praktikum;
+
 import gmbh.kdb.hsw.gdp.domain.*;
 
 import java.math.BigDecimal;
