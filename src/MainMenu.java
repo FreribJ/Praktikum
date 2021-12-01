@@ -112,7 +112,8 @@ public class MainMenu {
                 case "back":
                     break;
                 case "create":
-                    MenuApplication.create();
+                    //menuApplication.create();
+                    break;
                 default:
                     throw new WrongChoiceException();
             }
@@ -155,7 +156,8 @@ public class MainMenu {
                 case "back":
                     break;
                 case "create":
-                    MenuProject.create();
+                   //menuProject.create();
+                    break;
                 default:
                     throw new WrongChoiceException();
             }
