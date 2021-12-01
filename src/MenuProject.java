@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handels all {@link Project} related Operations.
+ */
 public class MenuProject {
     GameDevStudio studio;
     List<Project> allProjects;
@@ -16,6 +19,10 @@ public class MenuProject {
         this.allProjects = this.studio.getProjectBoard().get();
     }
 
+    /**
+     * Prints all {@link Project} with each {@link Developer} and the Day he needs to finish.
+     * It also prints out the best {@link Developer} for the given {@link Project}.
+     */
     public void showProjects() {
         ArrayList<Developer> allDeveloperWithoutProject = getAllDeveloperWithoutProject();
         var projectText = new ArrayList<String>();
@@ -42,8 +49,8 @@ public class MenuProject {
     }
 
     /**
-     * Accepts a Project
-     * @param i shows which Project will be accepted
+     * Accepts a given {@link Project}
+     * @param i shows which Project will be accepted.
      */
     public void accept(int i) {
         try {
@@ -52,19 +59,19 @@ public class MenuProject {
                 throw new IllegalArgumentException("Can´t accept project, because there is no capable Developer!");
             }
             studio.acceptProject(allProjects.get(i), allProjectsFastestDevelopers.get(i));
-            System.out.println("Project was accepted!");
+            TextHandler.print("Project was accepted!");
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Wrong Number!!! (You may try 'List' first)");
+            TextHandler.print("Wrong Number!!! (You may try 'List' first)");
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            TextHandler.print(e.getMessage());
         } //catch (Exception e) {
         //    System.out.println(e.getMessage());
         //}
     }
 
     /**
-     * creates new Project and adds it to the {@link ProjectBoard}
+     * creates new {@link Project} and adds it to the {@link ProjectBoard}
      */
     public void create() {
         var projectName = TextHandler.getText("Projektname: ");
@@ -81,6 +88,12 @@ public class MenuProject {
         studio.setProjectBoard(new ProjectBoard(projectList));
     }
 
+    /**
+     * Gives a List of all possible Developers for a given Project
+     * @param allDeveloperWithoutProject  {@link Developer} which don´t have a project yet.
+     * @param project defines the given {@link Project}
+     * @return List of {@link Developer}
+     */
     private ArrayList<String> possibleDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
         var extraInformation2D = new ArrayList<String>();
         for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
@@ -96,6 +109,7 @@ public class MenuProject {
         }
         return extraInformation2D;
     }
+
 
     private String findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
