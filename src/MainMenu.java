@@ -91,7 +91,7 @@ public class MainMenu {
 
     public void menuApplicationStructure(MenuApplication menuApplication) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list; accept; back]")) {
+            switch (TextHandler.getText("What do you want to do? [list; accept; create; back]")) {
                 case "list":
                     menuApplication = new MenuApplication(gameInstance.getStudio());
                     menuApplication.showApplicationDevelopers();
@@ -111,6 +111,9 @@ public class MainMenu {
                     break;
                 case "back":
                     break;
+                case "create":
+                    //menuApplication.create();
+                    break;
                 default:
                     throw new WrongChoiceException();
             }
@@ -126,38 +129,13 @@ public class MainMenu {
             System.out.println(e.getMessage());
             menuApplicationStructure(menuApplication);
         }
-       /* MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
-        try {
-        switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
-            case "yes":
-                if (i>2){
-                    System.out.println("You can only perform three actions in a round");
-                    throw new WrongChoiceException();
-                }
-                try {
-                    MenuApplication.hireApplicationDeveloper(gameInstance.getStudio());
-                    i++;
-                } catch (Exception e){
-                    System.out.println(e.getMessage());
-                    menuApplicationStructure();
-                }
-                break;
-            case "no":
-                TextHandler.print("No Developer hired");
-                break;
-            default:
-                throw new WrongChoiceException();
-            }
-        } catch (WrongChoiceException e){
-            System.out.println(e.getMessage());
-            menuApplicationStructure();
-        }*/
+
 
     }
 
     public void menuProjectsStructure(MenuProject menuProject) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list; accept; back]")) {
+            switch (TextHandler.getText("What do you want to do? [list; accept; create; back]")) {
                 case "list":
                     menuProject = new MenuProject(gameInstance.getStudio());
                     menuProject.showProjects();
@@ -176,6 +154,9 @@ public class MainMenu {
                     i++;
                     break;
                 case "back":
+                    break;
+                case "create":
+                   //menuProject.create();
                     break;
                 default:
                     throw new WrongChoiceException();
