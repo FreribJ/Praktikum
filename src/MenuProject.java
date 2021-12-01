@@ -1,10 +1,8 @@
 
-import gmbh.kdb.hsw.gdp.domain.Developer;
-import gmbh.kdb.hsw.gdp.domain.GameDevStudio;
-import gmbh.kdb.hsw.gdp.domain.Project;
-import gmbh.kdb.hsw.gdp.domain.Skillset;
+import gmbh.kdb.hsw.gdp.domain.*;
 
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +41,10 @@ public class MenuProject {
         }
     }
 
+    /**
+     * Accepts a Project
+     * @param i shows which Project will be accepted
+     */
     public void accept(int i) {
         try {
             i--;
@@ -59,6 +61,24 @@ public class MenuProject {
         } //catch (Exception e) {
         //    System.out.println(e.getMessage());
         //}
+    }
+
+    /**
+     * creates new Project and adds it to the {@link ProjectBoard}
+     */
+    public void create() {
+        var projectName = TextHandler.getText("Projektname: ");
+        var skillsAsStringArray = TextHandler.getText("Skills [separated with comma]: ").split(",");
+        var skillSet = new Skillset(Integer.parseInt(skillsAsStringArray[0]), Integer.parseInt(skillsAsStringArray[1]), Integer.parseInt(skillsAsStringArray[2]), Integer.parseInt(skillsAsStringArray[3]));
+        var money = Double.parseDouble(TextHandler.getText("Money: "));
+        var customer = TextHandler.getText("Company Name: ");
+        var deadline = Integer.parseInt(TextHandler.getText("Deadline: "));
+
+        var project = SpecialProject.createSpecialProject(projectName, skillSet, money, customer, deadline);
+
+        List<Project> projectList = new ArrayList<>(studio.getProjectBoard().get());
+        projectList.add(project);
+        studio.setProjectBoard(new ProjectBoard(projectList));
     }
 
     private ArrayList<String> possibleDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
