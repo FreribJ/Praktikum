@@ -7,7 +7,6 @@ public class MainMenu {
 
     Game gameInstance;
     boolean letGameContinue = false;
-    int i;
 
     public void run() {
         gameInstance = Game.create(iGameHandler -> {
@@ -46,7 +45,6 @@ public class MainMenu {
                     break;
                 case "continue":
                     gameInstance.start();
-                    i= 0;
                     menuStructure();
                     break;
                 default:
@@ -98,22 +96,18 @@ public class MainMenu {
                     menuApplicationStructure(menuApplication);
                     break;
                 case "accept":
-                    if (i>2){
-                        System.out.println("You can only perform three actions in a round");
-                        throw new WrongChoiceException();
-                    }
                     if (menuApplication == null) {
                         throw new RuntimeException("You need to use list first");
                     }
                     menuApplication.hireApplicationDeveloper();
                     menuApplicationStructure(menuApplication);
-                    i++;
                     break;
                 case "back":
                     break;
                 case "create":
                     menuApplication = new MenuApplication(gameInstance.getStudio());
                     menuApplication.create();
+                    gameInstance.actionPerformed();
                     menuApplicationStructure(null);
                     break;
                 default:
@@ -144,22 +138,18 @@ public class MainMenu {
                     menuProjectsStructure(menuProject);
                     break;
                 case "accept":
-                    if (i>2){
-                        System.out.println("You can only perform three actions in a round");
-                        throw new WrongChoiceException();
-                    }
                     if (menuProject == null) {
                         throw new RuntimeException("You need to use List first");
                     }
                     menuProject.accept(Integer.parseInt(TextHandler.getText("Which number?")));
                     menuProjectsStructure(menuProject);
-                    i++;
                     break;
                 case "back":
                     break;
                 case "create":
                     menuProject = new MenuProject(gameInstance.getStudio());
                     menuProject.create();
+                    gameInstance.actionPerformed();
                     menuProjectsStructure(null);
                     break;
                 default:

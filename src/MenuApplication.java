@@ -85,13 +85,16 @@ public class MenuApplication {
         TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
     }
 
-    public void create() {
-        var skillsAsStringArray = TextHandler.getText("Skills [separated with comma]: ").split(",");
-        var skills = new Skillset(Integer.parseInt(skillsAsStringArray[0]), Integer.parseInt(skillsAsStringArray[1]), Integer.parseInt(skillsAsStringArray[2]), Integer.parseInt(skillsAsStringArray[3]));
-        var hireBonus = Double.parseDouble(TextHandler.getText("Hire Bonus:"));
-        var hireAgentFee = Double.parseDouble(TextHandler.getText("Hire Agent Fee:"));
-        var name = TextHandler.getText("Developer Name:");
-        var salary = Double.parseDouble(TextHandler.getText("Salary:"));
+    public void create(){
+        var coding = TextHandler.getInt("Coding skill [0-10]:");
+        var research = TextHandler.getInt("Research skill [0-10]:");
+        var testing = TextHandler.getInt("Testing skill [0-10]:");
+        var design = TextHandler.getInt("Design skill [0-10]:");
+        var skills = new Skillset(coding, research, testing, design);
+        var hireBonus = TextHandler.getDouble("Hire bonus:");
+        var hireAgentFee = TextHandler.getDouble("Hire agent fee:");
+        var name = TextHandler.getText("Developer name:");
+        var salary = TextHandler.getDouble("Salary:");
         var applications = new ArrayList<>(studio.getApplications());
         applications.add(SpecialApplication.createSpecialApplication(skills, hireBonus, hireAgentFee, name, salary));
         studio.setApplications(applications);
