@@ -92,7 +92,7 @@ public class MenuProject {
         List<Project> projectList = new ArrayList<>(studio.getProjectBoard().get());
         projectList.add(project);
         studio.setProjectBoard(new ProjectBoard(projectList));
-        TextHandler.print("The project " + projectName + "has been created successfully!");
+        TextHandler.print("The project " + projectName + " has been created successfully!");
     }
 
     /**

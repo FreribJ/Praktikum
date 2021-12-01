@@ -99,7 +99,7 @@ public class MenuApplication {
         var applications = new ArrayList<>(studio.getApplications());
         applications.add(SpecialApplication.createSpecialApplication(skills, hireBonus, hireAgentFee, name, salary));
         studio.setApplications(applications);
-        TextHandler.print("The application of " + name + "has been created successfully!");
+        TextHandler.print("The application of " + name + " has been created successfully!");
     }
 }
 
