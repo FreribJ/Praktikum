@@ -75,10 +75,15 @@ public class MenuProject {
      */
     public void create() {
         var projectName = TextHandler.getText("Projektname: ");
-        var skillsAsStringArray = TextHandler.getText("Skills [separated with comma]: ").split(",");
-        var skillSet = new Skillset(Integer.parseInt(skillsAsStringArray[0]), Integer.parseInt(skillsAsStringArray[1]), Integer.parseInt(skillsAsStringArray[2]), Integer.parseInt(skillsAsStringArray[3]));
+
+        var coding = TextHandler.getInt("Coding skill [0 - 10]: ");
+        var research = TextHandler.getInt("Research skill [0 - 10]: ");
+        var testing = TextHandler.getInt("Testing skill [0 - 10]: ");
+        var design = TextHandler.getInt("Design skill[0 - 10]: ");
+        var skillSet = new Skillset(coding, research, testing, design);
+
         var money = Double.parseDouble(TextHandler.getText("Money: "));
-        var customer = TextHandler.getText("Company Name: ");
+        var customer = TextHandler.getText("Company name: ");
         var deadline = Integer.parseInt(TextHandler.getText("Deadline: "));
 
         var project = SpecialProject.createSpecialProject(projectName, skillSet, money, customer, deadline);
