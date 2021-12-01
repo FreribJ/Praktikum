@@ -117,7 +117,12 @@ public class MenuProject {
         return extraInformation2D;
     }
 
-
+    /**
+     * Findes the fastest {@link Developer} for a given {@link Project}.
+     * @param allDeveloperWithoutProject {@link Developer} to Compare.
+     * @param project The given {@link Project} .
+     * @return Returns a String with the best {@link Developer}s.
+     */
     private String findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
         //while (true) {
@@ -149,6 +154,10 @@ public class MenuProject {
         }
     }
 
+    /**
+     * Gives a List of the all {@link Developer} how are not assigned to an {@link Project} yet.
+     * @return List of {@link Developer}s
+     */
     private ArrayList<Developer> getAllDeveloperWithoutProject() {
         var allDeveloperWithoutProject = new ArrayList<Developer>();
         for (var dev : Employees.getEmployees(this.studio)) {
@@ -159,6 +168,12 @@ public class MenuProject {
         return allDeveloperWithoutProject;
     }
 
+    /**
+     * Gives the amount of days a given {@link Developer} needs to finish a given {@link Project}
+     * @param dev The {@link Developer}.
+     * @param pro The {@link Project}.
+     * @return Number of Days
+     */
     private int getDaysToFinishProject(Developer dev, Project pro) {
         Skillset effort = pro.getEffort();
         int days = 0;
@@ -177,6 +192,9 @@ public class MenuProject {
         return days;
     }
 
+    /**
+     * Same as {@link #getDaysToFinishProject(Developer, Project)} just with a List of {@link Developer}s.
+     */
     private int getDaysToFinishProject(List<Developer> devs, Project pro) {
         Skillset effort = pro.getEffort();
         int days = 0;
