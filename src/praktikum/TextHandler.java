@@ -4,10 +4,17 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles all the console-interfaces.
+ */
 public class TextHandler {
     static Scanner sc = new Scanner((System.in));
 
-    //Returns input from console
+    /**
+     * Reads a user input from the console as a {@link String}.
+     * @param message for a user input.
+     * @return the user input as a {@link String}.
+     */
     public static String getText(String message) {
         System.out.println();
         System.out.println(message);
@@ -17,6 +24,11 @@ public class TextHandler {
         return input;
     }
 
+    /**
+     * Reads a user input from the console until it is a {@link Integer}
+     * @param message for a user input
+     * @return the user input as a {@link Integer}
+     */
     public static int getInt(String message){
         System.out.println();
         System.out.println(message);
@@ -30,6 +42,11 @@ public class TextHandler {
             }
     }
 
+    /**
+     * Reads a user input from the console until it is a {@link Double}
+     * @param message for a user input
+     * @return the user input as a {@link Double}
+     */
     public static double getDouble(String message){
         System.out.println();
         System.out.println(message);
@@ -43,32 +60,79 @@ public class TextHandler {
         }
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param text is the information, stored as a {@link String}.
+     * @throws RuntimeException
+     */
     public static void print(String text){
         var textList = new ArrayList<String>();
         textList.add(text);
         print(textList);
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s.
+     * @throws RuntimeException
+     */
     public static void print(ArrayList<String> textList){
         print(textList, null);
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s.
+     * @param headline is for the headline above the information.
+     * @throws RuntimeException
+     */
     public static void print(ArrayList<String> textList, String headline){
         print(textList, headline, false);
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s.
+     * @param headline is for the headline above the information.
+     * @param enumeration if enumeration is true all main information will be counted.
+     * @throws RuntimeException
+     */
     public static void print(ArrayList<String> textList, String headline,  boolean enumeration){
         print(textList, headline, null, enumeration, null);
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s.
+     * @param headline is for the headline above the information.
+     * @param prefix is for a unified text in front of the main information.
+     * @throws RuntimeException
+     */
     public static void print(ArrayList<String> textList, String headline,  String prefix){
         print(textList, headline, prefix, false, null);
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s.
+     * @param enumeration if enumeration is true all main information will be counted.
+     * @throws RuntimeException
+     */
     public static void print(ArrayList<String> textList, boolean enumeration){
         print(textList, null, enumeration);
     }
 
+    /**
+     * Prints an output at the console in a unified design
+     * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s.
+     * @param headline is for the headline above the information.
+     * @param prefix is for a unified text in front of the main information.
+     * @param enumeration if enumeration is true all main information will be counted.
+     * @param extraInformation is for extra information for every main information.
+     *                         Extra information for one main information are stored as a {@link ArrayList} of {@link String}s.
+     *                         Each extra information for one main information are also stored in a {@link ArrayList}.
+     * @throws RuntimeException
+     */
     public static void print(ArrayList<String> textList, String headline, String prefix, boolean enumeration, ArrayList<ArrayList<String>> extraInformation) throws RuntimeException{
         if(prefix == null)
                 prefix = "";

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Handels all {@link Project} related Operations.
+ * Handles all {@link Project} related Operations.
  */
 public class MenuProject {
     GameDevStudio studio;
@@ -120,7 +120,7 @@ public class MenuProject {
     }
 
     /**
-     * Findes the fastest {@link Developer} for a given {@link Project}.
+     * Finds the fastest {@link Developer} for a given {@link Project}.
      * @param allDeveloperWithoutProject {@link Developer} to Compare.
      * @param project The given {@link Project} .
      * @return Returns a String with the best {@link Developer}s.
