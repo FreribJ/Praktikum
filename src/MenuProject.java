@@ -74,6 +74,7 @@ public class MenuProject {
      * creates new {@link Project} and adds it to the {@link ProjectBoard}
      */
     public void create() {
+        TextHandler.print("A project will be created. Please enter the following values:");
         var projectName = TextHandler.getText("Projektname: ");
 
         var coding = TextHandler.getInt("Coding skill [0 - 10]: ");
@@ -91,6 +92,7 @@ public class MenuProject {
         List<Project> projectList = new ArrayList<>(studio.getProjectBoard().get());
         projectList.add(project);
         studio.setProjectBoard(new ProjectBoard(projectList));
+        TextHandler.print("The project " + projectName + "has been created successfully!");
     }
 
     /**
