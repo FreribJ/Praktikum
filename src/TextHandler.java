@@ -9,7 +9,7 @@ public class TextHandler {
     public static String getText(String message) {
         System.out.println();
         System.out.println(message);
-        String input = sc.next().toLowerCase();
+        String input = sc.next();
         System.out.println();
         System.out.println("-".repeat(100));
         return input;

@@ -21,28 +21,33 @@ public class MainMenu {
     //Main-Menu
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [continue; evaluation; applications; projects; continueAll; end]: ")) {
+            switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); continueAll(ca); end]: ").toLowerCase()) {
                 case "end":
                     //Terminate program
                     TextHandler.print("end");
                     break;
+                case "ca":
                 case "continueall":
                     TextHandler.print("continues");
                     letGameContinue = true;
                     gameInstance.start();
                     break;
+                case "e":
                 case "evaluation":
                     this.menuEvaluationStructure();
                     menuStructure();
                     break;
+                case "a":
                 case "applications":
                     this.menuApplicationStructure(null);
                     menuStructure();
                     break;
+                case "p":
                 case "projects":
                     this.menuProjectsStructure(null);
                     menuStructure();
                     break;
+                case "c":
                 case "continue":
                     gameInstance.start();
                     menuStructure();
@@ -59,22 +64,28 @@ public class MainMenu {
     //Sub-Menus
     public void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log; offices; developer; projects; costs; yearsUntilBankrupt]: ")) {
+            switch (TextHandler.getText("Which Evaluation? [log(l); offices(o); developer(d); projects(p); costs(c); yearsUntilBankrupt(y)]: ").toLowerCase()) {
+                case "l":
                 case "log":
                     MenuEventLogEvaluation.showEventLog(gameInstance);
                     break;
+                case "o":
                 case "offices":
                     MenuOfficesEvaluation.showOffices(gameInstance.getStudio());
                     break;
+                case "d":
                 case "developer":
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
                     break;
+                case "p":
                 case "projects":
                     MenuProjectsEvaluation.showProjects(gameInstance);
                     break;
+                case "c":
                 case "costs":
                     MenuCostsEvaluation.showCosts(gameInstance.getStudio());
                     break;
+                case "y":
                 case "yearsuntilbankrupt":
                     MenuBankruptEvaluation.showDaysUntilBankrupt(gameInstance.getStudio());
                     break;
@@ -89,12 +100,14 @@ public class MainMenu {
 
     public void menuApplicationStructure(MenuApplication menuApplication) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list; accept; create; back]")) {
+            switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
+                case "l":
                 case "list":
                     menuApplication = new MenuApplication(gameInstance.getStudio());
                     menuApplication.showApplicationDevelopers();
                     menuApplicationStructure(menuApplication);
                     break;
+                case "a":
                 case "accept":
                     if (menuApplication == null) {
                         throw new RuntimeException("You need to use list first");
@@ -102,8 +115,10 @@ public class MainMenu {
                     menuApplication.hireApplicationDeveloper();
                     menuApplicationStructure(menuApplication);
                     break;
+                case "b":
                 case "back":
                     break;
+                case "c":
                 case "create":
                     menuApplication = new MenuApplication(gameInstance.getStudio());
                     menuApplication.create();
@@ -131,12 +146,14 @@ public class MainMenu {
 
     public void menuProjectsStructure(MenuProject menuProject) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list; accept; create; back]")) {
+            switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back]").toLowerCase()) {
+                case "l":
                 case "list":
                     menuProject = new MenuProject(gameInstance.getStudio());
                     menuProject.showProjects();
                     menuProjectsStructure(menuProject);
                     break;
+                case "a":
                 case "accept":
                     if (menuProject == null) {
                         throw new RuntimeException("You need to use List first");
@@ -146,6 +163,7 @@ public class MainMenu {
                     break;
                 case "back":
                     break;
+                case "c":
                 case "create":
                     menuProject = new MenuProject(gameInstance.getStudio());
                     menuProject.create();
