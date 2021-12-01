@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class SpecialApplication extends Application {
 
-    public SpecialApplication(Developer developer, Money hireBonus, Money hireAgentFee) {
+    private SpecialApplication(Developer developer, Money hireBonus, Money hireAgentFee) {
         super(developer, hireBonus, hireAgentFee);
     }
 
