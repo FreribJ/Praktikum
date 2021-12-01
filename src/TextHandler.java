@@ -15,6 +15,32 @@ public class TextHandler {
         return input;
     }
 
+    public static int getInt(String message){
+        System.out.println();
+        System.out.println(message);
+            try {
+                int input = Integer.parseInt(sc.next());
+                System.out.println();
+                System.out.println("-".repeat(100));
+                return input;
+            }catch (NumberFormatException e){
+                return getInt("you have to give a number:");
+            }
+    }
+
+    public static double getDouble(String message){
+        System.out.println();
+        System.out.println(message);
+        try {
+            double input = Double.parseDouble(sc.next());
+            System.out.println();
+            System.out.println("-".repeat(100));
+            return input;
+        }catch (NumberFormatException e){
+            return getDouble("you have to give a double:");
+        }
+    }
+
     public static void print(String text){
         var textList = new ArrayList<String>();
         textList.add(text);
