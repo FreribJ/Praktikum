@@ -1,4 +1,5 @@
 import gmbh.kdb.hsw.gdp.Game;
+import gmbh.kdb.hsw.gdp.domain.Application;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class MainMenu {
                     menuStructure();
                     break;
                 case "applications":
-                    this.menuApplicationStructure();
+                    this.menuApplicationStructure(null);
                     menuStructure();
                     break;
                 case "projects":
@@ -88,8 +89,44 @@ public class MainMenu {
         }
     }
 
-    public void menuApplicationStructure() {
-        MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
+    public void menuApplicationStructure(MenuApplication menuApplication) {
+        try {
+            switch (TextHandler.getText("What do you want to do? [list; accept; back]")) {
+                case "list":
+                    menuApplication = new MenuApplication(gameInstance.getStudio());
+                    menuApplication.showApplicationDevelopers();
+                    menuApplicationStructure(menuApplication);
+                    break;
+                case "accept":
+                    if (i>2){
+                        System.out.println("You can only perform three actions in a round");
+                        throw new WrongChoiceException();
+                    }
+                    if (menuApplication == null) {
+                        throw new RuntimeException("You need to use list first");
+                    }
+                    menuApplication.hireApplicationDeveloper();
+                    menuApplicationStructure(menuApplication);
+                    i++;
+                    break;
+                case "back":
+                    break;
+                default:
+                    throw new WrongChoiceException();
+            }
+        } catch (WrongChoiceException e) {
+            System.out.println(e.getMessage());
+            menuApplicationStructure(menuApplication);
+        }
+        catch (NumberFormatException e) {
+            System.out.println("You have to give a number!");
+            menuApplicationStructure(menuApplication);
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            menuApplicationStructure(menuApplication);
+        }
+       /* MenuApplication.showApplicationDevelopers(gameInstance.getStudio());
         try {
         switch (TextHandler.getText("Do you want to hire one? [yes; no]: ")) {
             case "yes":
@@ -114,7 +151,8 @@ public class MainMenu {
         } catch (WrongChoiceException e){
             System.out.println(e.getMessage());
             menuApplicationStructure();
-        }
+        }*/
+
     }
 
     public void menuProjectsStructure(MenuProject menuProject) {

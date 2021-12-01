@@ -63,14 +63,21 @@ public class MenuApplication {
         return yearlyExpenditure;
     }
 
-    public void hireApplicationDeveloper() throws Exception{
-        int developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?")) - 1;
-        var outputText = new ArrayList<String>();
-        for (Office office : studio.getOffices()) {
-            outputText.add(office.toString());
+    public void hireApplicationDeveloper() throws WrongChoiceException{
+        int developerIndex = 0;
+        int officeIndex = 0;
+        try {
+            developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?")) - 1;
+
+            var outputText = new ArrayList<String>();
+            for (Office office : studio.getOffices()) {
+                outputText.add(office.toString());
+            }
+            TextHandler.print(outputText, true);
+            officeIndex = Integer.parseInt(TextHandler.getText("In which office?")) - 1;
+        } catch(Exception e) {
+            throw new WrongChoiceException();
         }
-        TextHandler.print(outputText, true);
-        int officeIndex = Integer.parseInt(TextHandler.getText("In which office?")) - 1;
         if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
             throw new WrongChoiceException();
         }
