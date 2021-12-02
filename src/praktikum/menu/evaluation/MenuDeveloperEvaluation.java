@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class MenuDeveloperEvaluation {
     public static void showDeveloper(GameDevStudio studio) {
-        String headline = "These are the developers";
+        String headline = "These are the";
         var extraInformation = new ArrayList<ArrayList<String>>();
         for(Developer developer : Employees.getEmployees(studio)){
             var extraInformation2D = new ArrayList<String>();
