@@ -37,7 +37,7 @@ public class MenuProject {
         } else {
             for (int i = 0; i < allProjects.size(); i++) { //Iterate throw all Projects
                 Project project = allProjects.get(i);
-                projectText.add(project.getName().getName());
+                projectText.add("\""+project.getName().getName()+"\"");
                 var extraInformation2D = new ArrayList<String>();
                 if (allDeveloperWithoutProject.size() == 0) {
                     extraInformation2D.add("There are no available Developers");
@@ -49,7 +49,7 @@ public class MenuProject {
                 }
                 extraInformation.add(extraInformation2D);
             }
-            TextHandler.print(projectText, "Projects", null, true, extraInformation);
+            TextHandler.print(projectText, "Projects", "Project", true, extraInformation);
         }
     }
 
