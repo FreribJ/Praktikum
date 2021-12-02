@@ -4,6 +4,7 @@ import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.Developer;
 import gmbh.kdb.hsw.gdp.domain.Office;
 import gmbh.kdb.hsw.gdp.domain.Project;
+import praktikum.Employees;
 import praktikum.TextHandler;
 
 import java.util.ArrayList;
@@ -31,7 +32,12 @@ public class MenuProjectsEvaluation {
                 projectText.add("\"" + project.getName().getName() + "\"");
                 var extraInformation2D = new ArrayList<String>();
                 extraInformation2D.add("Days left: " + calculateDaysLeft(project, game));
-                // extraInformation2D.add("Developers: "+ );
+                int quantityOfDeveloper = 0;
+                for(Developer developer : Employees.getEmployees(game.getStudio())){
+                    if(developer.getWorkingOn() != null && developer.getWorkingOn().equals(project))
+                        quantityOfDeveloper++;
+                }
+                extraInformation2D.add("Developers: " + quantityOfDeveloper);
                 extraInformation2D.add("");
 
                 extraInformation.add(extraInformation2D);
