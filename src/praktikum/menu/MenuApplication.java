@@ -9,6 +9,9 @@ import praktikum.exceptions.WrongChoiceException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+/**
+ * Handles all {@link Application} related operations.
+ */
 public class MenuApplication {
     Game game;
     GameDevStudio studio;
@@ -18,6 +21,9 @@ public class MenuApplication {
         this.studio = game.getStudio();
     }
 
+    /**
+     * Prints all {@link Application} with important information about the application.
+     */
     public void showApplicationDevelopers() {
         var allApplicationDeveloper = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
@@ -46,15 +52,24 @@ public class MenuApplication {
         TextHandler.print(allApplicationDeveloper, !allApplicationDeveloper.isEmpty() ? "These are all the applicants" : "There are no applications", null, true, extraInformation);
     }
 
-    public Money calculateRemainingCapital(Application application) {
+    /**
+     * Calculates the remaining capital if you accept the {@link Application}.
+     * @param application is the application calculating with.
+     * @return the remaining capital.
+     */
+    private Money calculateRemainingCapital(Application application) {
         Money capital = new Money(studio.getCash().getValue());
         capital = capital.subtract(application.getHireBonus());
         capital = capital.subtract(application.getHireAgentFee());
         return capital;
     }
 
-    public Money calculateYearlyExpenditure(Application application) {
-        // jährlicher Betrag den wir durch alle Ausgaben verlieren
+    /**
+     * Calculates the yearly Expenditure if you accept the {@link Application}.
+     * @param application is the application calculating with.
+     * @return the yearly Expenditure.
+     */
+    private Money calculateYearlyExpenditure(Application application) {
         Money yearlyExpenditure = new Money(new BigDecimal(0));
         for (Office office : studio.getOffices()) {
             yearlyExpenditure = yearlyExpenditure.add(office.getLease());
@@ -63,11 +78,14 @@ public class MenuApplication {
             }
         }
 
-        //jährlicher Betrag den wir zusätzlich durch das Gehalt des jeweiligen Entwicklers ausgeben
         yearlyExpenditure = yearlyExpenditure.add(application.getDeveloper().getSalary());
         return yearlyExpenditure;
     }
 
+    /**
+     * Hires a {@link Developer} in a {@link Office}.
+     * @throws WrongChoiceException when the indexes are out of range.
+     */
     public void hireApplicationDeveloper() throws WrongChoiceException {
         int developerIndex = 0;
         int officeIndex = 0;
@@ -88,6 +106,9 @@ public class MenuApplication {
         studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(finalDeveloperIndex)).toList());
     }
 
+    /**
+     * Creates new {@link Application} and adds it to the {@link GameDevStudio}.
+     */
     public void create(){
         TextHandler.print("An application will be created. Please enter the following values:");
         var coding = TextHandler.getInt("Coding skill [0-10]:");
