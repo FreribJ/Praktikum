@@ -107,7 +107,7 @@ public class MainMenu {
             switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
-                    menuApplication = new MenuApplication(gameInstance.getStudio());
+                    menuApplication = new MenuApplication(gameInstance);
                     menuApplication.showApplicationDevelopers();
                     menuApplicationStructure(menuApplication);
                     break;
@@ -124,7 +124,7 @@ public class MainMenu {
                     break;
                 case "c":
                 case "create":
-                    menuApplication = new MenuApplication(gameInstance.getStudio());
+                    menuApplication = new MenuApplication(gameInstance);
                     menuApplication.create();
                     gameInstance.actionPerformed();
                     menuApplicationStructure(null);
@@ -153,7 +153,7 @@ public class MainMenu {
             switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
-                    menuProject = new MenuProject(gameInstance.getStudio());
+                    menuProject = new MenuProject(gameInstance);
                     menuProject.showProjects();
                     menuProjectsStructure(menuProject);
                     break;
@@ -170,7 +170,7 @@ public class MainMenu {
                     break;
                 case "c":
                 case "create":
-                    menuProject = new MenuProject(gameInstance.getStudio());
+                    menuProject = new MenuProject(gameInstance);
                     menuProject.create();
                     gameInstance.actionPerformed();
                     menuProjectsStructure(null);

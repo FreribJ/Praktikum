@@ -1,5 +1,6 @@
 package praktikum.menu;
 
+import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.*;
 import praktikum.special.SpecialApplication;
 import praktikum.TextHandler;
@@ -9,10 +10,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class MenuApplication {
+    Game game;
     GameDevStudio studio;
 
-    public MenuApplication(GameDevStudio studio) {
-        this.studio = studio;
+    public MenuApplication(Game game) {
+        this.game = game;
+        this.studio = game.getStudio();
     }
 
     public void showApplicationDevelopers() {
@@ -103,6 +106,7 @@ public class MenuApplication {
         applications.add(SpecialApplication.createSpecialApplication(skills, hireBonus, hireAgentFee, name, salary));
         studio.setApplications(applications);
         TextHandler.print("The application of " + name + " has been created successfully!");
+        game.log("New application of " + name + " was created.");
     }
 }
 

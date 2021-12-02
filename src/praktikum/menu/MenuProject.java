@@ -1,5 +1,6 @@
 package praktikum.menu;
 
+import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.*;
 import praktikum.Employees;
 import praktikum.special.SpecialProject;
@@ -12,12 +13,14 @@ import java.util.List;
  * Handles all {@link Project} related Operations.
  */
 public class MenuProject {
+    Game game;
     GameDevStudio studio;
     List<Project> allProjects;
     List<List<Developer>> allProjectsFastestDevelopers = new ArrayList<>();
 
-    public MenuProject(GameDevStudio studio) {
-        this.studio = studio;
+    public MenuProject(Game game) {
+        this.game = game;
+        this.studio = this.game.getStudio();
         this.allProjects = this.studio.getProjectBoard().get();
     }
 
@@ -94,6 +97,7 @@ public class MenuProject {
         projectList.add(project);
         studio.setProjectBoard(new ProjectBoard(projectList));
         TextHandler.print("The project " + projectName + " has been created successfully!");
+        game.log("New Project "  +  projectName +  " was created.");
     }
 
     /**
