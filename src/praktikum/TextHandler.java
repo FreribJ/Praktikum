@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Handles all the console-interfaces.
  */
 public class TextHandler {
-    static Scanner sc = new Scanner((System.in));
+    static Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
     /**
      * Reads a user input from the console as a {@link String}.
