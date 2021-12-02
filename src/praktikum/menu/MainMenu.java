@@ -25,13 +25,13 @@ public class MainMenu {
     //praktikum.Main-Menu
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); continueAll(ca); end]: ").toLowerCase()) {
+            switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); continue all(ca); end]: ").toLowerCase()) {
                 case "end":
                     //Terminate program
                     TextHandler.print("end");
                     break;
                 case "ca":
-                case "continueall":
+                case "continue all":
                     TextHandler.print("continues");
                     letGameContinue = true;
                     gameInstance.start();
