@@ -153,7 +153,7 @@ public class MenuProject {
         allProjectsFastestDevelopers.add(fastestForCurrentProject);
 
         if (fastestForCurrentProject.size() == 0) {
-             return "There is no Developer, who can do this project";
+             return "There is no Developer, who can work on this project!";
         } else {
             StringBuilder sb = new StringBuilder();
             for (Developer dev: fastestForCurrentProject) {
