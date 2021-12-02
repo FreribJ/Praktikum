@@ -117,7 +117,7 @@ public class MainMenu {
                         throw new RuntimeException("You need to use list first");
                     }
                     menuApplication.hireApplicationDeveloper();
-                    menuApplicationStructure(menuApplication);
+                    menuApplicationStructure(null);
                     break;
                 case "b":
                 case "back":
@@ -163,7 +163,7 @@ public class MainMenu {
                         throw new RuntimeException("You need to use List first");
                     }
                     menuProject.accept(Integer.parseInt(TextHandler.getText("Which number?")));
-                    menuProjectsStructure(menuProject);
+                    menuProjectsStructure(null);
                     break;
                 case "b":
                 case "back":
