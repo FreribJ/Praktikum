@@ -22,7 +22,7 @@ public class Employees {
         var employees = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
             for (Developer developer : office.getDevelopers()) {
-                employees.add(developer.toString());
+                employees.add(developer.getName().getName());
             }
         }
         return employees;
