@@ -2,7 +2,7 @@ package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.domain.*;
 import praktikum.Employees;
-import praktikum.SpecialProject;
+import praktikum.special.SpecialProject;
 import praktikum.TextHandler;
 
 import java.util.ArrayList;

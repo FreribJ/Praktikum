@@ -1,4 +1,4 @@
-package praktikum;
+package praktikum.special;
 
 import gmbh.kdb.hsw.gdp.domain.*;
 

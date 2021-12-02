@@ -1,7 +1,7 @@
 package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.domain.*;
-import praktikum.SpecialApplication;
+import praktikum.special.SpecialApplication;
 import praktikum.TextHandler;
 import praktikum.exceptions.WrongChoiceException;
 
