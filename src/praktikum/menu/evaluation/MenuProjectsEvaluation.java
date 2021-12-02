@@ -14,17 +14,16 @@ public class MenuProjectsEvaluation {
 
         for (Office office : game.getStudio().getOffices()) {
             for (Developer developer : office.getDevelopers()) {
-                //projects.add(developer.getWorkingOn().toString());
                 if (developer.getWorkingOn() != null) {
                     projects.add("");
-                    projects.add("Name: " + developer.getWorkingOn().getName().toString());
+                    projects.add("Name: " + developer.getWorkingOn().getName().getName());
                     projects.add("Days left: " + calculateDaysLeft(developer.getWorkingOn(), game));
                 }
             }
 
         }
         if(!projects.isEmpty()){
-        TextHandler.print(projects, "current projects: ");
+        TextHandler.print(projects, "current projects");
     } else{
         TextHandler.print("no current projects");
         }
