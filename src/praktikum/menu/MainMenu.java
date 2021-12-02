@@ -60,6 +60,7 @@ public class MainMenu {
                 case "offices":
                     this.menuOfficesStructure();
                     menuStructure();
+                    break;
                 default:
                     throw new WrongChoiceException();
             }
