@@ -157,7 +157,6 @@ public class MenuProject {
         } else {
             StringBuilder sb = new StringBuilder();
             for (Developer dev: fastestForCurrentProject) {
-                System.out.println("Test!!!: " + fastestForCurrentProject);
                 sb.append(dev.getName().getName() + "     ");
             }
             return "Best Developer(s): " + sb;

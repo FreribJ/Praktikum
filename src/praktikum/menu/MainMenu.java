@@ -2,6 +2,7 @@ package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.Game;
 import praktikum.TextHandler;
+import praktikum.exceptions.NotAvailableException;
 import praktikum.exceptions.WrongChoiceException;
 import praktikum.menu.evaluation.*;
 
@@ -128,7 +129,7 @@ public class MainMenu {
                 case "a":
                 case "accept":
                     if (menuApplication == null) {
-                        throw new RuntimeException("You need to use list first");
+                        throw new NotAvailableException("You need to use list first");
                     }
                     menuApplication.hireApplicationDeveloper();
                     menuApplicationStructure(null);
@@ -146,11 +147,7 @@ public class MainMenu {
                 default:
                     throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException e) {
-            System.out.println(e.getMessage());
-            menuApplicationStructure(menuApplication);
-        }
-        catch (RuntimeException e) {
+        } catch (WrongChoiceException | NotAvailableException e) {
             System.out.println(e.getMessage());
             menuApplicationStructure(menuApplication);
         }
@@ -170,7 +167,7 @@ public class MainMenu {
                 case "a":
                 case "accept":
                     if (menuProject == null) {
-                        throw new RuntimeException("You need to use List first");
+                        throw new NotAvailableException("You need to use List first");
                     }
                     menuProject.accept(TextHandler.getInt("Which number?"));
                     menuProjectsStructure(null);
@@ -188,7 +185,7 @@ public class MainMenu {
                 default:
                     throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException e) {
+        } catch (WrongChoiceException | NotAvailableException e) {
             System.out.println(e.getMessage());
             menuProjectsStructure(menuProject);
         }
