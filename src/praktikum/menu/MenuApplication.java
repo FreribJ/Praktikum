@@ -76,9 +76,9 @@ public class MenuApplication {
 
             var outputText = new ArrayList<String>();
             for (Office office : studio.getOffices()) {
-                outputText.add(office.toString());
+                outputText.add(office.getName().getName());
             }
-            TextHandler.print(outputText, true);
+            TextHandler.print(outputText, "Offices", "Office", true, null);
             officeIndex = Integer.parseInt(TextHandler.getText("In which office?")) - 1;
         } catch(Exception e) {
             throw new WrongChoiceException();
