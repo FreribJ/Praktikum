@@ -16,7 +16,6 @@ public class MenuApplication {
     }
 
     public void showApplicationDevelopers() {
-        //neue Liste für alle verfügbaren Entwickler
         var allApplicationDeveloper = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
 
@@ -24,13 +23,10 @@ public class MenuApplication {
             var developer = studio.getApplications().get(i).getDeveloper();
             allApplicationDeveloper.add(developer.getName().getName());
 
-            // remaining capital wird berechnet und ausgegeben
             Money capital = this.calculateRemainingCapital(studio.getApplications().get(i));
 
-            // jährlicher Betrag den wir durch alle bisherigen Ausgaben und den neuen Entwickler verlieren wird berechnet
             Money yearlyExpenditure = this.calculateYearlyExpenditure(studio.getApplications().get(i));
 
-            // Berechnung und Ausgabe wie viele Jahre bis tot
             int yearsUntilDeath = 0;
             while (capital.isGreaterThan(yearlyExpenditure)) {
                 capital = capital.subtract(yearlyExpenditure);
@@ -43,7 +39,7 @@ public class MenuApplication {
             extraInformation2D.add("Years until we die: " + yearsUntilDeath);
             extraInformation.add(extraInformation2D);
         }
-        TextHandler.print(allApplicationDeveloper, "These are all the applicants", null, true, extraInformation);
+        TextHandler.print(allApplicationDeveloper, !allApplicationDeveloper.isEmpty() ? "These are all the applicants" : "There are no applications", null, true, extraInformation);
     }
 
     public Money calculateRemainingCapital(Application application) {
@@ -88,6 +84,8 @@ public class MenuApplication {
         }
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
         TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
+        int finalDeveloperIndex = developerIndex;
+        studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(finalDeveloperIndex)).toList());
     }
 
     public void create(){
