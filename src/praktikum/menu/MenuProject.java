@@ -62,14 +62,13 @@ public class MenuProject {
             }
             studio.acceptProject(allProjects.get(i), allProjectsFastestDevelopers.get(i));
             TextHandler.print("Project was accepted!");
-
+            int finalI = i;
+            studio.setProjectBoard(new ProjectBoard(studio.getProjectBoard().get().stream().filter(project -> project != allProjects.get(finalI)).toList()));
         } catch (IndexOutOfBoundsException e) {
             TextHandler.print("Wrong Number!!! (You may try 'List' first)");
         } catch (IllegalArgumentException e) {
             TextHandler.print(e.getMessage());
-        } //catch (Exception e) {
-        //    System.out.println(e.getMessage());
-        //}
+        }
     }
 
     /**
@@ -85,7 +84,7 @@ public class MenuProject {
         var design = TextHandler.getInt("Design skill[0 - 10]: ");
         var skillSet = new Skillset(coding, research, testing, design);
 
-        var money = Double.parseDouble(TextHandler.getText("Money: "));
+        var money = TextHandler.getDouble("Money: ");
         var customer = TextHandler.getText("Company name: ");
         var deadline = Integer.parseInt(TextHandler.getText("Deadline: "));
 
@@ -127,7 +126,6 @@ public class MenuProject {
      */
     private String findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
-        //while (true) {
         int lowestDays = 100;
         Developer fastest = null;
         for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
@@ -142,7 +140,6 @@ public class MenuProject {
             }
         }
         fastestForCurrentProject.add(fastest);
-        //}
         allProjectsFastestDevelopers.add(fastestForCurrentProject);
 
         if (fastestForCurrentProject.size() == 0) {
