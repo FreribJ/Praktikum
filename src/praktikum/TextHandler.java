@@ -146,7 +146,7 @@ public class TextHandler {
             prefix = prefix + ": ";
         }
         for(int i = 0; i < textList.size(); i++) {
-            System.out.println(prefix + (enumeration ? i+1 + ". "+ textList.get(i) : textList.get(i)));
+            System.out.println((enumeration ? i+1 + ". " : "") + prefix + textList.get(i));
             if(extraInformation != null){
                 if(textList.size() != extraInformation.size()){
                     throw new RuntimeException("textList and extraInformation must have the same length");
