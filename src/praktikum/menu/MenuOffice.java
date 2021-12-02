@@ -6,7 +6,7 @@ import praktikum.TextHandler;
 import praktikum.special.SpecialOffice;
 
 public class MenuOffice {
-    public static void create(Game game){
+    public void create(Game game){
         TextHandler.print("An office will be created. Please enter the following values:");
         var name = TextHandler.getText("Name: ");
         var lease = TextHandler.getDouble("Lease: ");

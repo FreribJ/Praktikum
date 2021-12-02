@@ -10,9 +10,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class MenuCostsEvaluation {
-    public static void showCosts(GameDevStudio studio){
+    GameDevStudio studio;
+
+    public MenuCostsEvaluation(GameDevStudio studio) {
+        this.studio = studio;
+    }
+
+    public void showCosts(){
         Money yearlyExpenditure = new Money(new BigDecimal(0));
-        for (Office office : studio.getOffices()) {
+        for (Office office : this.studio.getOffices()) {
             yearlyExpenditure = yearlyExpenditure.add(office.getLease());
             for (Developer developer : office.getDevelopers()) {
                 yearlyExpenditure = yearlyExpenditure.add(developer.getSalary());

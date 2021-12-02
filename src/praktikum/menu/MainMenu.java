@@ -12,23 +12,33 @@ public class MainMenu {
 
     Game gameInstance;
     boolean letGameContinue = false;
+    MenuEventLogEvaluation menuEventLogEvaluation;
+    MenuOfficesEvaluation menuOfficesEvaluation;
+    MenuDeveloperEvaluation menuDeveloperEvaluation;
+    MenuProjectsEvaluation menuProjectsEvaluation;
+    MenuCostsEvaluation menuCostsEvaluation;
+    MenuBankruptEvaluation menuBankruptEvaluation;
 
     public void run() {
         gameInstance = Game.create(iGameHandler -> {
-            printRelevantInformation();
+            this.printRelevantInformation();
             return letGameContinue;
         });
 
         gameInstance.start();
+        menuEventLogEvaluation = new MenuEventLogEvaluation(gameInstance);
+        menuOfficesEvaluation = new MenuOfficesEvaluation(gameInstance.getStudio());
+        menuDeveloperEvaluation = new MenuDeveloperEvaluation(gameInstance.getStudio());
+        menuProjectsEvaluation = new MenuProjectsEvaluation(gameInstance);
+        menuCostsEvaluation = new MenuCostsEvaluation(gameInstance.getStudio());
+        menuBankruptEvaluation = new MenuBankruptEvaluation(gameInstance.getStudio());
         menuStructure();
     }
 
-    //praktikum.Main-Menu
-    public void menuStructure() {
+    private void menuStructure() {
         try {
             switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
                 case "end":
-                    //Terminate program
                     TextHandler.print("end");
                     break;
                 case "ca":
@@ -40,70 +50,69 @@ public class MainMenu {
                 case "e":
                 case "evaluation":
                     this.menuEvaluationStructure();
-                    menuStructure();
+                    this.menuStructure();
                     break;
                 case "a":
                 case "applications":
                     this.menuApplicationStructure(null);
-                    menuStructure();
+                    this.menuStructure();
                     break;
                 case "p":
                 case "projects":
                     this.menuProjectsStructure(null);
-                    menuStructure();
+                    this.menuStructure();
                     break;
                 case "c":
                 case "continue":
                     gameInstance.start();
-                    menuStructure();
+                    this.menuStructure();
                     break;
                 case "o":
                 case "offices":
                     this.menuOfficesStructure();
-                    menuStructure();
+                    this.menuStructure();
                     break;
                 default:
                     throw new WrongChoiceException();
             }
         } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
-            menuStructure();
+            this.menuStructure();
         }
     }
 
-    //Sub-Menus
-    public void menuEvaluationStructure() {
+    private void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log(l); offices(o); developer(d); projects(p); costs(c); yearsUntilBankrupt(y); back(b)]: ").toLowerCase()) {
+            switch (TextHandler.getText("Which Evaluation? [log(l); offices(o); developer(d); projects(p); costs(c); daysUntilBankrupt(db); back(b)]: ").toLowerCase()) {
                 case "l":
                 case "log":
-                    MenuEventLogEvaluation.showEventLog(gameInstance);
-                    menuEvaluationStructure();
+                    menuEventLogEvaluation.showEventLog();
+                    this.menuEvaluationStructure();
                     break;
                 case "o":
                 case "offices":
-                    MenuOfficesEvaluation.showOffices(gameInstance.getStudio());
-                    menuEvaluationStructure();
+                    menuOfficesEvaluation.showOffices();
+                    this.menuEvaluationStructure();
                     break;
                 case "d":
                 case "developer":
-                    MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
-                    menuEvaluationStructure();
+                    menuDeveloperEvaluation.showDeveloper();
+                    this.menuEvaluationStructure();
                     break;
                 case "p":
                 case "projects":
-                    MenuProjectsEvaluation.showProjects(gameInstance);
-                    menuEvaluationStructure();
+                    menuProjectsEvaluation.showProjects();
+                    this.menuEvaluationStructure();
                     break;
                 case "c":
                 case "costs":
-                    MenuCostsEvaluation.showCosts(gameInstance.getStudio());
-                    menuEvaluationStructure();
+                    menuCostsEvaluation.showCosts();
+                    this.menuEvaluationStructure();
                     break;
-                case "y":
-                case "yearsuntilbankrupt":
-                    MenuBankruptEvaluation.showDaysUntilBankrupt(gameInstance.getStudio());
-                    menuEvaluationStructure();
+                case "db":
+                case "daysuntilbankrupt":
+                    menuBankruptEvaluation.showDaysUntilBankrupt();
+                    this.menuEvaluationStructure();
                     break;
                 case "b":
                 case "back":
@@ -113,18 +122,18 @@ public class MainMenu {
             }
         } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
-            menuEvaluationStructure();
+            this.menuEvaluationStructure();
         }
     }
 
-    public void menuApplicationStructure(MenuApplication menuApplication) {
+    private void menuApplicationStructure(MenuApplication menuApplication) {
         try {
             switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
                     menuApplication = new MenuApplication(gameInstance);
                     menuApplication.showApplicationDevelopers();
-                    menuApplicationStructure(menuApplication);
+                    this.menuApplicationStructure(menuApplication);
                     break;
                 case "a":
                 case "accept":
@@ -132,7 +141,7 @@ public class MainMenu {
                         throw new NotAvailableException("You need to use list first");
                     }
                     menuApplication.hireApplicationDeveloper();
-                    menuApplicationStructure(null);
+                    this.menuApplicationStructure(null);
                     break;
                 case "b":
                 case "back":
@@ -142,27 +151,27 @@ public class MainMenu {
                     menuApplication = new MenuApplication(gameInstance);
                     menuApplication.create();
                     gameInstance.actionPerformed();
-                    menuApplicationStructure(null);
+                    this.menuApplicationStructure(null);
                     break;
                 default:
                     throw new WrongChoiceException();
             }
         } catch (WrongChoiceException | NotAvailableException e) {
             System.out.println(e.getMessage());
-            menuApplicationStructure(menuApplication);
+            this.menuApplicationStructure(menuApplication);
         }
 
 
     }
 
-    public void menuProjectsStructure(MenuProject menuProject) {
+    private void menuProjectsStructure(MenuProject menuProject) {
         try {
             switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
                     menuProject = new MenuProject(gameInstance);
                     menuProject.showProjects();
-                    menuProjectsStructure(menuProject);
+                    this.menuProjectsStructure(menuProject);
                     break;
                 case "a":
                 case "accept":
@@ -170,7 +179,7 @@ public class MainMenu {
                         throw new NotAvailableException("You need to use List first");
                     }
                     menuProject.accept(TextHandler.getInt("Which number?"));
-                    menuProjectsStructure(null);
+                    this.menuProjectsStructure(null);
                     break;
                 case "b":
                 case "back":
@@ -180,19 +189,19 @@ public class MainMenu {
                     menuProject = new MenuProject(gameInstance);
                     menuProject.create();
                     gameInstance.actionPerformed();
-                    menuProjectsStructure(null);
+                    this.menuProjectsStructure(null);
                     break;
                 default:
                     throw new WrongChoiceException();
             }
         } catch (WrongChoiceException | NotAvailableException e) {
             System.out.println(e.getMessage());
-            menuProjectsStructure(menuProject);
+            this.menuProjectsStructure(menuProject);
         }
 
     }
 
-    public void menuOfficesStructure() {
+    private void menuOfficesStructure() {
         try {
             switch (TextHandler.getText("What do you want to do? [create(c); back(b)]").toLowerCase()) {
                 case "b":
@@ -200,26 +209,27 @@ public class MainMenu {
                     break;
                 case "c":
                 case "create":
-                    MenuOffice.create(gameInstance);
+                    var menuOffice = new MenuOffice();
+                    menuOffice.create(gameInstance);
                     gameInstance.actionPerformed();
-                    menuOfficesStructure();
+                    this.menuOfficesStructure();
                     break;
                 default:
                     throw new WrongChoiceException();
             }
         } catch (WrongChoiceException e){
             System.out.println(e.getMessage());
-            menuOfficesStructure();
+            this.menuOfficesStructure();
         }
     }
 
 
-    //Helping Methods
-    public void printRelevantInformation() {
+    private void printRelevantInformation() {
         var relevantInformation = new ArrayList<String>();
         relevantInformation.add("Company Name: " + gameInstance.getStudio().getName().getName());
         relevantInformation.add("Cash: " + gameInstance.getStudio().getCash().toString());
         relevantInformation.add("Number of Offices: " + gameInstance.getStudio().getOffices().size());
+        relevantInformation.add("Number of Day: " + gameInstance.getDay().getNumber());
 
         TextHandler.print(relevantInformation, "Relevant information");
     }

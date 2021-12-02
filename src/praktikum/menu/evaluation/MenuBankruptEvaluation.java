@@ -10,10 +10,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class MenuBankruptEvaluation {
-    public static void showDaysUntilBankrupt(GameDevStudio studio){
-        Money capital = new Money(studio.getCash().getValue());
+    GameDevStudio studio;
+
+    public MenuBankruptEvaluation(GameDevStudio studio) {
+        this.studio = studio;
+    }
+
+    public void showDaysUntilBankrupt(){
+        Money capital = new Money(this.studio.getCash().getValue());
         Money yearlyExpenditure = new Money(new BigDecimal(0));
-        for (Office office : studio.getOffices()) {
+        for (Office office : this.studio.getOffices()) {
             yearlyExpenditure = yearlyExpenditure.add(office.getLease());
             for (Developer developer : office.getDevelopers()) {
                 yearlyExpenditure = yearlyExpenditure.add(developer.getSalary());

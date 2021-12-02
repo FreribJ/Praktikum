@@ -6,9 +6,15 @@ import praktikum.TextHandler;
 import java.util.ArrayList;
 
 public class MenuEventLogEvaluation {
-    public static void showEventLog(Game game) {
+    Game game;
+
+    public MenuEventLogEvaluation(Game game) {
+        this.game = game;
+    }
+
+    public void showEventLog() {
         var eventLog = new ArrayList<String>();
-        for(String string: game.getEventLog()){
+        for(String string : this.game.getEventLog()){
             eventLog.add(string);
         }
         TextHandler.print(eventLog, "Number of Events: " + eventLog.size(), "Event");

@@ -8,10 +8,16 @@ import praktikum.TextHandler;
 import java.util.ArrayList;
 
 public class MenuDeveloperEvaluation {
-    public static void showDeveloper(GameDevStudio studio) {
+    GameDevStudio studio;
+
+    public MenuDeveloperEvaluation(GameDevStudio studio) {
+        this.studio = studio;
+    }
+
+    public void showDeveloper() {
         String headline = "These are the developers";
         var extraInformation = new ArrayList<ArrayList<String>>();
-        for(Developer developer : Employees.getEmployees(studio)){
+        for(Developer developer : Employees.getEmployees(this.studio)){
             var extraInformation2D = new ArrayList<String>();
             extraInformation2D.add("Salary: " + developer.getSalary().toString());
             if(developer.getWorkingOn() != null)
@@ -20,6 +26,6 @@ public class MenuDeveloperEvaluation {
             extraInformation2D.add("Total skill: " + totalSkill);
             extraInformation.add(extraInformation2D);
         }
-        TextHandler.print(Employees.getEmployeesAsString(studio), headline, null, true, extraInformation);
+        TextHandler.print(Employees.getEmployeesAsString(this.studio), headline, null, true, extraInformation);
     }
 }

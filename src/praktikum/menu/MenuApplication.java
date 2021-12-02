@@ -34,19 +34,19 @@ public class MenuApplication {
 
             Money capital = this.calculateRemainingCapital(studio.getApplications().get(i));
 
-            Money yearlyExpenditure = this.calculateYearlyExpenditure(studio.getApplications().get(i));
+            Money yearlyExpenditure = this.calculateDailyExpenditure(studio.getApplications().get(i));
 
-            int yearsUntilDeath = 0;
+            int daysUntilDeath = 0;
             while (capital.isGreaterThan(yearlyExpenditure)) {
                 capital = capital.subtract(yearlyExpenditure);
-                yearsUntilDeath++;
+                daysUntilDeath++;
             }
             var extraInformation2D = new ArrayList<String>();
             extraInformation2D.add("Hire Bonus: " + studio.getApplications().get(i).getHireBonus());
             extraInformation2D.add("Hire Agent Fee: " + studio.getApplications().get(i).getHireAgentFee());
             extraInformation2D.add("Salary: " + studio.getApplications().get(i).getDeveloper().getSalary());
             extraInformation2D.add("Remaining capital: " + this.calculateRemainingCapital(studio.getApplications().get(i)));
-            extraInformation2D.add("Years until we die: " + yearsUntilDeath);
+            extraInformation2D.add("Days until we die: " + daysUntilDeath);
             extraInformation.add(extraInformation2D);
         }
         TextHandler.print(allApplicationDeveloper, !allApplicationDeveloper.isEmpty() ? "These are all the applicants" : "There are no applications", null, true, extraInformation);
@@ -65,21 +65,21 @@ public class MenuApplication {
     }
 
     /**
-     * Calculates the yearly Expenditure if you accept the {@link Application}.
+     * Calculates the daily Expenditure if you accept the {@link Application}.
      * @param application is the application calculating with.
      * @return the yearly Expenditure.
      */
-    private Money calculateYearlyExpenditure(Application application) {
-        Money yearlyExpenditure = new Money(new BigDecimal(0));
+    private Money calculateDailyExpenditure(Application application) {
+        Money dailyExpenditure = new Money(new BigDecimal(0));
         for (Office office : studio.getOffices()) {
-            yearlyExpenditure = yearlyExpenditure.add(office.getLease());
+            dailyExpenditure = dailyExpenditure.add(office.getLease());
             for (Developer developer : office.getDevelopers()) {
-                yearlyExpenditure = yearlyExpenditure.add(developer.getSalary());
+                dailyExpenditure = dailyExpenditure.add(developer.getSalary());
             }
         }
 
-        yearlyExpenditure = yearlyExpenditure.add(application.getDeveloper().getSalary());
-        return yearlyExpenditure;
+        dailyExpenditure = dailyExpenditure.add(application.getDeveloper().getSalary());
+        return dailyExpenditure;
     }
 
     /**

@@ -8,15 +8,20 @@ import praktikum.Employees;
 import praktikum.TextHandler;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuProjectsEvaluation {
-    public static void showProjects(Game game) {
+    Game game;
+
+    public MenuProjectsEvaluation(Game game) {
+        this.game = game;
+    }
+
+    public void showProjects() {
         var projects = new ArrayList<Project>();
         var projectText = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
 
-        for (Office office : game.getStudio().getOffices()) {
+        for (Office office : this.game.getStudio().getOffices()) {
             for (Developer developer : office.getDevelopers()) {
                 if (developer.getWorkingOn() != null) {
                     projects.add(developer.getWorkingOn());
@@ -31,9 +36,9 @@ public class MenuProjectsEvaluation {
                 Project project = projects.get(i);
                 projectText.add("\"" + project.getName().getName() + "\"");
                 var extraInformation2D = new ArrayList<String>();
-                extraInformation2D.add("Days left: " + calculateDaysLeft(project, game));
+                extraInformation2D.add("Days left: " + this.calculateDaysLeft(project));
                 int quantityOfDeveloper = 0;
-                for(Developer developer : Employees.getEmployees(game.getStudio())){
+                for(Developer developer : Employees.getEmployees(this.game.getStudio())){
                     if(developer.getWorkingOn() != null && developer.getWorkingOn().equals(project))
                         quantityOfDeveloper++;
                 }
@@ -47,9 +52,7 @@ public class MenuProjectsEvaluation {
 
     }
 
-
-
-    public static int calculateDaysLeft(Project project, Game game) {
-        return project.getDeadline().differenceTo(game.getDay());
+    public int calculateDaysLeft(Project project) {
+        return project.getDeadline().differenceTo(this.game.getDay());
     }
 }

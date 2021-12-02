@@ -7,14 +7,20 @@ import praktikum.TextHandler;
 import java.util.ArrayList;
 
 public class MenuOfficesEvaluation {
-    public static void showOffices(GameDevStudio studio){
+    GameDevStudio studio;
+
+    public MenuOfficesEvaluation(GameDevStudio studio) {
+        this.studio = studio;
+    }
+
+    public void showOffices(){
         var officeText = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
-        if (studio.getOffices().size() == 0) { //Überprüft ob
+        if (this.studio.getOffices().size() == 0) { //Überprüft ob
             TextHandler.print("There are no offices");
         } else {
-            for (int i = 0; i < studio.getOffices().size(); i++) { //Iterate throw all Offices
-                Office office = studio.getOffices().get(i);
+            for (int i = 0; i < this.studio.getOffices().size(); i++) { //Iterate throw all Offices
+                Office office = this.studio.getOffices().get(i);
                 officeText.add("\""+office.getName().getName()+"\"");
                 var extraInformation2D = new ArrayList<String>();
                 if (office.getLease() == null) {
