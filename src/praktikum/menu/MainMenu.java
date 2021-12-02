@@ -68,30 +68,39 @@ public class MainMenu {
     //Sub-Menus
     public void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log(l); offices(o); developer(d); projects(p); costs(c); yearsUntilBankrupt(y)]: ").toLowerCase()) {
+            switch (TextHandler.getText("Which Evaluation? [log(l); offices(o); developer(d); projects(p); costs(c); yearsUntilBankrupt(y); back(b)]: ").toLowerCase()) {
                 case "l":
                 case "log":
                     MenuEventLogEvaluation.showEventLog(gameInstance);
+                    menuEvaluationStructure();
                     break;
                 case "o":
                 case "offices":
                     MenuOfficesEvaluation.showOffices(gameInstance.getStudio());
+                    menuEvaluationStructure();
                     break;
                 case "d":
                 case "developer":
                     MenuDeveloperEvaluation.showDeveloper(gameInstance.getStudio());
+                    menuEvaluationStructure();
                     break;
                 case "p":
                 case "projects":
                     MenuProjectsEvaluation.showProjects(gameInstance);
+                    menuEvaluationStructure();
                     break;
                 case "c":
                 case "costs":
                     MenuCostsEvaluation.showCosts(gameInstance.getStudio());
+                    menuEvaluationStructure();
                     break;
                 case "y":
                 case "yearsuntilbankrupt":
                     MenuBankruptEvaluation.showDaysUntilBankrupt(gameInstance.getStudio());
+                    menuEvaluationStructure();
+                    break;
+                case "b":
+                case "back":
                     break;
                 default:
                     throw new WrongChoiceException();
