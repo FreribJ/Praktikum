@@ -38,6 +38,7 @@ public class MenuApplication {
             var extraInformation2D = new ArrayList<String>();
             extraInformation2D.add("Hire Bonus: " + studio.getApplications().get(i).getHireBonus());
             extraInformation2D.add("Hire Agent Fee: " + studio.getApplications().get(i).getHireAgentFee());
+            extraInformation2D.add("Salary: " + studio.getApplications().get(i).getDeveloper().getSalary());
             extraInformation2D.add("Remaining capital: " + this.calculateRemainingCapital(studio.getApplications().get(i)));
             extraInformation2D.add("Years until we die: " + yearsUntilDeath);
             extraInformation.add(extraInformation2D);
