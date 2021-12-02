@@ -145,10 +145,6 @@ public class MainMenu {
             System.out.println(e.getMessage());
             menuApplicationStructure(menuApplication);
         }
-        catch (NumberFormatException e) {
-            System.out.println("You have to give a number!");
-            menuApplicationStructure(menuApplication);
-        }
         catch (RuntimeException e) {
             System.out.println(e.getMessage());
             menuApplicationStructure(menuApplication);
@@ -171,7 +167,7 @@ public class MainMenu {
                     if (menuProject == null) {
                         throw new RuntimeException("You need to use List first");
                     }
-                    menuProject.accept(Integer.parseInt(TextHandler.getText("Which number?")));
+                    menuProject.accept(TextHandler.getInt("Which number?"));
                     menuProjectsStructure(null);
                     break;
                 case "b":
@@ -189,10 +185,6 @@ public class MainMenu {
             }
         } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());
-            menuProjectsStructure(menuProject);
-        }
-        catch (NumberFormatException e) {
-            System.out.println("You have to give a number!");
             menuProjectsStructure(menuProject);
         }
         catch (RuntimeException e) {

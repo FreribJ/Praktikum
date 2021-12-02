@@ -71,18 +71,14 @@ public class MenuApplication {
     public void hireApplicationDeveloper() throws WrongChoiceException {
         int developerIndex = 0;
         int officeIndex = 0;
-        try {
-            developerIndex = Integer.parseInt(TextHandler.getText("which one do you want to hire?")) - 1;
+        developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
 
-            var outputText = new ArrayList<String>();
-            for (Office office : studio.getOffices()) {
-                outputText.add(office.getName().getName());
-            }
-            TextHandler.print(outputText, "Offices", "Office", true, null);
-            officeIndex = Integer.parseInt(TextHandler.getText("In which office?")) - 1;
-        } catch(Exception e) {
-            throw new WrongChoiceException();
+        var outputText = new ArrayList<String>();
+        for (Office office : studio.getOffices()) {
+            outputText.add(office.getName().getName());
         }
+        TextHandler.print(outputText, "Offices", "Office", true, null);
+        officeIndex = TextHandler.getInt("In which office?") - 1;
         if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
             throw new WrongChoiceException();
         }
