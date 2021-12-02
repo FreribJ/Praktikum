@@ -3,6 +3,7 @@ package praktikum.menu;
 import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.*;
 import praktikum.Employees;
+import praktikum.exceptions.NotAvailableException;
 import praktikum.special.SpecialProject;
 import praktikum.TextHandler;
 
@@ -101,7 +102,7 @@ public class MenuProject {
     }
 
     /**
-     * Gives a List of all possible Developers for a given Project
+     * Gives a List of all possible Developers for a given Project in addition to the Number of Days it takes them to finish the Project
      * @param allDeveloperWithoutProject  {@link Developer} which don´t have a project yet.
      * @param project defines the given {@link Project}
      * @return List of {@link Developer}
@@ -113,7 +114,7 @@ public class MenuProject {
             String extraInformation2DText = "";
             try {
                 extraInformation2DText = extraInformation2DText.concat("Days to Finish: " + getDaysToFinishProject(dev, project) + " -> ");
-            } catch (RuntimeException e) {
+            } catch (NotAvailableException e) {
                 extraInformation2DText = extraInformation2DText.concat(e.getMessage() + " -> ");
             }
             extraInformation2DText = extraInformation2DText.concat(dev.getName().getName());
@@ -129,8 +130,9 @@ public class MenuProject {
      * @return Returns a String with the best {@link Developer}s.
      */
     private String findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
+        //Start der eventuellen While-Schleife für mehrere Developer
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
-        int lowestDays = 100;
+        int lowestDays = 1000;
         Developer fastest = null;
         for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
             Developer dev = allDeveloperWithoutProject.get(j);
@@ -140,10 +142,14 @@ public class MenuProject {
                     lowestDays = daysToFinishProject;
                     fastest = dev;
                 }
-            } catch (RuntimeException e) {
+            } catch (NotAvailableException e) {
             }
         }
-        fastestForCurrentProject.add(fastest);
+        if (fastest != null) {
+            fastestForCurrentProject.add(fastest);
+        }
+        //Ende der eventuellen While-Schleife für mehrere Developer
+
         allProjectsFastestDevelopers.add(fastestForCurrentProject);
 
         if (fastestForCurrentProject.size() == 0) {
@@ -151,6 +157,7 @@ public class MenuProject {
         } else {
             StringBuilder sb = new StringBuilder();
             for (Developer dev: fastestForCurrentProject) {
+                System.out.println("Test!!!: " + fastestForCurrentProject);
                 sb.append(dev.getName().getName() + "     ");
             }
             return "Best Developer(s): " + sb;
@@ -175,9 +182,9 @@ public class MenuProject {
      * Gives the amount of days a given {@link Developer} needs to finish a given {@link Project}
      * @param dev The {@link Developer}.
      * @param pro The {@link Project}.
-     * @return Number of Days
+     * @return Number of Days.
      */
-    private int getDaysToFinishProject(Developer dev, Project pro) {
+    private int getDaysToFinishProject(Developer dev, Project pro) throws NotAvailableException {
         Skillset effort = pro.getEffort();
         int days = 0;
         if (
@@ -186,7 +193,7 @@ public class MenuProject {
                         (dev.getSkills().getTesting() == 0 && effort.getTesting() != 0) ||
                         (dev.getSkills().getDesign() == 0 && effort.getDesign() != 0)
         ) {
-            throw new RuntimeException("Developer is unable to perform this project!");
+            throw new NotAvailableException("Developer is unable to perform this project!");
         }
         while (effort.getCoding() != 0 || effort.getDesign() != 0 || effort.getResearch() != 0 || effort.getTesting() != 0) {
             days++;
@@ -197,8 +204,9 @@ public class MenuProject {
 
     /**
      * Same as {@link #getDaysToFinishProject(Developer, Project)} just with a List of {@link Developer}s.
+     * @return Number of Days.
      */
-    private int getDaysToFinishProject(List<Developer> devs, Project pro) {
+    private int getDaysToFinishProject(List<Developer> devs, Project pro) throws NotAvailableException {
         Skillset effort = pro.getEffort();
         int days = 0;
         for(Developer dev: devs) {
@@ -208,7 +216,7 @@ public class MenuProject {
                             (dev.getSkills().getTesting() == 0 && effort.getTesting() != 0) ||
                             (dev.getSkills().getDesign() == 0 && effort.getDesign() != 0)
             ) {
-                throw new RuntimeException("Developer is unable to perform this project!");
+                throw new NotAvailableException("Developer is unable to perform this project!");
             }
             while (effort.getCoding() != 0 || effort.getDesign() != 0 || effort.getResearch() != 0 || effort.getTesting() != 0) {
                 days++;
