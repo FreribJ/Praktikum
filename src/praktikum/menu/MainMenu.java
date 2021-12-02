@@ -25,7 +25,7 @@ public class MainMenu {
     //praktikum.Main-Menu
     public void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); continue all(ca); end]: ").toLowerCase()) {
+            switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
                 case "end":
                     //Terminate program
                     TextHandler.print("end");
@@ -56,6 +56,10 @@ public class MainMenu {
                     gameInstance.start();
                     menuStructure();
                     break;
+                case "o":
+                case "offices":
+                    this.menuOfficesStructure();
+                    menuStructure();
                 default:
                     throw new WrongChoiceException();
             }
@@ -187,12 +191,30 @@ public class MainMenu {
             System.out.println(e.getMessage());
             menuProjectsStructure(menuProject);
         }
-        catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            menuProjectsStructure(menuProject);
-        }
 
     }
+
+    public void menuOfficesStructure() {
+        try {
+            switch (TextHandler.getText("What do you want to do? [create(c); back(b)]").toLowerCase()) {
+                case "b":
+                case "back":
+                    break;
+                case "c":
+                case "create":
+                    MenuOffice.create(gameInstance);
+                    gameInstance.actionPerformed();
+                    menuOfficesStructure();
+                    break;
+                default:
+                    throw new WrongChoiceException();
+            }
+        } catch (WrongChoiceException e){
+            System.out.println(e.getMessage());
+            menuOfficesStructure();
+        }
+    }
+
 
     //Helping Methods
     public void printRelevantInformation() {
