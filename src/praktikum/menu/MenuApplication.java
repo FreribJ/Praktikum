@@ -22,7 +22,7 @@ public class MenuApplication {
 
         for (int i = 0; i < studio.getApplications().size(); i++) {
             var developer = studio.getApplications().get(i).getDeveloper();
-            allApplicationDeveloper.add(developer.toString());
+            allApplicationDeveloper.add(developer.getName().getName());
 
             // remaining capital wird berechnet und ausgegeben
             Money capital = this.calculateRemainingCapital(studio.getApplications().get(i));
@@ -37,6 +37,8 @@ public class MenuApplication {
                 yearsUntilDeath++;
             }
             var extraInformation2D = new ArrayList<String>();
+            extraInformation2D.add("Hire Bonus: " + studio.getApplications().get(i).getHireBonus());
+            extraInformation2D.add("Hire Agent Fee: " + studio.getApplications().get(i).getHireAgentFee());
             extraInformation2D.add("Remaining capital: " + this.calculateRemainingCapital(studio.getApplications().get(i)));
             extraInformation2D.add("Years until we die: " + yearsUntilDeath);
             extraInformation.add(extraInformation2D);
