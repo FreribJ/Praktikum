@@ -16,6 +16,10 @@ public class MenuApplication {
     Game game;
     GameDevStudio studio;
 
+    /**
+     * Constructor of a {@link MenuApplication}.
+     * @param game the game operated with.
+     */
     public MenuApplication(Game game) {
         this.game = game;
         this.studio = game.getStudio();

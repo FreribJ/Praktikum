@@ -214,8 +214,8 @@ public class MainMenu {
                 case "c":
                 case "create":
                     gameInstance.assertActionsLeft();
-                    var menuOffice = new MenuOffice();
-                    menuOffice.create(gameInstance);
+                    var menuOffice = new MenuOffice(gameInstance);
+                    menuOffice.create();
                     gameInstance.actionPerformed();
                     this.menuOfficesStructure();
                     break;

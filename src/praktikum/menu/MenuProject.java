@@ -19,6 +19,10 @@ public class MenuProject {
     List<Project> allProjects;
     List<List<Developer>> allProjectsFastestDevelopers = new ArrayList<>();
 
+    /**
+     * Constructor of a {@link MenuProject}.
+     * @param game the game operated with.
+     */
     public MenuProject(Game game) {
         this.game = game;
         this.studio = this.game.getStudio();
