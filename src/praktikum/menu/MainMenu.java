@@ -140,6 +140,7 @@ public class MainMenu {
                     if (menuApplication == null) {
                         throw new NotAvailableException("You need to use list first");
                     }
+                    gameInstance.assertActionsLeft();
                     menuApplication.hireApplicationDeveloper();
                     this.menuApplicationStructure(null);
                     break;
@@ -148,6 +149,7 @@ public class MainMenu {
                     break;
                 case "c":
                 case "create":
+                    gameInstance.assertActionsLeft();
                     menuApplication = new MenuApplication(gameInstance);
                     menuApplication.create();
                     gameInstance.actionPerformed();
@@ -156,7 +158,7 @@ public class MainMenu {
                 default:
                     throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException | NotAvailableException e) {
+        } catch (WrongChoiceException | NotAvailableException | IllegalStateException e) {
             System.out.println(e.getMessage());
             this.menuApplicationStructure(menuApplication);
         }
@@ -178,6 +180,7 @@ public class MainMenu {
                     if (menuProject == null) {
                         throw new NotAvailableException("You need to use List first");
                     }
+                    gameInstance.assertActionsLeft();
                     menuProject.accept(TextHandler.getInt("Which number?"));
                     this.menuProjectsStructure(null);
                     break;
@@ -186,6 +189,7 @@ public class MainMenu {
                     break;
                 case "c":
                 case "create":
+                    gameInstance.assertActionsLeft();
                     menuProject = new MenuProject(gameInstance);
                     menuProject.create();
                     gameInstance.actionPerformed();
@@ -194,7 +198,7 @@ public class MainMenu {
                 default:
                     throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException | NotAvailableException e) {
+        } catch (WrongChoiceException | NotAvailableException | IllegalStateException e) {
             System.out.println(e.getMessage());
             this.menuProjectsStructure(menuProject);
         }
@@ -209,6 +213,7 @@ public class MainMenu {
                     break;
                 case "c":
                 case "create":
+                    gameInstance.assertActionsLeft();
                     var menuOffice = new MenuOffice();
                     menuOffice.create(gameInstance);
                     gameInstance.actionPerformed();
@@ -217,7 +222,7 @@ public class MainMenu {
                 default:
                     throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException e){
+        } catch (WrongChoiceException | IllegalStateException e){
             System.out.println(e.getMessage());
             this.menuOfficesStructure();
         }
