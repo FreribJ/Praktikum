@@ -37,7 +37,7 @@ public class MainMenu {
 
     private void menuStructure() {
         try {
-            switch (TextHandler.getText("Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
+            switch (TextHandler.getText("\u001B[37m" + "(Main Menu) " + "\u001B[0m" + "Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
                 case "end":
                     TextHandler.print("end");
                     break;
@@ -83,7 +83,7 @@ public class MainMenu {
 
     private void menuEvaluationStructure() {
         try {
-            switch (TextHandler.getText("Which Evaluation? [log(l); offices(o); developer(d); projects(p); costs(c); daysUntilBankrupt(db); back(b)]: ").toLowerCase()) {
+            switch (TextHandler.getText("\u001B[37m" + "(Evaluation Menu) " + "\u001B[0m" + "What do you want to evaluate? [log(l); offices(o); developer(d); projects(p); costs(c); daysUntilBankrupt(db); back(b)]: ").toLowerCase()) {
                 case "l":
                 case "log":
                     menuEventLogEvaluation.showEventLog();
@@ -128,7 +128,7 @@ public class MainMenu {
 
     private void menuApplicationStructure(MenuApplication menuApplication) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
+            switch (TextHandler.getText("\u001B[37m" + "(Application Menu) " + "\u001B[0m" + "What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
                     menuApplication = new MenuApplication(gameInstance);
@@ -166,7 +166,7 @@ public class MainMenu {
 
     private void menuProjectsStructure(MenuProject menuProject) {
         try {
-            switch (TextHandler.getText("What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
+            switch (TextHandler.getText("\u001B[37m" + "(Project Menu) " + "\u001B[0m" + "What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
                     menuProject = new MenuProject(gameInstance);
@@ -203,7 +203,7 @@ public class MainMenu {
 
     private void menuOfficesStructure() {
         try {
-            switch (TextHandler.getText("What do you want to do? [create(c); back(b)]").toLowerCase()) {
+            switch (TextHandler.getText("\u001B[37m" + "(Office Menu) " + "\u001B[0m" + "What do you want to do? [create(c); back(b)]").toLowerCase()) {
                 case "b":
                 case "back":
                     break;
