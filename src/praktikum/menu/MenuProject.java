@@ -37,16 +37,15 @@ public class MenuProject {
         ArrayList<Developer> allDeveloperWithoutProject = getAllDeveloperWithoutProject();
         var projectText = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
-        if (allProjects.size() == 0) { //Überprüft ob
+        if (allProjects.size() == 0) {
             TextHandler.print("There are no projects");
         } else {
-            for (int i = 0; i < allProjects.size(); i++) { //Iterate throw all Projects
-                Project project = allProjects.get(i);
-                projectText.add("\""+project.getName().getName()+"\"");
+            for (Project project : allProjects) {
+                projectText.add("\"" + project.getName().getName() + "\"");
                 var extraInformation2D = new ArrayList<String>();
                 if (allDeveloperWithoutProject.size() == 0) {
                     extraInformation2D.add("There are no available Developers");
-                    allProjectsFastestDevelopers.add(new ArrayList<Developer>());
+                    allProjectsFastestDevelopers.add(new ArrayList<>());
                 } else {
                     extraInformation2D.addAll(possibleDevelopers(allDeveloperWithoutProject, project));
                     extraInformation2D.add(findFastestDevelopers(allDeveloperWithoutProject, project));
@@ -84,7 +83,7 @@ public class MenuProject {
      */
     public void create() {
         TextHandler.print("A project will be created. Please enter the following values:");
-        var projectName = TextHandler.getText("Projektname: ");
+        var projectName = TextHandler.getText("Project name: ");
 
         var coding = TextHandler.getInt("Coding skill [0 - 10]: ");
         var research = TextHandler.getInt("Research skill [0 - 10]: ");
@@ -113,8 +112,7 @@ public class MenuProject {
      */
     private ArrayList<String> possibleDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
         var extraInformation2D = new ArrayList<String>();
-        for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
-            Developer dev = allDeveloperWithoutProject.get(j);
+        for (Developer dev : allDeveloperWithoutProject) {
             String extraInformation2DText = "";
             try {
                 extraInformation2DText = extraInformation2DText.concat("Days to Finish: " + getDaysToFinishProject(dev, project) + " -> ");
@@ -138,8 +136,7 @@ public class MenuProject {
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
         int lowestDays = 1000;
         Developer fastest = null;
-        for (int j = 0; j < allDeveloperWithoutProject.size(); j++) {
-            Developer dev = allDeveloperWithoutProject.get(j);
+        for (Developer dev : allDeveloperWithoutProject) {
             try {
                 int daysToFinishProject = this.getDaysToFinishProject(dev, project);
                 if (daysToFinishProject < lowestDays) {
@@ -161,7 +158,7 @@ public class MenuProject {
         } else {
             StringBuilder sb = new StringBuilder();
             for (Developer dev: fastestForCurrentProject) {
-                sb.append(dev.getName().getName() + "     ");
+                sb.append(dev.getName().getName()).append("     ");
             }
             return "Best Developer(s): " + sb;
         }

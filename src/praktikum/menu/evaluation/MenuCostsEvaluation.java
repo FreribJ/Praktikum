@@ -9,23 +9,41 @@ import praktikum.TextHandler;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+/**
+ * Handles the evaluation of the daily costs.
+ */
 public class MenuCostsEvaluation {
     GameDevStudio studio;
 
+    /**
+     * Constructs a {@link MenuCostsEvaluation}.
+     * @param studio the studio operated with.
+     */
     public MenuCostsEvaluation(GameDevStudio studio) {
         this.studio = studio;
     }
 
+    /**
+     * Calculates and prints the daily costs.
+     */
     public void showCosts(){
-        Money yearlyExpenditure = new Money(new BigDecimal(0));
+        var text = new ArrayList<String>();
+        text.add(this.getCosts().toString());
+        TextHandler.print(text, "Sum of running costs");
+    }
+
+    /**
+     * Calculates the daily costs.
+     * @return the daily costs.
+     */
+    public Money getCosts(){
+        Money dailyExpenditure = new Money(new BigDecimal(0));
         for (Office office : this.studio.getOffices()) {
-            yearlyExpenditure = yearlyExpenditure.add(office.getLease());
+            dailyExpenditure = dailyExpenditure.add(office.getLease());
             for (Developer developer : office.getDevelopers()) {
-                yearlyExpenditure = yearlyExpenditure.add(developer.getSalary());
+                dailyExpenditure = dailyExpenditure.add(developer.getSalary());
             }
         }
-        var text = new ArrayList<String>();
-        text.add(yearlyExpenditure.toString());
-        TextHandler.print(text, "Sum of running costs");
+        return dailyExpenditure;
     }
 }

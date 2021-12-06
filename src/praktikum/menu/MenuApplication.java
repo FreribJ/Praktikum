@@ -2,11 +2,11 @@ package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.*;
+import praktikum.menu.evaluation.MenuCostsEvaluation;
 import praktikum.special.SpecialApplication;
 import praktikum.TextHandler;
 import praktikum.exceptions.WrongChoiceException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -38,11 +38,12 @@ public class MenuApplication {
 
             Money capital = this.calculateRemainingCapital(studio.getApplications().get(i));
 
-            Money yearlyExpenditure = this.calculateDailyExpenditure(studio.getApplications().get(i));
+            Money dailyExpenditure = new MenuCostsEvaluation(studio).getCosts();
+            dailyExpenditure = dailyExpenditure.add(studio.getApplications().get(i).getDeveloper().getSalary());
 
             int daysUntilDeath = 0;
-            while (capital.isGreaterThan(yearlyExpenditure)) {
-                capital = capital.subtract(yearlyExpenditure);
+            while (capital.isGreaterThan(dailyExpenditure)) {
+                capital = capital.subtract(dailyExpenditure);
                 daysUntilDeath++;
             }
             var extraInformation2D = new ArrayList<String>();
@@ -69,45 +70,24 @@ public class MenuApplication {
     }
 
     /**
-     * Calculates the daily Expenditure if you accept the {@link Application}.
-     * @param application is the application calculating with.
-     * @return the yearly Expenditure.
-     */
-    private Money calculateDailyExpenditure(Application application) {
-        Money dailyExpenditure = new Money(new BigDecimal(0));
-        for (Office office : studio.getOffices()) {
-            dailyExpenditure = dailyExpenditure.add(office.getLease());
-            for (Developer developer : office.getDevelopers()) {
-                dailyExpenditure = dailyExpenditure.add(developer.getSalary());
-            }
-        }
-
-        dailyExpenditure = dailyExpenditure.add(application.getDeveloper().getSalary());
-        return dailyExpenditure;
-    }
-
-    /**
      * Hires a {@link Developer} in a {@link Office}.
      * @throws WrongChoiceException when the indexes are out of range.
      */
     public void hireApplicationDeveloper() throws WrongChoiceException {
-        int developerIndex = 0;
-        int officeIndex = 0;
-        developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
+        int developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
 
         var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
             outputText.add(office.getName().getName());
         }
         TextHandler.print(outputText, "Offices", "Office", true, null);
-        officeIndex = TextHandler.getInt("In which office?") - 1;
+        int officeIndex = TextHandler.getInt("In which office?") - 1;
         if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
             throw new WrongChoiceException();
         }
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
         TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
-        int finalDeveloperIndex = developerIndex;
-        studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(finalDeveloperIndex)).toList());
+        studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(developerIndex)).toList());
     }
 
     /**
