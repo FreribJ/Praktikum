@@ -2,6 +2,7 @@ package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.*;
+import praktikum.exceptions.NotAvailableException;
 import praktikum.special.SpecialApplication;
 import praktikum.TextHandler;
 import praktikum.exceptions.WrongChoiceException;
@@ -53,7 +54,12 @@ public class MenuApplication {
             extraInformation2D.add("Days until we die: " + daysUntilDeath);
             extraInformation.add(extraInformation2D);
         }
-        TextHandler.print(allApplicationDeveloper, !allApplicationDeveloper.isEmpty() ? "These are all the applicants" : "There are no applications", null, true, extraInformation);
+        if(allApplicationDeveloper.isEmpty()){
+            TextHandler.print("There are no applications!");
+        }else{
+            TextHandler.print(allApplicationDeveloper, "These are all the applicants", null, true, extraInformation);
+
+        }
     }
 
     /**
@@ -90,24 +96,24 @@ public class MenuApplication {
      * Hires a {@link Developer} in a {@link Office}.
      * @throws WrongChoiceException when the indexes are out of range.
      */
-    public void hireApplicationDeveloper() throws WrongChoiceException {
-        int developerIndex = 0;
-        int officeIndex = 0;
-        developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
+    public void hireApplicationDeveloper() throws WrongChoiceException, NotAvailableException {
+        if(studio.getApplications() == null | studio.getApplications().size() <=0){
+            throw new NotAvailableException("You can not hire a developer because there are no applications!");
+        }
+        int developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
 
         var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
             outputText.add(office.getName().getName());
         }
         TextHandler.print(outputText, "Offices", "Office", true, null);
-        officeIndex = TextHandler.getInt("In which office?") - 1;
+        int officeIndex = TextHandler.getInt("In which office?") - 1;
         if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
             throw new WrongChoiceException();
         }
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
         TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
-        int finalDeveloperIndex = developerIndex;
-        studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(finalDeveloperIndex)).toList());
+        studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(developerIndex)).toList());
     }
 
     /**
