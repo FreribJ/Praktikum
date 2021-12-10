@@ -8,6 +8,9 @@ import praktikum.menu.evaluation.*;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the main menu and all submenus.
+ */
 public class MainMenu {
 
     Game gameInstance;
@@ -19,6 +22,9 @@ public class MainMenu {
     MenuCostsEvaluation menuCostsEvaluation;
     MenuBankruptEvaluation menuBankruptEvaluation;
 
+    /**
+     * Starts the game and the {@link #menuStructure()}.
+     */
     public void run() {
         gameInstance = Game.create(iGameHandler -> {
             this.printRelevantInformation();
@@ -35,6 +41,9 @@ public class MainMenu {
         menuStructure();
     }
 
+    /**
+     * Prints the main menu and calls the submenus.
+     */
     private void menuStructure() {
         try {
             switch (TextHandler.getText("\u001B[37m" + "(Main Menu) " + "\u001B[0m" + "Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
@@ -81,6 +90,9 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Prints the evaluation menu and handles all evaluations.
+     */
     private void menuEvaluationStructure() {
         try {
             switch (TextHandler.getText("\u001B[37m" + "(Evaluation Menu) " + "\u001B[0m" + "What do you want to evaluate? [log(l); offices(o); developer(d); projects(p); costs(c); daysUntilBankrupt(db); back(b)]: ").toLowerCase()) {
@@ -126,6 +138,9 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Prints the application menu and handles th {@link MenuApplication}.
+     */
     private void menuApplicationStructure(MenuApplication menuApplication) {
         try {
             switch (TextHandler.getText("\u001B[37m" + "(Application Menu) " + "\u001B[0m" + "What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
@@ -166,6 +181,9 @@ public class MainMenu {
 
     }
 
+    /**
+     * Prints the projects menu and handles th {@link MenuProject}.
+     */
     private void menuProjectsStructure(MenuProject menuProject) {
         try {
             switch (TextHandler.getText("\u001B[37m" + "(Project Menu) " + "\u001B[0m" + "What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
@@ -205,6 +223,9 @@ public class MainMenu {
 
     }
 
+    /**
+     * Prints the office menu and handles th {@link MenuOffice}.
+     */
     private void menuOfficesStructure() {
         try {
             switch (TextHandler.getText("\u001B[37m" + "(Office Menu) " + "\u001B[0m" + "What do you want to do? [create(c); back(b)]").toLowerCase()) {
@@ -229,6 +250,9 @@ public class MainMenu {
     }
 
 
+    /**
+     * Prints all relevant information for each day.
+     */
     private void printRelevantInformation() {
         var relevantInformation = new ArrayList<String>();
         relevantInformation.add("Company Name: " + gameInstance.getStudio().getName().getName());

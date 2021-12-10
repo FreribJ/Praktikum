@@ -2,7 +2,6 @@ package praktikum.menu;
 
 import gmbh.kdb.hsw.gdp.Game;
 import gmbh.kdb.hsw.gdp.domain.*;
-import praktikum.exceptions.NotAvailableException;
 import praktikum.special.SpecialApplication;
 import praktikum.TextHandler;
 import praktikum.exceptions.WrongChoiceException;
@@ -16,11 +15,9 @@ import java.util.ArrayList;
 public class MenuApplication {
     Game game;
     GameDevStudio studio;
-    boolean emptyList;
 
     /**
      * Constructor of a {@link MenuApplication}.
-     *
      * @param game the game operated with.
      */
     public MenuApplication(Game game) {
@@ -56,18 +53,11 @@ public class MenuApplication {
             extraInformation2D.add("Days until we die: " + daysUntilDeath);
             extraInformation.add(extraInformation2D);
         }
-        if (allApplicationDeveloper.isEmpty()) {
-            emptyList = true;
-            TextHandler.print("There are no applications");
-        } else {
-            emptyList = false;
-            TextHandler.print(allApplicationDeveloper, "These are all the applicants", null, true, extraInformation);
-        }
+        TextHandler.print(allApplicationDeveloper, !allApplicationDeveloper.isEmpty() ? "These are all the applicants" : "There are no applications", null, true, extraInformation);
     }
 
     /**
      * Calculates the remaining capital if you accept the {@link Application}.
-     *
      * @param application is the application calculating with.
      * @return the remaining capital.
      */
@@ -80,7 +70,6 @@ public class MenuApplication {
 
     /**
      * Calculates the daily Expenditure if you accept the {@link Application}.
-     *
      * @param application is the application calculating with.
      * @return the yearly Expenditure.
      */
@@ -99,12 +88,9 @@ public class MenuApplication {
 
     /**
      * Hires a {@link Developer} in a {@link Office}.
-     *
      * @throws WrongChoiceException when the indexes are out of range.
      */
-    public void hireApplicationDeveloper() throws WrongChoiceException, NotAvailableException {
-        if(studio.getApplications() == null || studio.getApplications().isEmpty())
-            throw new NotAvailableException("You can not hire a developer because there are no applications!");
+    public void hireApplicationDeveloper() throws WrongChoiceException {
         int developerIndex = 0;
         int officeIndex = 0;
         developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
@@ -115,7 +101,7 @@ public class MenuApplication {
         }
         TextHandler.print(outputText, "Offices", "Office", true, null);
         officeIndex = TextHandler.getInt("In which office?") - 1;
-        if (developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0) {
+        if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
             throw new WrongChoiceException();
         }
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
@@ -127,17 +113,17 @@ public class MenuApplication {
     /**
      * Creates new {@link Application} and adds it to the {@link GameDevStudio}.
      */
-    public void create() {
+    public void create(){
         TextHandler.print("An application will be created. Please enter the following values:");
-        var name = TextHandler.getText("Developer name:");
         var coding = TextHandler.getInt("Coding skill [0-10]:");
         var research = TextHandler.getInt("Research skill [0-10]:");
         var testing = TextHandler.getInt("Testing skill [0-10]:");
         var design = TextHandler.getInt("Design skill [0-10]:");
         var skills = new Skillset(coding, research, testing, design);
-        var salary = TextHandler.getDouble("Salary:");
         var hireBonus = TextHandler.getDouble("Hire bonus:");
         var hireAgentFee = TextHandler.getDouble("Hire agent fee:");
+        var name = TextHandler.getText("Developer name:");
+        var salary = TextHandler.getDouble("Salary:");
         var applications = new ArrayList<>(studio.getApplications());
         applications.add(SpecialApplication.createSpecialApplication(skills, hireBonus, hireAgentFee, name, salary));
         studio.setApplications(applications);
