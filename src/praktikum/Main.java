@@ -11,6 +11,10 @@ public class Main {
      */
     public static void main(String[] args) {
         TextHandler.print("""
+                Java-Practicum by Daniel Koch,
+                in cooperation with Finn, Jan, Jannes, Juliana, Magnus
+                """);
+        TextHandler.print("""
                 In this game, you are the CEO of your company.
                 You want to survive as long as possible. You can manage your projects and applications.
                 Furthermore, you can earn money by finishing projects.
