@@ -16,7 +16,7 @@ public class Main {
                 Furthermore, you can earn money by finishing projects.
                 (!!! Create Methods are for testing purposes only !!!)
                 """);
-        TextHandler.getText("Type 'Start' to Start");
+        TextHandler.getText("Type anything to Start");
         new MainMenu().run();
     }
 }
