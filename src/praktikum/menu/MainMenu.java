@@ -181,7 +181,7 @@ public class MainMenu {
                         throw new NotAvailableException("You need to use List first");
                     }
                     gameInstance.assertActionsLeft();
-                    menuProject.accept(TextHandler.getInt("Which number?"));
+                    menuProject.accept();
                     this.menuProjectsStructure(null);
                     break;
                 case "b":

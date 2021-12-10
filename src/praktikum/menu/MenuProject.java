@@ -60,13 +60,16 @@ public class MenuProject {
 
     /**
      * Accepts a given {@link Project}
-     * @param i shows which Project will be accepted.
      */
-    public void accept(int i) {
+    public void accept() {
         try {
+            if(allProjects == null || allProjects.isEmpty()){
+                throw new NotAvailableException("You can not accept a project because there are no projects!");
+            }
+            int i = TextHandler.getInt("Which number?");
             i--;
             if (allProjectsFastestDevelopers.get(i).size() == 0) {
-                throw new IllegalArgumentException("Can´t accept project, because there is no capable Developer!");
+                throw new IllegalArgumentException("Can´t accept project because there is no capable Developer!");
             }
             studio.acceptProject(allProjects.get(i), allProjectsFastestDevelopers.get(i));
             TextHandler.print("Project was accepted!");
@@ -75,6 +78,9 @@ public class MenuProject {
         } catch (IndexOutOfBoundsException e) {
             TextHandler.print("Wrong Number!!! (You may try 'List' first)");
         } catch (IllegalArgumentException e) {
+            TextHandler.print(e.getMessage());
+        }
+        catch (NotAvailableException e){
             TextHandler.print(e.getMessage());
         }
     }
