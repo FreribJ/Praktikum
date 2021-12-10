@@ -121,6 +121,7 @@ public class MenuApplication {
      */
     public void create(){
         TextHandler.print("An application will be created. Please enter the following values:");
+        var name = TextHandler.getText("Developer name:");
         var coding = TextHandler.getInt("Coding skill [0-10]:");
         var research = TextHandler.getInt("Research skill [0-10]:");
         var testing = TextHandler.getInt("Testing skill [0-10]:");
@@ -128,7 +129,6 @@ public class MenuApplication {
         var skills = new Skillset(coding, research, testing, design);
         var hireBonus = TextHandler.getDouble("Hire bonus:");
         var hireAgentFee = TextHandler.getDouble("Hire agent fee:");
-        var name = TextHandler.getText("Developer name:");
         var salary = TextHandler.getDouble("Salary:");
         var applications = new ArrayList<>(studio.getApplications());
         applications.add(SpecialApplication.createSpecialApplication(skills, hireBonus, hireAgentFee, name, salary));

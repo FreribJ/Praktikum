@@ -21,6 +21,11 @@ public class TextHandler {
         String input = sc.next();
         System.out.println();
         System.out.println("-".repeat(100));
+
+        //Für Konsoleneingabe über Batch
+        if (input.length() > 0 && input.toCharArray()[input.toCharArray().length-1] == 13) {
+            input = input.substring(0, input.length() - 1);
+        }
         return input;
     }
 
