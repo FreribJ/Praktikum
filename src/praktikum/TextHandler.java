@@ -38,10 +38,17 @@ public class TextHandler {
         System.out.println();
         System.out.println(message);
             try {
-                int input = Integer.parseInt(sc.next());
+                String input = sc.next();
+
+                //Für Konsoleneingabe über Batch
+                if (input.length() > 0 && input.toCharArray()[input.toCharArray().length-1] == 13) {
+                    input = input.substring(0, input.length() - 1);
+                }
+
+                int intInput = Integer.parseInt(input);
                 System.out.println();
                 System.out.println("-".repeat(100));
-                return input;
+                return intInput;
             }catch (NumberFormatException e){
                 return getInt("you have to give a number:");
             }
@@ -56,10 +63,17 @@ public class TextHandler {
         System.out.println();
         System.out.println(message);
         try {
-            double input = Double.parseDouble(sc.next());
+            String input = sc.next();
+
+            //Für Konsoleneingabe über Batch
+            if (input.length() > 0 && input.toCharArray()[input.toCharArray().length-1] == 13) {
+                input = input.substring(0, input.length() - 1);
+            }
+
+            double doubleInput = Integer.parseInt(input);
             System.out.println();
             System.out.println("-".repeat(100));
-            return input;
+            return doubleInput;
         }catch (NumberFormatException e){
             return getDouble("you have to give a double:");
         }
