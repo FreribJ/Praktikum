@@ -91,11 +91,7 @@ public class MenuProject {
         TextHandler.print("A project will be created. Please enter the following values:");
         var projectName = TextHandler.getText("Project name: ");
 
-        var coding = TextHandler.getInt("Coding skill [0 - 10]: ");
-        var research = TextHandler.getInt("Research skill [0 - 10]: ");
-        var testing = TextHandler.getInt("Testing skill [0 - 10]: ");
-        var design = TextHandler.getInt("Design skill[0 - 10]: ");
-        var skillSet = new Skillset(coding, research, testing, design);
+        var skillSet = TextHandler.getSkillset();
 
         var money = TextHandler.getDouble("Money: ");
         var customer = TextHandler.getText("Company name: ");

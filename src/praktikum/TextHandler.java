@@ -74,11 +74,10 @@ public class TextHandler {
                 input = input.substring(0, input.length() - 1);
             }
 
-            double doubleInput = Integer.parseInt(input);
             System.out.println();
             System.out.println("-".repeat(100));
-            return doubleInput;
-        }catch (NumberFormatException e){
+            return Double.parseDouble(input);
+        } catch (NumberFormatException e) {
             return getDouble("you have to give a double:");
         }
     }
