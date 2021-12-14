@@ -14,7 +14,7 @@ public class MenuBankruptEvaluation {
 
     /**
      * Constructs a {@link MenuBankruptEvaluation}.
-     * @param studio the studio operated with.
+     * @param studio the studio operated with
      */
     public MenuBankruptEvaluation(GameDevStudio studio) {
         this.studio = studio;
@@ -31,7 +31,7 @@ public class MenuBankruptEvaluation {
 
     /**
      * Calculates the days until bankrupt.
-     * @return the days until bankrupt.
+     * @return the days until bankrupt
      */
     public int getDaysUntilBankrupt(){
         Money capital = new Money(this.studio.getCash().getValue());

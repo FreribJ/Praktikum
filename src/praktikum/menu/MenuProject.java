@@ -30,7 +30,7 @@ public class MenuProject {
     }
 
     /**
-     * Prints all {@link Project} with each {@link Developer} and the Day he needs to finish.
+     * Prints all {@link Project} with each {@link Developer} and the day he needs to finish.
      * It also prints out the best {@link Developer} for the given {@link Project}.
      */
     public void showProjects() {
@@ -58,7 +58,7 @@ public class MenuProject {
     }
 
     /**
-     * Accepts a given {@link Project}
+     * Accepts a given {@link Project}.
      */
     public void accept() {
         try {
@@ -68,24 +68,21 @@ public class MenuProject {
             int i = TextHandler.getInt("Which number?");
             i--;
             if (allProjectsFastestDevelopers.get(i).size() == 0) {
-                throw new IllegalArgumentException("Can´t accept project because there is no capable Developer!");
+                throw new IllegalArgumentException("Can´t accept project because there is no capable developer!");
             }
             studio.acceptProject(allProjects.get(i), allProjectsFastestDevelopers.get(i));
             TextHandler.print("Project was accepted!");
             int finalI = i;
             studio.setProjectBoard(new ProjectBoard(studio.getProjectBoard().get().stream().filter(project -> project != allProjects.get(finalI)).toList()));
         } catch (IndexOutOfBoundsException e) {
-            TextHandler.print("Wrong Number!!! (You may try 'List' first)");
-        } catch (IllegalArgumentException e) {
-            TextHandler.print(e.getMessage());
-        }
-        catch (NotAvailableException e){
+            TextHandler.print("Wrong number!!! (You may try 'List' first)");
+        } catch (IllegalArgumentException | NotAvailableException e) {
             TextHandler.print(e.getMessage());
         }
     }
 
     /**
-     * creates new {@link Project} and adds it to the {@link ProjectBoard}
+     * creates new {@link Project} and adds it to the {@link ProjectBoard}.
      */
     public void create() {
         TextHandler.print("A project will be created. Please enter the following values:");
@@ -103,11 +100,11 @@ public class MenuProject {
         projectList.add(project);
         studio.setProjectBoard(new ProjectBoard(projectList));
         TextHandler.print("The project " + projectName + " has been created successfully!");
-        game.log("New Project "  +  projectName +  " was created.");
+        game.log("New project "  +  projectName +  " was created.");
     }
 
     /**
-     * Gives a List of all possible Developers for a given Project in addition to the Number of Days it takes them to finish the Project
+     * Gives a List of all possible {@link Developer}s for a given {@link Project} in addition to the number of days it takes them to finish the project.
      * @param allDeveloperWithoutProject  {@link Developer} which don´t have a project yet.
      * @param project defines the given {@link Project}
      * @return List of {@link Developer}
@@ -129,12 +126,12 @@ public class MenuProject {
 
     /**
      * Finds the fastest {@link Developer} for a given {@link Project}.
-     * @param allDeveloperWithoutProject {@link Developer} to Compare.
-     * @param project The given {@link Project} .
-     * @return Returns a String with the best {@link Developer}s.
+     * @param allDeveloperWithoutProject {@link Developer} to compare
+     * @param project The given {@link Project}
+     * @return {@link String} with the best {@link Developer}s
      */
     private String findFastestDevelopers(ArrayList<Developer> allDeveloperWithoutProject, Project project) {
-        //Start der eventuellen While-Schleife für mehrere Developer
+        //Start der eventuellen While-Schleife für mehrere Developer(andere Strategie)
         ArrayList<Developer> fastestForCurrentProject = new ArrayList<>();
         int lowestDays = 1000;
         Developer fastest = null;
@@ -145,7 +142,7 @@ public class MenuProject {
                     lowestDays = daysToFinishProject;
                     fastest = dev;
                 }
-            } catch (NotAvailableException e) {
+            } catch (NotAvailableException ignored) {
             }
         }
         if (fastest != null) {
@@ -156,13 +153,13 @@ public class MenuProject {
         allProjectsFastestDevelopers.add(fastestForCurrentProject);
 
         if (fastestForCurrentProject.size() == 0) {
-             return "There is no Developer, who can work on this project!";
+             return "There is no developer, who can work on this project!";
         } else {
             StringBuilder sb = new StringBuilder();
             for (Developer dev: fastestForCurrentProject) {
                 sb.append(dev.getName().getName()).append("     ");
             }
-            return "Best Developer(s): " + sb;
+            return "Best developer(s): " + sb;
         }
     }
 
@@ -182,9 +179,9 @@ public class MenuProject {
 
     /**
      * Gives the amount of days a given {@link Developer} needs to finish a given {@link Project}
-     * @param dev The {@link Developer}.
-     * @param pro The {@link Project}.
-     * @return Number of Days.
+     * @param dev The {@link Developer}
+     * @param pro The {@link Project}
+     * @return Number of Days
      */
     private int getDaysToFinishProject(Developer dev, Project pro) throws NotAvailableException {
         Skillset effort = pro.getEffort();
@@ -206,7 +203,7 @@ public class MenuProject {
 
     /**
      * Same as {@link #getDaysToFinishProject(Developer, Project)} just with a List of {@link Developer}s.
-     * @return Number of Days.
+     * @return Number of Days
      */
     private int getDaysToFinishProject(List<Developer> devs, Project pro) throws NotAvailableException {
         Skillset effort = pro.getEffort();

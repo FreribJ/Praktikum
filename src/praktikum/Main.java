@@ -5,9 +5,8 @@ import praktikum.menu.MainMenu;
 
 public class Main {
     /**
-     * This is the praktikum.Main Part of the Program where its starts
-     * Starts by making a {@see praktikum.menu.MainMenu}
-     *
+     * This is the praktikum.Main Part of the program where its starts.
+     * It prints out general information and starts by making a {@see praktikum.menu.MainMenu}
      */
     public static void main(String[] args) {
         TextHandler.print("""

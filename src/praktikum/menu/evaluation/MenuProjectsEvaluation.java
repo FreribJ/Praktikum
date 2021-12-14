@@ -17,7 +17,7 @@ public class MenuProjectsEvaluation {
 
     /**
      * Constructs a {@link MenuProjectsEvaluation}.
-     * @param game the game operated with.
+     * @param game the game operated with
      */
     public MenuProjectsEvaluation(Game game) {
         this.game = game;
@@ -63,8 +63,8 @@ public class MenuProjectsEvaluation {
 
     /**
      * Calculates the remaining days for a {@link Project}.
-     * @param project the {@link Project} calculated with.
-     * @return the remaining days.
+     * @param project the {@link Project} calculated with
+     * @return the remaining days
      */
     private int calculateDaysLeft(Project project) {
         return project.getDeadline().differenceTo(this.game.getDay());

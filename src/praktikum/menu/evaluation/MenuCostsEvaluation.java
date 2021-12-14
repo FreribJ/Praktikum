@@ -17,7 +17,7 @@ public class MenuCostsEvaluation {
 
     /**
      * Constructs a {@link MenuCostsEvaluation}.
-     * @param studio the studio operated with.
+     * @param studio the studio operated with
      */
     public MenuCostsEvaluation(GameDevStudio studio) {
         this.studio = studio;
@@ -34,7 +34,7 @@ public class MenuCostsEvaluation {
 
     /**
      * Calculates the daily costs.
-     * @return the daily costs.
+     * @return the daily costs
      */
     public Money getCosts(){
         Money dailyExpenditure = new Money(new BigDecimal(0));

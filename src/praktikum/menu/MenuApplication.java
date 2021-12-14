@@ -19,7 +19,7 @@ public class MenuApplication {
 
     /**
      * Constructor of a {@link MenuApplication}.
-     * @param game the game operated with.
+     * @param game the game operated with
      */
     public MenuApplication(Game game) {
         this.game = game;
@@ -64,8 +64,8 @@ public class MenuApplication {
 
     /**
      * Calculates the remaining capital if you accept the {@link Application}.
-     * @param application is the application calculating with.
-     * @return the remaining capital.
+     * @param application is the application calculating with
+     * @return the remaining capital
      */
     private Money calculateRemainingCapital(Application application) {
         Money capital = new Money(studio.getCash().getValue());
@@ -75,9 +75,9 @@ public class MenuApplication {
     }
 
     /**
-     * Calculates the daily Expenditure if you accept the {@link Application}.
-     * @param application is the application calculating with.
-     * @return the yearly Expenditure.
+     * Calculates the daily expenditure if you accept the {@link Application}.
+     * @param application is the application calculating with
+     * @return the yearly Expenditure
      */
     private Money calculateDailyExpenditure(Application application) {
         Money dailyExpenditure = new Money(new BigDecimal(0));
@@ -97,7 +97,7 @@ public class MenuApplication {
      * @throws WrongChoiceException when the indexes are out of range.
      */
     public void hireApplicationDeveloper() throws WrongChoiceException, NotAvailableException {
-        if(studio.getApplications() == null | studio.getApplications().size() <=0){
+        if(studio.getApplications() == null || studio.getApplications().size() <=0){
             throw new NotAvailableException("You can not hire a developer because there are no applications!");
         }
         int developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;

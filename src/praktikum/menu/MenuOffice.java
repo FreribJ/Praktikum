@@ -13,7 +13,7 @@ public class MenuOffice {
 
     /**
      * Constructor of a {@link MenuOffice}.
-     * @param game the game operated with.
+     * @param game the game operated with
      */
     public MenuOffice(Game game) {
         this.game = game;
