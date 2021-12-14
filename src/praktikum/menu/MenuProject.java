@@ -95,7 +95,7 @@ public class MenuProject {
 
         var money = TextHandler.getDouble("Money: ");
         var customer = TextHandler.getText("Company name: ");
-        var deadline = Integer.parseInt(TextHandler.getText("Deadline: "));
+        var deadline = TextHandler.getInt("Deadline: ");
 
         var project = SpecialProject.createSpecialProject(projectName, skillSet, money, customer, deadline);
 
