@@ -5,6 +5,7 @@ import praktikum.exceptions.NotAvailableException;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -97,9 +98,23 @@ public class TextHandler {
     public static Skillset getSkillset() {
         int[] skills = new int[4];
         String[] skillNames = {"Coding", "Research", "Testing", "Design"};
+        var totalSkill = new Random().nextInt(30, 40);
+        TextHandler.print(String.format("""
+                In the following you are asked to enter 4 skills.
+                The destiny has decided that the total skills for this applicant have a maximum of %s.
+                Pay attention that the sum of all the values does not exceed %s.""", totalSkill, totalSkill));
 
         for (int i = 0; i < 4; i++) {
-            skills[i] = TextHandler.getInt(skillNames[i] + " skill [0 - 10]: ", 0,10);
+                if(totalSkill <=0){
+                    skills[i] = 0;
+                    TextHandler.print("The skill " + skillNames[i] + " is automatically 0 because the maximum is reached");
+                }else{
+                    var message = String.format("""
+                            You have a total skill of %s left.
+                            %s skill [0 - %s]:""", totalSkill, skillNames[i], Math.min(totalSkill, 10));
+                    skills[i] = TextHandler.getInt(message, 0, Math.min(totalSkill, 10));
+                    totalSkill -= skills[i];
+                }
         }
 
         return new Skillset(skills[0],skills[1],skills[2],skills[3]);

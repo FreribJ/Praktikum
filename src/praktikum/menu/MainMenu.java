@@ -47,7 +47,8 @@ public class MainMenu {
         try {
             switch (TextHandler.getText("(Main Menu) " + "Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
                 case "end":
-                    TextHandler.print("end");
+                    TextHandler.print("The game has ended. These are your results: ");
+                    printRelevantInformation();
                     break;
                 case "ca":
                 case "continue all":
