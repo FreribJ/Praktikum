@@ -25,7 +25,7 @@ public class MenuOffice {
     public void create(){
         TextHandler.print("An office will be created. Please enter the following values:");
         var name = TextHandler.getText("Name: ");
-        var lease = TextHandler.getDouble("Lease: ");
+        var lease = TextHandler.getDouble("Lease: [value between: 250 and 1000]", 250, 1000);
         this.game.getStudio().getOffices().add(SpecialOffice.createSpecialOffice(name, lease));
         TextHandler.print("The office " + name + " has been created successfully!");
         this.game.log("New office " + name + " was created.");

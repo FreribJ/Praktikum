@@ -47,6 +47,7 @@ public class MenuProject {
                     extraInformation2D.add("There are no available Developers");
                     allProjectsFastestDevelopers.add(new ArrayList<>());
                 } else {
+                    extraInformation2D.add("Reward: " + project.getReward().getValue());
                     extraInformation2D.addAll(possibleDevelopers(allDeveloperWithoutProject, project));
                     extraInformation2D.add(findFastestDevelopers(allDeveloperWithoutProject, project));
                     extraInformation2D.add("");
@@ -65,7 +66,7 @@ public class MenuProject {
             if(allProjects == null || allProjects.isEmpty()){
                 throw new NotAvailableException("You can not accept a project because there are no projects!");
             }
-            int i = TextHandler.getInt("Which number?");
+            int i = TextHandler.getInt("Which number?", 1, allProjects.size());
             i--;
             if (allProjectsFastestDevelopers.get(i).size() == 0) {
                 throw new IllegalArgumentException("Can´t accept project because there is no capable developer!");
@@ -90,9 +91,9 @@ public class MenuProject {
 
         var skillSet = TextHandler.getSkillset();
 
-        var money = TextHandler.getDouble("Money: ");
+        var money = TextHandler.getDouble("Money: [value between: 8000 and 40000]", 8000, 40000);
         var customer = TextHandler.getText("Company name: ");
-        var deadline = TextHandler.getInt("Deadline: ");
+        var deadline = TextHandler.getInt("Days until the deadline: [value between 1 and 10]", 1, 10) + game.getDay().getNumber();
 
         var project = SpecialProject.createSpecialProject(projectName, skillSet, money, customer, deadline);
 

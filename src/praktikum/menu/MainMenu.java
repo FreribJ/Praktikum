@@ -30,7 +30,6 @@ public class MainMenu {
             this.printRelevantInformation();
             return letGameContinue;
         });
-
         gameInstance.start();
         menuEventLogEvaluation = new MenuEventLogEvaluation(gameInstance);
         menuOfficesEvaluation = new MenuOfficesEvaluation(gameInstance.getStudio());
@@ -139,7 +138,7 @@ public class MainMenu {
     }
 
     /**
-     * Prints the application menu and handles th {@link MenuApplication}.
+     * Prints the application menu and handles the {@link MenuApplication}.
      */
     private void menuApplicationStructure(MenuApplication menuApplication) {
         try {
@@ -182,7 +181,7 @@ public class MainMenu {
     }
 
     /**
-     * Prints the projects menu and handles th {@link MenuProject}.
+     * Prints the projects menu and handles the {@link MenuProject}.
      */
     private void menuProjectsStructure(MenuProject menuProject) {
         try {
@@ -224,7 +223,7 @@ public class MainMenu {
     }
 
     /**
-     * Prints the office menu and handles th {@link MenuOffice}.
+     * Prints the office menu and handles the {@link MenuOffice}.
      */
     private void menuOfficesStructure() {
         try {

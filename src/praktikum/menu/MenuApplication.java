@@ -100,17 +100,14 @@ public class MenuApplication {
         if(studio.getApplications() == null || studio.getApplications().size() <=0){
             throw new NotAvailableException("You can not hire a developer because there are no applications!");
         }
-        int developerIndex = TextHandler.getInt("which one do you want to hire?") - 1;
+        int developerIndex = TextHandler.getInt("which one do you want to hire?", 1, studio.getApplications().size()) - 1;
 
         var outputText = new ArrayList<String>();
         for (Office office : studio.getOffices()) {
             outputText.add(office.getName().getName());
         }
         TextHandler.print(outputText, "Offices", "Office", true, null);
-        int officeIndex = TextHandler.getInt("In which office?") - 1;
-        if(developerIndex >= studio.getApplications().size() || developerIndex < 0 || officeIndex >= studio.getOffices().size() || officeIndex < 0){
-            throw new WrongChoiceException();
-        }
+        int officeIndex = TextHandler.getInt("In which office?", 1, studio.getOffices().size()) - 1;
         studio.acceptApplication(studio.getApplications().get(developerIndex), studio.getOffices().get(officeIndex));
         TextHandler.print("Hired developer " + studio.getApplications().get(developerIndex).getDeveloper().getName().getName() + " in office " + studio.getOffices().get(officeIndex).getName().getName());
         studio.setApplications(studio.getApplications().stream().filter(application -> application != studio.getApplications().get(developerIndex)).toList());
@@ -123,9 +120,9 @@ public class MenuApplication {
         TextHandler.print("An application will be created. Please enter the following values:");
         var name = TextHandler.getText("Developer name:");
         var skills = TextHandler.getSkillset();
-        var hireBonus = TextHandler.getDouble("Hire bonus:");
-        var hireAgentFee = TextHandler.getDouble("Hire agent fee:");
-        var salary = TextHandler.getDouble("Salary:");
+        var hireBonus = TextHandler.getDouble("Hire bonus: [value between: 500 and 1000]", 500, 1000);
+        var hireAgentFee = TextHandler.getDouble("Hire agent fee: [value between: 2000 and 2500]", 2000, 2500);
+        var salary = TextHandler.getDouble("Salary: [value between: 3000 and 4000]", 3000, 4000);
         var applications = new ArrayList<>(studio.getApplications());
         applications.add(SpecialApplication.createSpecialApplication(skills, hireBonus, hireAgentFee, name, salary));
         studio.setApplications(applications);

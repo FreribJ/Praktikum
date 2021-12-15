@@ -1,6 +1,7 @@
 package praktikum;
 
 import gmbh.kdb.hsw.gdp.domain.Skillset;
+import praktikum.exceptions.NotAvailableException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,11 +37,11 @@ public class TextHandler {
      * @param message for a user input
      * @return the user input as a {@link Integer}
      */
-    public static int getInt(String message) {
+    public static int getInt(String message, int min, int max) {
         System.out.println();
         System.out.println(message);
         try {
-            String input = sc.next();
+            var input = sc.next();
 
             //Für Konsoleneingabe über Batch
             if (input.length() > 0 && input.toCharArray()[input.toCharArray().length - 1] == 13) {
@@ -49,18 +50,24 @@ public class TextHandler {
 
             System.out.println();
             System.out.println("-".repeat(100));
-            return Integer.parseInt(input);
+            var inputInt = Integer.parseInt(input);
+            if(inputInt < min || inputInt > max){
+                throw new NumberFormatException();
+            }
+            return inputInt;
         } catch (NumberFormatException e) {
-            return getInt("you have to give a number:");
+            return getInt("You have to give a number between " + min + " and " + max +".", min, max);
         }
     }
 
     /**
-     * Reads a user input from the console until it is a {@link Double}.
+     * Reads a user input from the console until it is a {@link Double} in the given range.
      * @param message for a user input
+     * @param min is the minimum of the range
+     * @param max is the maximum of the range
      * @return the user input as a {@link Double}
      */
-    public static double getDouble(String message) {
+    public static double getDouble(String message, double min, double max) {
         System.out.println();
         System.out.println(message);
         try {
@@ -73,9 +80,13 @@ public class TextHandler {
 
             System.out.println();
             System.out.println("-".repeat(100));
-            return Double.parseDouble(input);
+            var inputDouble = Double.parseDouble(input);
+            if(inputDouble < min || inputDouble > max){
+                throw new NumberFormatException();
+            }
+            return inputDouble;
         } catch (NumberFormatException e) {
-            return getDouble("you have to give a double:");
+            return getDouble("You have to give a double between " + min + " and " + max +".", min, max);
         }
     }
 
@@ -88,10 +99,7 @@ public class TextHandler {
         String[] skillNames = {"Coding", "Research", "Testing", "Design"};
 
         for (int i = 0; i < 4; i++) {
-            skills[i] = TextHandler.getInt(skillNames[i] + " skill [0 - 10]: ");
-            while (skills[i] > 10 || skills[i] < 0) {
-                skills[i] = TextHandler.getInt("A skill must be between 0 - 10: ");
-            }
+            skills[i] = TextHandler.getInt(skillNames[i] + " skill [0 - 10]: ", 0,10);
         }
 
         return new Skillset(skills[0],skills[1],skills[2],skills[3]);
