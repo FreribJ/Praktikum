@@ -91,7 +91,7 @@ public class MenuProject {
 
         var skillSet = TextHandler.getSkillset();
 
-        var money = TextHandler.getDouble("Money: [value between: 8000 and 40000]", 8000, 40000);
+        var money = TextHandler.getDouble("Reward: [value between: 8000 and 40000]", 8000, 40000);
         var customer = TextHandler.getText("Company name: ");
         var deadline = TextHandler.getInt("Days until the deadline: [value between 1 and 10]", 1, 10) + game.getDay().getNumber();
 
