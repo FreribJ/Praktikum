@@ -14,8 +14,8 @@ public class SpecialOffice extends Office {
     /**
      * Same as {@link Office}.
      *
-     * @param name
-     * @param lease
+     * @param name  the name of the office
+     * @param lease the lease of the office
      */
     private SpecialOffice(OfficeName name, Money lease) {
         super(name, lease);

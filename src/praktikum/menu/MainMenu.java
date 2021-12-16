@@ -46,43 +46,36 @@ public class MainMenu {
     private void menuStructure() {
         try {
             switch (TextHandler.getText("(Main Menu) " + "Whats your next choice? [continue(c); evaluation(e); applications(a); projects(p); offices(o); continue all(ca); end]: ").toLowerCase()) {
-                case "end":
+                case "end" -> {
                     TextHandler.print("The game has ended. These are your results: ");
                     printRelevantInformation();
-                    break;
-                case "ca":
-                case "continue all":
+                }
+                case "ca", "continue all" -> {
                     TextHandler.print("continues");
                     letGameContinue = true;
                     gameInstance.start();
-                    break;
-                case "e":
-                case "evaluation":
+                }
+                case "e", "evaluation" -> {
                     this.menuEvaluationStructure();
                     this.menuStructure();
-                    break;
-                case "a":
-                case "applications":
+                }
+                case "a", "applications" -> {
                     this.menuApplicationStructure(null);
                     this.menuStructure();
-                    break;
-                case "p":
-                case "projects":
+                }
+                case "p", "projects" -> {
                     this.menuProjectsStructure(null);
                     this.menuStructure();
-                    break;
-                case "c":
-                case "continue":
+                }
+                case "c", "continue" -> {
                     gameInstance.start();
                     this.menuStructure();
-                    break;
-                case "o":
-                case "offices":
+                }
+                case "o", "offices" -> {
                     this.menuOfficesStructure();
                     this.menuStructure();
-                    break;
-                default:
-                    throw new WrongChoiceException();
+                }
+                default -> throw new WrongChoiceException();
             }
         } catch (WrongChoiceException e) {
             System.out.println(e.getMessage());

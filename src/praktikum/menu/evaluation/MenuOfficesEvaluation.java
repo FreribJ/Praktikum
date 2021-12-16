@@ -16,7 +16,7 @@ public class MenuOfficesEvaluation {
     /**
      * Constructs a {@link MenuOfficesEvaluation}.
      *
-     * @param studio
+     * @param studio the studio operated with
      */
     public MenuOfficesEvaluation(GameDevStudio studio) {
         this.studio = studio;

@@ -12,9 +12,9 @@ public class SpecialApplication extends Application {
     /**
      * Same as {@link Application}
      *
-     * @param developer
-     * @param hireBonus
-     * @param hireAgentFee
+     * @param developer    the developer for the application
+     * @param hireBonus    the hire bonus for the application
+     * @param hireAgentFee the hire agent fee for the application
      */
     private SpecialApplication(Developer developer, Money hireBonus, Money hireAgentFee) {
         super(developer, hireBonus, hireAgentFee);

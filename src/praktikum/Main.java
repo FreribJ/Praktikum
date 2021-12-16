@@ -1,9 +1,15 @@
 package praktikum;
 
-import org.w3c.dom.Text;
 import praktikum.menu.MainMenu;
 
+/**
+ * Java practicum
+ *
+ * @author Finn Veerkamp, Jan Schiffer, Jannes Frenker, Juliana Tüpker, Magnus Buxel
+ * @version 1.5.6
+ */
 public class Main {
+
     /**
      * This is the praktikum.Main part of the program where it starts.
      * It prints out general information and starts by making a {@see praktikum.menu.MainMenu}

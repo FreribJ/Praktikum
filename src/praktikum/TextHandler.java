@@ -1,7 +1,6 @@
 package praktikum;
 
 import gmbh.kdb.hsw.gdp.domain.Skillset;
-import praktikum.exceptions.NotAvailableException;
 
 import java.util.ArrayList;
 import java.util.Objects;

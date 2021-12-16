@@ -12,11 +12,11 @@ public class SpecialProject extends Project {
     /**
      * Same as {@link Project}.
      *
-     * @param name
-     * @param effort
-     * @param reward
-     * @param customer
-     * @param deadline
+     * @param name     the name of the project
+     * @param effort   the effort of the project
+     * @param reward   the reward of the project when the project has finished
+     * @param customer the customer of the project
+     * @param deadline the deadline of the project
      */
     private SpecialProject(ProjectName name, Skillset effort, Money reward, CompanyName customer, Day deadline) {
         super(name, effort, reward, customer, deadline);
