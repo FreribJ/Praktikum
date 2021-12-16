@@ -14,6 +14,7 @@ public class MenuBankruptEvaluation {
 
     /**
      * Constructs a {@link MenuBankruptEvaluation}.
+     *
      * @param studio the studio operated with
      */
     public MenuBankruptEvaluation(GameDevStudio studio) {
@@ -23,7 +24,7 @@ public class MenuBankruptEvaluation {
     /**
      * Calculates and prints the days until bankrupt.
      */
-    public void showDaysUntilBankrupt(){
+    public void showDaysUntilBankrupt() {
         var text = new ArrayList<String>();
         text.add(String.valueOf(this.getDaysUntilBankrupt()));
         TextHandler.print(text, "Remaining days until bankrupt");
@@ -31,11 +32,12 @@ public class MenuBankruptEvaluation {
 
     /**
      * Calculates the days until bankrupt.
+     *
      * @return the days until bankrupt
      */
-    public int getDaysUntilBankrupt(){
-        Money capital = new Money(this.studio.getCash().getValue());
-        Money dailyExpenditure = new MenuCostsEvaluation(studio).getCosts();
+    public int getDaysUntilBankrupt() {
+        var capital = new Money(this.studio.getCash().getValue());
+        var dailyExpenditure = new MenuCostsEvaluation(studio).getCosts();
         int daysUntilDeath = 0;
         while (capital.isGreaterThan(dailyExpenditure)) {
             capital = capital.subtract(dailyExpenditure);

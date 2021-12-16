@@ -16,6 +16,7 @@ public class MenuDeveloperEvaluation {
 
     /**
      * Constructs a {@link MenuDeveloperEvaluation}.
+     *
      * @param studio the studio operated with
      */
     public MenuDeveloperEvaluation(GameDevStudio studio) {
@@ -26,14 +27,14 @@ public class MenuDeveloperEvaluation {
      * Prints all the hired developer with name, salary, total skill and possible {@link Project} the developer is working on.
      */
     public void showDeveloper() {
-        String headline = "These are the developers";
+        var headline = "These are the developers";
         var extraInformation = new ArrayList<ArrayList<String>>();
-        for(Developer developer : Employees.getEmployees(this.studio)){
+        for (Developer developer : Employees.getEmployees(this.studio)) {
             var extraInformation2D = new ArrayList<String>();
             extraInformation2D.add("Salary: " + developer.getSalary().toString());
-            if(developer.getWorkingOn() != null)
+            if (developer.getWorkingOn() != null)
                 extraInformation2D.add("Working on project: " + developer.getWorkingOn().getName().getName());
-            int totalSkill = developer.getSkills().getCoding() + developer.getSkills().getDesign() + developer.getSkills().getResearch() + developer.getSkills().getTesting();
+            var totalSkill = developer.getSkills().getCoding() + developer.getSkills().getDesign() + developer.getSkills().getResearch() + developer.getSkills().getTesting();
             extraInformation2D.add("Total skill: " + totalSkill);
             extraInformation.add(extraInformation2D);
         }

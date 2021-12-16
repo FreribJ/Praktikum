@@ -143,7 +143,7 @@ public class MainMenu {
      */
     private void menuApplicationStructure(MenuApplication menuApplication) {
         try {
-            switch (TextHandler.getText("(Application Menu) " +  "What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
+            switch (TextHandler.getText("(Application Menu) " + "What do you want to do? [list(l); accept(a); create(c); back(b)]").toLowerCase()) {
                 case "l":
                 case "list":
                     menuApplication = new MenuApplication(gameInstance);
@@ -243,7 +243,7 @@ public class MainMenu {
                 default:
                     throw new WrongChoiceException();
             }
-        } catch (WrongChoiceException | IllegalStateException e){
+        } catch (WrongChoiceException | IllegalStateException e) {
             System.out.println(e.getMessage());
             this.menuOfficesStructure();
         }

@@ -16,13 +16,14 @@ public class TextHandler {
 
     /**
      * Reads a user input from the console as a {@link String}.
+     *
      * @param message for a user input
      * @return the user input as a {@link String}
      */
     public static String getText(String message) {
         System.out.println();
         System.out.println(message);
-        String input = sc.next();
+        var input = sc.next();
         System.out.println();
         System.out.println("-".repeat(100));
 
@@ -35,7 +36,10 @@ public class TextHandler {
 
     /**
      * Reads a user input from the console until it is a {@link Integer}.
+     *
      * @param message for a user input
+     * @param min     is the minimum of the range
+     * @param max     is the maximum of the range
      * @return the user input as a {@link Integer}
      */
     public static int getInt(String message, int min, int max) {
@@ -52,27 +56,28 @@ public class TextHandler {
             System.out.println();
             System.out.println("-".repeat(100));
             var inputInt = Integer.parseInt(input);
-            if(inputInt < min || inputInt > max){
+            if (inputInt < min || inputInt > max) {
                 throw new NumberFormatException();
             }
             return inputInt;
         } catch (NumberFormatException e) {
-            return getInt("You have to give a number between " + min + " and " + max +".", min, max);
+            return getInt("You have to give a number between " + min + " and " + max + ".", min, max);
         }
     }
 
     /**
      * Reads a user input from the console until it is a {@link Double} in the given range.
+     *
      * @param message for a user input
-     * @param min is the minimum of the range
-     * @param max is the maximum of the range
+     * @param min     is the minimum of the range
+     * @param max     is the maximum of the range
      * @return the user input as a {@link Double}
      */
     public static double getDouble(String message, double min, double max) {
         System.out.println();
         System.out.println(message);
         try {
-            String input = sc.next();
+            var input = sc.next();
 
             //Für Konsoleneingabe über Batch
             if (input.length() > 0 && input.toCharArray()[input.toCharArray().length - 1] == 13) {
@@ -82,21 +87,22 @@ public class TextHandler {
             System.out.println();
             System.out.println("-".repeat(100));
             var inputDouble = Double.parseDouble(input);
-            if(inputDouble < min || inputDouble > max){
+            if (inputDouble < min || inputDouble > max) {
                 throw new NumberFormatException();
             }
             return inputDouble;
         } catch (NumberFormatException e) {
-            return getDouble("You have to give a double between " + min + " and " + max +".", min, max);
+            return getDouble("You have to give a double between " + min + " and " + max + ".", min, max);
         }
     }
 
     /**
      * Reads 4 skills to create a {@link Skillset}.
+     *
      * @return the combined {@link Skillset}
      */
     public static Skillset getSkillset() {
-        int[] skills = new int[4];
+        var skills = new int[4];
         String[] skillNames = {"Coding", "Research", "Testing", "Design"};
         var totalSkill = new Random().nextInt(30, 40);
         TextHandler.print(String.format("""
@@ -105,23 +111,24 @@ public class TextHandler {
                 Pay attention that the sum of all the values does not exceed %s.""", totalSkill, totalSkill));
 
         for (int i = 0; i < 4; i++) {
-                if(totalSkill <=0){
-                    skills[i] = 0;
-                    TextHandler.print("The skill " + skillNames[i] + " is automatically 0 because the maximum is reached");
-                }else{
-                    var message = String.format("""
-                            You have a total skill of %s left.
-                            %s skill [0 - %s]:""", totalSkill, skillNames[i], Math.min(totalSkill, 10));
-                    skills[i] = TextHandler.getInt(message, 0, Math.min(totalSkill, 10));
-                    totalSkill -= skills[i];
-                }
+            if (totalSkill <= 0) {
+                skills[i] = 0;
+                TextHandler.print("The skill " + skillNames[i] + " is automatically 0 because the maximum is reached");
+            } else {
+                var message = String.format("""
+                        You have a total skill of %s left.
+                        %s skill [0 - %s]:""", totalSkill, skillNames[i], Math.min(totalSkill, 10));
+                skills[i] = TextHandler.getInt(message, 0, Math.min(totalSkill, 10));
+                totalSkill -= skills[i];
+            }
         }
 
-        return new Skillset(skills[0],skills[1],skills[2],skills[3]);
+        return new Skillset(skills[0], skills[1], skills[2], skills[3]);
     }
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param text is the information, stored as a {@link String}
      */
     public static void print(String text) {
@@ -132,6 +139,7 @@ public class TextHandler {
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s
      */
     public static void print(ArrayList<String> textList) {
@@ -140,6 +148,7 @@ public class TextHandler {
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s
      * @param headline is for the headline above the information
      */
@@ -149,6 +158,7 @@ public class TextHandler {
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param textList    has the main information, stored as a {@link ArrayList} of {@link String}s
      * @param headline    is for the headline above the information
      * @param enumeration if enumeration is true all main information will be counted
@@ -159,6 +169,7 @@ public class TextHandler {
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param textList has the main information, stored as a {@link ArrayList} of {@link String}s
      * @param headline is for the headline above the information
      * @param prefix   is for a unified text in front of the main information
@@ -169,6 +180,7 @@ public class TextHandler {
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param textList    has the main information, stored as a {@link ArrayList} of {@link String}s
      * @param enumeration if enumeration is true all main information will be counted
      */
@@ -178,6 +190,7 @@ public class TextHandler {
 
     /**
      * Prints an output at the console in a unified design.
+     *
      * @param textList         has the main information, stored as a {@link ArrayList} of {@link String}s.
      * @param headline         is for the headline above the information
      * @param prefix           is for a unified text in front of the main information

@@ -13,6 +13,7 @@ public class MenuOffice {
 
     /**
      * Constructor of a {@link MenuOffice}.
+     *
      * @param game the game operated with
      */
     public MenuOffice(Game game) {
@@ -22,7 +23,7 @@ public class MenuOffice {
     /**
      * Creates a new {@link Office} and adds it to the office-list.
      */
-    public void create(){
+    public void create() {
         TextHandler.print("An office will be created. Please enter the following values:");
         var name = TextHandler.getText("Name: ");
         var lease = TextHandler.getDouble("Lease: [value between: 250 and 1000]", 250, 1000);

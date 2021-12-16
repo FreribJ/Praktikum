@@ -17,6 +17,7 @@ public class MenuCostsEvaluation {
 
     /**
      * Constructs a {@link MenuCostsEvaluation}.
+     *
      * @param studio the studio operated with
      */
     public MenuCostsEvaluation(GameDevStudio studio) {
@@ -26,7 +27,7 @@ public class MenuCostsEvaluation {
     /**
      * Calculates and prints the daily costs.
      */
-    public void showCosts(){
+    public void showCosts() {
         var text = new ArrayList<String>();
         text.add(this.getCosts().toString());
         TextHandler.print(text, "Sum of running costs");
@@ -34,13 +35,14 @@ public class MenuCostsEvaluation {
 
     /**
      * Calculates the daily costs.
+     *
      * @return the daily costs
      */
-    public Money getCosts(){
-        Money dailyExpenditure = new Money(new BigDecimal(0));
+    public Money getCosts() {
+        var dailyExpenditure = new Money(new BigDecimal(0));
         for (Office office : this.studio.getOffices()) {
             dailyExpenditure = dailyExpenditure.add(office.getLease());
-            for (Developer developer : office.getDevelopers()) {
+            for (var developer : office.getDevelopers()) {
                 dailyExpenditure = dailyExpenditure.add(developer.getSalary());
             }
         }

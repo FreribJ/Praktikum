@@ -17,6 +17,7 @@ public class MenuProjectsEvaluation {
 
     /**
      * Constructs a {@link MenuProjectsEvaluation}.
+     *
      * @param game the game operated with
      */
     public MenuProjectsEvaluation(Game game) {
@@ -31,7 +32,7 @@ public class MenuProjectsEvaluation {
         var projectText = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
 
-        for (Office office : this.game.getStudio().getOffices()) {
+        for (var office : this.game.getStudio().getOffices()) {
             for (Developer developer : office.getDevelopers()) {
                 if (developer.getWorkingOn() != null) {
                     projects.add(developer.getWorkingOn());
@@ -42,12 +43,12 @@ public class MenuProjectsEvaluation {
         if (projects.size() == 0) {
             TextHandler.print("There are no current projects");
         } else {
-            for (Project project : projects) {
+            for (var project : projects) {
                 projectText.add("\"" + project.getName().getName() + "\"");
                 var extraInformation2D = new ArrayList<String>();
                 extraInformation2D.add("Days left: " + this.calculateDaysLeft(project));
-                int quantityOfDeveloper = 0;
-                for (Developer developer : Employees.getEmployees(this.game.getStudio())) {
+                var quantityOfDeveloper = 0;
+                for (var developer : Employees.getEmployees(this.game.getStudio())) {
                     if (developer.getWorkingOn() != null && developer.getWorkingOn().equals(project))
                         quantityOfDeveloper++;
                 }
@@ -63,6 +64,7 @@ public class MenuProjectsEvaluation {
 
     /**
      * Calculates the remaining days for a {@link Project}.
+     *
      * @param project the {@link Project} calculated with
      * @return the remaining days
      */

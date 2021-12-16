@@ -13,6 +13,7 @@ public class SpecialOffice extends Office {
 
     /**
      * Same as {@link Office}.
+     *
      * @param name
      * @param lease
      */
@@ -22,7 +23,8 @@ public class SpecialOffice extends Office {
 
     /**
      * Factory method of an {@link Office}.
-     * @param name the name of the office.
+     *
+     * @param name  the name of the office.
      * @param lease the lease of the office.
      * @return a {@link SpecialOffice} by the given params.
      */

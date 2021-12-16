@@ -15,6 +15,7 @@ public class MenuOfficesEvaluation {
 
     /**
      * Constructs a {@link MenuOfficesEvaluation}.
+     *
      * @param studio
      */
     public MenuOfficesEvaluation(GameDevStudio studio) {
@@ -24,15 +25,15 @@ public class MenuOfficesEvaluation {
     /**
      * Prints the all the offices with name, lease and number of {@link Developer} working in.
      */
-    public void showOffices(){
+    public void showOffices() {
         var officeText = new ArrayList<String>();
         var extraInformation = new ArrayList<ArrayList<String>>();
         if (this.studio.getOffices().size() == 0) {
             TextHandler.print("There are no offices");
         } else {
             for (int i = 0; i < this.studio.getOffices().size(); i++) {
-                Office office = this.studio.getOffices().get(i);
-                officeText.add("\""+office.getName().getName()+"\"");
+                var office = this.studio.getOffices().get(i);
+                officeText.add("\"" + office.getName().getName() + "\"");
                 var extraInformation2D = new ArrayList<String>();
                 if (office.getLease() == null) {
                     extraInformation2D.add("There is no Lease");

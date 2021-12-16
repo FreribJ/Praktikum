@@ -17,7 +17,6 @@ public class Main {
                 In this game, you are the CEO of your company.
                 You want to survive as long as possible. You can manage your projects and applications.
                 Furthermore, you can earn money by finishing projects.
-                (!!! Create methods are for testing purposes only !!!)
                 """);
         TextHandler.getText("Type anything to start");
         new MainMenu().run();

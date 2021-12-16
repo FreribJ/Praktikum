@@ -13,6 +13,7 @@ public class MenuEventLogEvaluation {
 
     /**
      * Constructs a {@link MenuEventLogEvaluation}.
+     *
      * @param game the game operated with
      */
     public MenuEventLogEvaluation(Game game) {
